@@ -21,15 +21,20 @@ go
 
 CREATE TABLE usuarios(
 id int not null primary key identity(1,1),
+cod_usu int not null unique,
+password varchar(140) not null,
 nombre_apellido varchar(200) not null,
 email varchar(200) not null unique,
-tipo_documento varchar(20) not null,
+tipo_documento varchar(20) not null check (tipo_documento in('dni', 'cuil', 'cuit', 'pasaporte')), --solo funciona para sql server
 numero_doc varchar(30) not null unique,
 fecha_nacimiento date not null,
 direccion varchar(50) not null,
 localidad tinyint not null,
 especialidad smallint not null,
 rol tinyint not null,
+altaUsu int not null,
+modiUsu int,
+bajaUsu int,
 altaFecha datetime not null default getdate(),
 modiFecha datetime,
 bajaFecha datetime,
@@ -46,6 +51,9 @@ id_medico int not null,
 fecha_hora datetime not null,
 observaciones text not null,
 estado tinyint not null,
+altaUsu int not null,
+modiUsu int,
+bajaUsu int,
 altaFecha datetime not null default getdate(),
 modiFecha datetime,
 bajaFecha datetime,
@@ -70,3 +78,53 @@ CREATE TABLE localidades
 	)  
 go
 
+
+create trigger TR_automaticoFechamodi on usuarios
+after update as 
+begin 
+update usuarios 
+set modiFecha = getdate()
+from usuarios
+inner join inserted on inserted.id = usuarios.id
+end
+
+create trigger TR_deleteLogicoyFisico on usuarios
+instead of delete as
+begin
+declare @bajaFec datetime
+select @bajaFec = bajaFecha from deleted
+if @bajaFec is null begin
+update usuarios set bajausu = 0, bajaFecha = getdate() 
+from usuarios 
+inner join deleted on deleted.id = usuarios.id  end
+else begin
+delete from usuarios
+from usuarios
+inner join deleted on deleted.id = usuarios.id
+end
+end
+
+create trigger TR_turnos_automaticoFechamodi on turnos
+after update as 
+begin 
+update turnos 
+set modiFecha = getdate()
+from turnos
+inner join inserted on inserted.id = turnos.id
+end
+
+create trigger TR_turnos_deleteLogicoyFisico on turnos
+instead of delete as
+begin
+declare @bajaFec datetime
+select @bajaFec = bajaFecha from deleted
+if @bajaFec is null begin
+update turnos set bajausu = 0, bajaFecha = getdate() 
+from turnos 
+inner join deleted on deleted.id = turnos.id  end
+else begin
+delete from turnos
+from turnos
+inner join deleted on deleted.id = turnos.id
+end
+end
