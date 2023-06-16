@@ -1,0 +1,10 @@
+﻿.principal {
+    background-image: url("./../Assets/background/1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+#navbarNavDropdown {
+    justify-content: flex-end;
+    margin-right: 2%;
+}
