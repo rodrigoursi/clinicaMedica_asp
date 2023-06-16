@@ -14,7 +14,7 @@
             <asp:BoundField HeaderText="numero de documento" DataField="numero_doc" />
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href='<%# "usuario.aspx?id=" + Eval("id") %>'>
+                    <a href='<%# "/pages/ficha.aspx?id=" + Eval("id") %>'>
                        <i class="fa-solid fa-eye" title="ver"></i>
                     </a>
                 </ItemTemplate>
@@ -34,6 +34,7 @@
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
-    </asp:GridView>
+        </asp:GridView>
+        <div><a href="/pages/ficha.aspx" class="btn btn-success">AGREGAR</a></div>
     </div>
 </asp:Content>

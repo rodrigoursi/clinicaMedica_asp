@@ -13,5 +13,18 @@ namespace clinicaMedica
         {
 
         }
+
+        protected void login_Click(object sender, EventArgs e)
+        {
+            string usuario = login.Text;
+            Session.Add("usuario", usuario);
+            Session.Add("rol", "admin");
+        }
+
+        protected void logout_Click(object sender, EventArgs e)
+        {
+            Session.Remove("usuario");
+            Session.Remove("rol");
+        }
     }
 }

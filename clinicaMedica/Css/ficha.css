@@ -1,0 +1,9 @@
+﻿.formFicha {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.formFicha div {
+    width: 30%;
+}

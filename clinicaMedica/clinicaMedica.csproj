@@ -2121,10 +2121,12 @@
     <Content Include="Assets\fontawesome\svgs\solid\yen-sign.svg" />
     <Content Include="Assets\fontawesome\svgs\solid\yin-yang.svg" />
     <Content Include="Assets\fontawesome\svgs\solid\z.svg" />
+    <Content Include="Css\ficha.css" />
     <Content Include="Css\master.css" />
     <Content Include="Css\usuario.css" />
     <Content Include="default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Pages\ficha.aspx" />
     <Content Include="Pages\usuario.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -2138,6 +2140,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ficha.aspx.cs">
+      <DependentUpon>ficha.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ficha.aspx.designer.cs">
+      <DependentUpon>ficha.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\usuario.aspx.cs">
       <DependentUpon>usuario.aspx</DependentUpon>
