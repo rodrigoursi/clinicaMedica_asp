@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1 style="text-align:center;" class="mb-5">SISTEMA CLINICA MEDICA NTU</h1>
+    <h1 style="text-align:center;" class="mb-5">SISTEMA CLINICA MEDICA</h1>
     <%if (Session["usuario"] == null)
             {%>
             <h2 style="text-align:center;" class="my-5">Para utilizar el sistema debe iniciar sesion</h2>
