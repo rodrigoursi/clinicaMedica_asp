@@ -63,6 +63,25 @@ foreign key (id_medico) references usuarios (id)
 )
 go
 
+CREATE TABLE dSemana(
+id tinyint primary key identity(1,1),
+cod_dia tinyint not null unique check(cod_dia between 1 and 7),
+diaSemana varchar(10) not null unique
+)
+go
+
+CREATE TABLE horarios (
+id int primary key identity(1,1),
+id_medico int not null,
+id_dia tinyint not null,
+hora_ini time not null,
+hora_fin time not null,
+foreign key (id_medico) references usuarios (id),
+foreign key (id_dia) references dSemana (id),
+constraint UQ_horarios_id_dia_id_medico unique (id_dia, id_medico)
+)
+go
+
 CREATE TABLE provincias (
 id tinyint not null primary key identity(1,1),
 provincia varchar(50) not null
