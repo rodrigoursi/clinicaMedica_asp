@@ -1,9 +1,23 @@
 ﻿.formFicha {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.formFicha div {
-    width: 30%;
+.formulario {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around
+}
+
+.formulario div {
+    width: 40%;
+}
+
+.formulario select {
+    width: 90%;
+}
+
+.formulario {
+    width: 50%;
+    background-color:aliceblue;
 }

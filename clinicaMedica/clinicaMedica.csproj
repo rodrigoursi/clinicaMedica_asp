@@ -2121,6 +2121,7 @@
     <Content Include="Assets\fontawesome\svgs\solid\yen-sign.svg" />
     <Content Include="Assets\fontawesome\svgs\solid\yin-yang.svg" />
     <Content Include="Assets\fontawesome\svgs\solid\z.svg" />
+    <Content Include="Assets\images\usermas.png" />
     <Content Include="Css\ficha.css" />
     <Content Include="Css\master.css" />
     <Content Include="Css\usuario.css" />
