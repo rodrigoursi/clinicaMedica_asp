@@ -1,6 +1,7 @@
 ﻿using Dominio;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Negocio
 {
-    internal class RolNegocio
+    public class RolNegocio
     {
         public List<Rol> listar()
         {
@@ -23,10 +24,12 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Rol rol = new Rol();
-                    rol.id = (int)datos.Lector["id"];
-                    rol.codigo = (int)datos.Lector["codigo"];
+                    rol.id = (int)(byte)datos.Lector["id"];
+                    rol.codigo = (int)(byte)datos.Lector["codigo"];
                     rol.nombre = (string)datos.Lector["rol"];
 
+                    // Imprimir los valores para verificar
+                    Debug.WriteLine($"id: {rol.id}, codigo: {rol.codigo}, nombre: {rol.nombre}");
 
                     lista.Add(rol);
                 }

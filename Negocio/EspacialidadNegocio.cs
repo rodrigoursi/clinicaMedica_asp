@@ -9,7 +9,7 @@ using Dominio;
 
 namespace Negocio
 {
-    internal class EspacialidadNegocio
+    public class EspacialidadNegocio
     {
         public List<Especialidad> listar()
         {
@@ -24,7 +24,7 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Especialidad especialidad = new Especialidad();
-                    especialidad.id = (int)datos.Lector["id"];
+                    especialidad.id = (int)(short)datos.Lector["id"];
                     especialidad.nombre = (string)datos.Lector["especialidad"];
 
 

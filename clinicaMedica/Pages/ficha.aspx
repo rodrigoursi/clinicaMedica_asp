@@ -52,18 +52,8 @@
                 <label for="AltaUsuario_loc" class="form-label">Localidad</label>
                 <asp:TextBox runat="server" CssClass="form-control" id="AltaUsuario_loc"/>
             </div>
-            <select class="form-select mb-3" aria-label="Default select example">
-                <option selected>Elige un rol</option>
-                <option value="1">Paciente</option>
-                <option value="2">Medico</option>
-                <option value="3">Operador</option>
-            </select>
-            <select class="form-select mb-3" aria-label="Default select example">
-                <option selected>Elige una Especialidad</option>
-                <option value="1">Clinico</option>
-                <option value="2">Odontologo</option>
-                <option value="3">Terapeuta</option>
-            </select>
+            <asp:DropDownList ID="ficha_rol" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
+            <asp:DropDownList ID="ficha_esp" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
             <button class="btn btn-primary mb-3">ACEPTAR</button>
         </div>
     </div>
