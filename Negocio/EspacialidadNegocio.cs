@@ -24,8 +24,8 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Especialidad especialidad = new Especialidad();
-                    especialidad.id = (int)(short)datos.Lector["id"];
-                    especialidad.nombre = (string)datos.Lector["especialidad"];
+                    especialidad.id = (short)datos.Lector["id"];
+                    especialidad.especialidad = (string)datos.Lector["especialidad"];
 
 
                     lista.Add(especialidad);
@@ -53,7 +53,7 @@ namespace Negocio
             {
                 datos.setearConsulta("UPDATE especialidades SET especialidad=@nombre WHERE id=@id");
                 datos.setearParametro("@id", especialidad.id);
-                datos.setearParametro("@nombre", especialidad.nombre);
+                datos.setearParametro("@nombre", especialidad.especialidad);
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)
@@ -77,7 +77,7 @@ namespace Negocio
             {
                 datos.setearConsulta("INSERT INTO especialidades (codigo, especialidad) VALUES (@codigo, @nombre)");
                 datos.setearParametro("@codigo", especialidad.codigo);
-                datos.setearParametro("@nombre", especialidad.nombre);
+                datos.setearParametro("@nombre", especialidad.especialidad);
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)

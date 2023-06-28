@@ -8,15 +8,15 @@ namespace Dominio
 {
     public class Estado
     {
-        public int id { get; set; }
-        public int codigo { get; set; }
-        public string nombre { get; set; }
+        public byte id { get; set; }
+        public byte codigo { get; set; }
+        public string estado { get; set; }
 
         public Estado() { }
-        public Estado(int codigo, string nombre) 
+        public Estado(byte codigo, string nombre) 
         {
             this.codigo = codigo;
-            this.nombre = nombre;
+            this.estado = nombre;
         }
     }
 }

@@ -8,14 +8,14 @@ namespace Dominio
 {
     public class Especialidad
     {
-        public int id { get; set; }
-        public int codigo { get; set; }
-        public string nombre { get; set; }
+        public short id { get; set; }
+        public short codigo { get; set; }
+        public string especialidad { get; set; }
         public Especialidad() { }
-        public Especialidad(int codigo, string nombre)
+        public Especialidad(short codigo, string nombre)
         {
             this.codigo = codigo;
-            this.nombre = nombre;
+            this.especialidad = nombre;
         }
     }
 }

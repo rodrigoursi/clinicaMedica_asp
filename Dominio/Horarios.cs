@@ -9,6 +9,8 @@ namespace Dominio
     public class Horarios
     {
         public int id { get; set; }
+        public Usuario idMedico { get; set; }
+        public DiaSemana idDia { get; set; }
         public DateTime horaInicio { get; set; }
         public DateTime horaFin { get; set; }
         public Turno turnoAsociado { get; set; }

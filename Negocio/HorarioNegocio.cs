@@ -17,16 +17,18 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT id, hora_inicio, hora_fin, turno_asociado FROM horarios");
+                datos.setearConsulta("SELECT id, id_medico, id_dia, hora_ini, hora_fin FROM horarios");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Horarios horario = new Horarios();
                     horario.id = (int)datos.Lector["id"];
-                    horario.horaInicio = (DateTime)datos.Lector["hora_inicio"];
+                    horario.idMedico.id = (int)datos.Lector["id_medico"];
+                    horario.idDia.id = (byte)datos.Lector["id_dia"];
+                    horario.horaInicio = (DateTime)datos.Lector["hora_ini"];
                     horario.horaInicio = (DateTime)datos.Lector["hora_fin"];
-                    horario.turnoAsociado = (Turno)datos.Lector["turno_asociado"];
+                    //horario.turnoAsociado.id = (int)datos.Lector["turno_asociado"];
 
 
                     lista.Add(horario);
@@ -52,11 +54,13 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE horarios SET hora_inicio=@inicio, hora_fin=@fin, turno_asociado=@turno WHERE id=@id");
+                datos.setearConsulta("UPDATE horarios SET  @medico=id_medico, @dia=id_dia, hora_ini=@inicio, hora_fin=@fin WHERE id=@id");
                 datos.setearParametro("@id", horario.id);
+                datos.setearParametro("@medico", horario.idMedico);
+                datos.setearParametro("@dia", horario.idDia);
                 datos.setearParametro("@inicio", horario.horaInicio);
                 datos.setearParametro("@fin", horario.horaFin);
-                datos.setearParametro("@turno", horario.turnoAsociado);
+                //datos.setearParametro("@turno", horario.turnoAsociado);
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)
@@ -78,10 +82,12 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("INSERT INTO horarios (hora_inicio, hora_fin, turno_asociado) VALUES (@inicio, @fin, @turno)");
+                datos.setearConsulta("INSERT INTO horarios (id_medico, id_dia, hora_ini, hora_fin) VALUES (@medico, @dia, @inicio, @fin)");
+                datos.setearParametro("@medico", horario.idMedico);
+                datos.setearParametro("@dia", horario.idDia);
                 datos.setearParametro("@inicio", horario.horaInicio);
                 datos.setearParametro("@fin", horario.horaFin);
-                datos.setearParametro("@turno", horario.turnoAsociado);
+                //datos.setearParametro("@turno", horario.turnoAsociado);
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)

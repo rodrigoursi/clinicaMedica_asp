@@ -41,7 +41,7 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="#">Estado</a></li>
-                                        <li><a class="dropdown-item" href="#">Rol</a></li>
+                                        <li><a class="dropdown-item" href="/Pages/abmRoles.aspx">Rol</a></li>
                                         <li><a class="dropdown-item" href="#">Especialidad</a></li>
                                         <li><a class="dropdown-item" href="#">Localidad</a></li>
                                         <li><a class="dropdown-item" href="#">Provincia</a></li>

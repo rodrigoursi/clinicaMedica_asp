@@ -2129,6 +2129,7 @@
     <Content Include="Global.asax" />
     <Content Include="Pages\ficha.aspx" />
     <Content Include="Pages\usuario.aspx" />
+    <Content Include="Pages\abmRoles.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -2155,6 +2156,13 @@
     </Compile>
     <Compile Include="Pages\usuario.aspx.designer.cs">
       <DependentUpon>usuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\abmRoles.aspx.cs">
+      <DependentUpon>abmRoles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\abmRoles.aspx.designer.cs">
+      <DependentUpon>abmRoles.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site1.Master.cs">

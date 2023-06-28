@@ -28,7 +28,7 @@ namespace Negocio
                     turno.medico.id = (int)datos.Lector["id_medico"];
                     turno.fechaYHora = (DateTime)datos.Lector["codigo"];
                     turno.observaciones = (string)datos.Lector["observaciones"];
-                    turno.estado.id = (int)datos.Lector["estado"];
+                    turno.estado.id = (byte)datos.Lector["estado"];
                     turno.altaUsuario.id = (int)datos.Lector["altaUsu"];
                     turno.modificacionUsuario.id = (int)datos.Lector["modiUsus"];
                     turno.bajaUsuario.id = (int)datos.Lector["bajaUsu"];

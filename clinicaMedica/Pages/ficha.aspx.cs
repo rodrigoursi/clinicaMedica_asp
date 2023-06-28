@@ -19,11 +19,11 @@ namespace clinicaMedica.Pages
             {
                 
                 ficha_rol.DataSource = Rol.listar();
-                ficha_rol.DataValueField = "nombre";
+                ficha_rol.DataValueField = "rol";
                 ficha_rol.DataBind();
 
                 ficha_esp.DataSource = Especialidad.listar();
-                ficha_esp.DataValueField = "nombre";
+                ficha_esp.DataValueField = "especialidad";
                 ficha_esp.DataBind();
                 
             }

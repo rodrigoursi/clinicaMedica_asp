@@ -8,12 +8,12 @@ namespace Dominio
 {
     public class Provincia
     {
-        public int id { get; set; }
-        public string nombre { get; set; }
+        public byte id { get; set; }
+        public string provincia { get; set; }
         public Provincia() { }
         public Provincia(string nombre)
         {
-            this.nombre = nombre;
+            this.provincia = nombre;
         }
     }
 }

@@ -8,14 +8,14 @@ namespace Dominio
 {
     public class Localidad
     {
-        public int id { get; set; }
+        public short id { get; set; }
+        public string localidad { get; set; }
         public Provincia provincia { get; set; }
-        public string nombre { get; set; }
         public Localidad() { }
         public Localidad(Provincia provincia, string nombre)
         {
             this.provincia = provincia;
-            this.nombre = nombre;
+            this.localidad = nombre;
         }
     }
 }

@@ -24,12 +24,12 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Rol rol = new Rol();
-                    rol.id = (int)(byte)datos.Lector["id"];
-                    rol.codigo = (int)(byte)datos.Lector["codigo"];
-                    rol.nombre = (string)datos.Lector["rol"];
+                    rol.id = (byte)datos.Lector["id"];
+                    rol.codigo = (byte)datos.Lector["codigo"];
+                    rol.rol = (string)datos.Lector["rol"];
 
                     // Imprimir los valores para verificar
-                    Debug.WriteLine($"id: {rol.id}, codigo: {rol.codigo}, nombre: {rol.nombre}");
+                    Debug.WriteLine($"id: {rol.id}, codigo: {rol.codigo}, nombre: {rol.rol}");
 
                     lista.Add(rol);
                 }
@@ -54,10 +54,10 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE roles SET codigo=@codigo, rol=@nombre WHERE id=@id");
+                datos.setearConsulta("UPDATE roles SET codigo=@codigo, rol=@rol WHERE id=@id");
                 datos.setearParametro("@id", rol.id);
                 datos.setearParametro("@codigo", rol.codigo);
-                datos.setearParametro("@nombre", rol.nombre);
+                datos.setearParametro("@rol", rol.rol);
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)
@@ -79,9 +79,9 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("INSERT INTO roles (codigo, rol) VALUES (@codigo, @nombre)");
+                datos.setearConsulta("INSERT INTO roles (codigo, rol) VALUES (@codigo, @rol)");
                 datos.setearParametro("@codigo", rol.codigo);
-                datos.setearParametro("@nombre", rol.nombre);
+                datos.setearParametro("@rol", rol.rol);
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)

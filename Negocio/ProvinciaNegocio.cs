@@ -23,8 +23,8 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Provincia provincia = new Provincia();
-                    provincia.id = (int)datos.Lector["id"];
-                    provincia.nombre = (string)datos.Lector["provincia"];
+                    provincia.id = (byte)datos.Lector["id"];
+                    provincia.provincia = (string)datos.Lector["provincia"];
 
 
                     lista.Add(provincia);
@@ -50,9 +50,9 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE provincias SET provincia=@nombre WHERE id=@id");
+                datos.setearConsulta("UPDATE provincias SET provincia=@provincia WHERE id=@id");
                 datos.setearParametro("@id", provincia.id);
-                datos.setearParametro("@nombre", provincia.nombre);
+                datos.setearParametro("@provincia", provincia.provincia);
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)
@@ -74,8 +74,8 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("INSERT INTO provincias (provincia) VALUES (@nombre)");
-                datos.setearParametro("@nombre", provincia.nombre);
+                datos.setearConsulta("INSERT INTO provincias (provincia) VALUES (@provincia)");
+                datos.setearParametro("@provincia", provincia.provincia);
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)

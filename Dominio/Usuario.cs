@@ -28,9 +28,10 @@ namespace Dominio
         public DateTime modificacionFecha { get; set; }
         public DateTime bajaFecha { get; set; }            
         public Usuario() { }
-        public Usuario(int codigo, string nombre)
+        public Usuario(int codigo, string nombreCompleto)
         {
-
+            this.codigoUsuario = codigo;
+            this.nombreYApellido = nombreCompleto;
         }
     }
 }

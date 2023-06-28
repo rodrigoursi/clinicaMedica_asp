@@ -23,8 +23,8 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Estado estado = new Estado();
-                    estado.id = (int)datos.Lector["id"];
-                    estado.nombre = (string)datos.Lector["estado"];
+                    estado.id = (byte)datos.Lector["id"];
+                    estado.estado = (string)datos.Lector["estado"];
 
 
                     lista.Add(estado);
@@ -52,7 +52,7 @@ namespace Negocio
             {
                 datos.setearConsulta("UPDATE estados SET estado=@nombre WHERE id=@id");
                 datos.setearParametro("@id", estado.id);
-                datos.setearParametro("@nombre", estado.nombre);
+                datos.setearParametro("@nombre", estado.estado);
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)
@@ -76,7 +76,7 @@ namespace Negocio
             {
                 datos.setearConsulta("INSERT INTO estados (codigo, estado) VALUES (@codigo, @nombre)");
                 datos.setearParametro("@codigo", estado.codigo);
-                datos.setearParametro("@nombre", estado.nombre);
+                datos.setearParametro("@nombre", estado.estado);
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)

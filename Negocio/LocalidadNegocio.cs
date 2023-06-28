@@ -23,8 +23,8 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Localidad localidad = new Localidad();
-                    localidad.id = (int)datos.Lector["id"];
-                    localidad.nombre = (string)datos.Lector["localidad"];
+                    localidad.id = (short)datos.Lector["id"];
+                    localidad.localidad = (string)datos.Lector["localidad"];
 
 
                     lista.Add(localidad);
@@ -50,10 +50,10 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE localidades SET localidad=@nombre, id_prov=@provncia WHERE id=@id");
+                datos.setearConsulta("UPDATE localidades SET localidad=@localidad, id_prov=@provncia WHERE id=@id");
                 datos.setearParametro("@id", localidad.id);
-                datos.setearParametro("@nombre", localidad.nombre);
-                datos.setearParametro("@nombre", localidad.provincia.id);
+                datos.setearParametro("@localidad", localidad.localidad);
+                datos.setearParametro("@provincia", localidad.provincia.id);
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)
@@ -75,9 +75,9 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("INSERT INTO localidades (localidad, id_prov) VALUES (@nombre, @provincia)");
-                datos.setearParametro("@codigo", localidad.nombre);
-                datos.setearParametro("@nombre", localidad.provincia.id);
+                datos.setearConsulta("INSERT INTO localidades (localidad, id_prov) VALUES (@localidad, @provincia)");
+                datos.setearParametro("@localidad", localidad.localidad);
+                datos.setearParametro("@provincia", localidad.provincia.id);
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)

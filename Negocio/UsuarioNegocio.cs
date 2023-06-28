@@ -52,9 +52,9 @@ namespace Negocio
                     usuario.numeroDeDocumento = (string)datos.Lector["numero_doc"];
                     usuario.fechaDeNacimiento = (DateTime)datos.Lector["fecha_nacimiento"];
                     usuario.direccion = (string)datos.Lector["direccion"];
-                    usuario.localidad.id = (int)datos.Lector["localidad"];
-                    usuario.especialidad.id = (int)datos.Lector["especialidad"];
-                    usuario.rol.id = (int)datos.Lector["rol"];
+                    usuario.localidad.id = (short)datos.Lector["localidad"];
+                    usuario.especialidad.id = (byte)datos.Lector["especialidad"];
+                    usuario.rol.id = (byte)datos.Lector["rol"];
                     usuario.altaUsuario.id = (int)datos.Lector["altaUsu"];
                     usuario.modificacionUsuario.id = (int)datos.Lector["modiUsus"];
                     usuario.bajaUsuario.id = (int)datos.Lector["bajaUsu"];
