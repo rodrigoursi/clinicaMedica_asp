@@ -87,15 +87,6 @@ namespace clinicaMedica.Pages
         protected global::System.Web.UI.WebControls.TextBox AltaUsuario_doc;
 
         /// <summary>
-        /// Control AltaUsuario_fecNac.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox AltaUsuario_fecNac;
-
-        /// <summary>
         /// Control AltaUsuario_dire.
         /// </summary>
         /// <remarks>
@@ -111,7 +102,16 @@ namespace clinicaMedica.Pages
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox AltaUsuario_loc;
+        protected global::System.Web.UI.WebControls.DropDownList AltaUsuario_loc;
+
+        /// <summary>
+        /// Control AltaUsuario_fecNac.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar AltaUsuario_fecNac;
 
         /// <summary>
         /// Control ficha_rol.
@@ -130,5 +130,14 @@ namespace clinicaMedica.Pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ficha_esp;
+
+        /// <summary>
+        /// Control AltaUsuario_agregar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button AltaUsuario_agregar;
     }
 }

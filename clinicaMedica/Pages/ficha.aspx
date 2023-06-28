@@ -41,19 +41,20 @@
                 <asp:TextBox runat="server" CssClass="form-control" id="AltaUsuario_doc"/>
             </div>
             <div class="mb-3">
-                <label for="AltaUsuario_fecNac" class="form-label">Fecha de nacimiento</label>
-                <asp:TextBox runat="server" CssClass="form-control" id="AltaUsuario_fecNac"/>
-            </div>
-            <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Direccion</label>
                 <asp:TextBox runat="server" CssClass="form-control" id="AltaUsuario_dire"/>
             </div>
             <div class="mb-3">
-                <label for="AltaUsuario_loc" class="form-label">Localidad</label>
-                <asp:TextBox runat="server" CssClass="form-control" id="AltaUsuario_loc"/>
+                <label for="exampleFormControlInput1" class="form-label">Localidad</label>
+                <asp:DropDownList ID="AltaUsuario_loc" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
+            </div>
+            <div class="mb-3 text-center">
+                <label for="AltaUsuario_fecNac" class="form-label">Fecha de nacimiento</label>
+                <asp:Calendar runat="server" ID="AltaUsuario_fecNac" />
             </div>
             <asp:DropDownList ID="ficha_rol" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
             <asp:DropDownList ID="ficha_esp" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
+            <asp:Button Text="AGREGAR" CssClass="btn btn-primary mb-3" ID="AltaUsuario_agregar" runat="server" OnClick="AltaUsuario_agregar_Click" />
             <button class="btn btn-primary mb-3">ACEPTAR</button>
         </div>
     </div>

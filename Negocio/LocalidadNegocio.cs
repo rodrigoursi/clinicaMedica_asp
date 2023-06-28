@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Negocio
 {
-    internal class LocalidadNegocio
+    public class LocalidadNegocio
     {
         public List<Localidad> listar()
         {

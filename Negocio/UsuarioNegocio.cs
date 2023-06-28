@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Negocio
 {
-    internal class UsuarioNegocio
+    public class UsuarioNegocio
     {
         public List<Usuario> listar()
         {
@@ -55,9 +55,9 @@ namespace Negocio
                     usuario.localidad.id = (short)datos.Lector["localidad"];
                     usuario.especialidad.id = (byte)datos.Lector["especialidad"];
                     usuario.rol.id = (byte)datos.Lector["rol"];
-                    usuario.altaUsuario.id = (int)datos.Lector["altaUsu"];
-                    usuario.modificacionUsuario.id = (int)datos.Lector["modiUsus"];
-                    usuario.bajaUsuario.id = (int)datos.Lector["bajaUsu"];
+                    usuario.altaUsuario = (int)datos.Lector["altaUsu"];
+                    usuario.modificacionUsuario = (int)datos.Lector["modiUsus"];
+                    usuario.bajaUsuario = (int)datos.Lector["bajaUsu"];
                     usuario.altaFecha = (DateTime)datos.Lector["altaFecha"];
                     usuario.modificacionFecha = (DateTime)datos.Lector["modiFecha"];
                     usuario.bajaFecha = (DateTime)datos.Lector["bajaFecha"];
@@ -153,17 +153,11 @@ namespace Negocio
                                         "localidad, " +
                                         "especialidad, " +
                                         "rol, " +
-                                        "altaUsu, " +
-                                        "modiUsus, " +
-                                        "bajaUsu, " +
-                                        "altaFecha, " +
-                                        "modiFecha, " +
-                                        "bajaFecha) " +
+                                        "altaUsu) " +
                                     "VALUES " +
                                         "(@codigo," +
                                         "@password," +
                                         "@nombreApellido," +
-                                        "@observaciones," +
                                         "@email," +
                                         "@tipoDocumento," +
                                         "@numeroDocumento," +
@@ -172,8 +166,7 @@ namespace Negocio
                                         "@localidad," +
                                         "@especialidad," +
                                         "@rol," +
-                                        "@modiUsuario," +
-                                        "@modiFecha)");
+                                        "@altaUsu)");
 
                 datos.setearParametro("@id", usuario.id);
                 datos.setearParametro("@codigo", usuario.codigoUsuario);
@@ -187,8 +180,7 @@ namespace Negocio
                 datos.setearParametro("@localidad", usuario.localidad.id);
                 datos.setearParametro("@especialidad", usuario.especialidad.id);
                 datos.setearParametro("@rol", usuario.rol.id);
-                datos.setearParametro("@modiUsuario", usuario.modificacionFecha);
-                datos.setearParametro("@modiFecha", usuario.modificacionFecha);
+                datos.setearParametro("@altaUsu", usuario.altaUsuario);
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)
