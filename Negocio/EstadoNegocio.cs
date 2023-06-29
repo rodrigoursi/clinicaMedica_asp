@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Negocio
 {
-    internal class EstadoNegocio
+    public class EstadoNegocio
     {
         public List<Estado> listar()
         {
@@ -17,13 +17,14 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT id, estado FROM estados");
+                datos.setearConsulta("SELECT id, codigo, estado FROM estados");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Estado estado = new Estado();
                     estado.id = (byte)datos.Lector["id"];
+                    estado.codigo = (byte)datos.Lector["codigo"];
                     estado.estado = (string)datos.Lector["estado"];
 
 
@@ -50,8 +51,9 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE estados SET estado=@nombre WHERE id=@id");
+                datos.setearConsulta("UPDATE estados SET codigo=@codigo, estado=@nombre WHERE id=@id");
                 datos.setearParametro("@id", estado.id);
+                datos.setearParametro("@codigo", estado.codigo);
                 datos.setearParametro("@nombre", estado.estado);
                 resultado = datos.ejecutarUpdate();
             }

@@ -10,7 +10,7 @@ namespace Dominio
     public class Usuario
     {
         public int id { get; set; }
-        public int codigoUsuario { get; set; }
+        public string codigoUsuario { get; set; }
         public string password { get; set; }
         public string nombreYApellido { get; set; }
         public string emailUsuario { get; set; }
@@ -28,7 +28,7 @@ namespace Dominio
         public DateTime modificacionFecha { get; set; }
         public DateTime bajaFecha { get; set; }            
         public Usuario() { }
-        public Usuario(int codigo, string nombreCompleto)
+        public Usuario(string codigo, string nombreCompleto)
         {
             this.codigoUsuario = codigo;
             this.nombreYApellido = nombreCompleto;

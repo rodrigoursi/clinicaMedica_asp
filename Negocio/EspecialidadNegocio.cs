@@ -9,7 +9,7 @@ using Dominio;
 
 namespace Negocio
 {
-    public class EspacialidadNegocio
+    public class EspecialidadNegocio
     {
         public List<Especialidad> listar()
         {
@@ -18,13 +18,14 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT id, especialidad FROM especialidades");
+                datos.setearConsulta("SELECT id, codigo, especialidad FROM especialidades");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Especialidad especialidad = new Especialidad();
                     especialidad.id = (short)datos.Lector["id"];
+                    especialidad.codigo = (short)datos.Lector["codigo"];
                     especialidad.especialidad = (string)datos.Lector["especialidad"];
 
 
@@ -51,8 +52,9 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE especialidades SET especialidad=@nombre WHERE id=@id");
+                datos.setearConsulta("UPDATE especialidades SET codigo=@codigo, especialidad=@nombre WHERE id=@id");
                 datos.setearParametro("@id", especialidad.id);
+                datos.setearParametro("@codigo", especialidad.codigo);
                 datos.setearParametro("@nombre", especialidad.especialidad);
                 resultado = datos.ejecutarUpdate();
             }

@@ -44,7 +44,7 @@ namespace Negocio
                 {
                     Usuario usuario = new Usuario();
                     usuario.id = (int)datos.Lector["id"];
-                    usuario.codigoUsuario = (int)datos.Lector["cod_usu"];
+                    usuario.codigoUsuario = (string)datos.Lector["cod_usu"];
                     usuario.password = (string)datos.Lector["password"];
                     usuario.nombreYApellido = (string)datos.Lector["nombre_apellido"];
                     usuario.emailUsuario = (string)datos.Lector["email"];

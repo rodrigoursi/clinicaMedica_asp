@@ -2127,6 +2127,10 @@
     <Content Include="Css\usuario.css" />
     <Content Include="default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Pages\abmEspecialidades.aspx" />
+    <Content Include="Pages\abmEstados.aspx" />
+    <Content Include="Pages\abmLocalidades.aspx" />
+    <Content Include="Pages\abmProvincias.aspx" />
     <Content Include="Pages\ficha.aspx" />
     <Content Include="Pages\usuario.aspx" />
     <Content Include="Pages\abmRoles.aspx" />
@@ -2142,6 +2146,34 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\abmEspecialidades.aspx.cs">
+      <DependentUpon>abmEspecialidades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\abmEspecialidades.aspx.designer.cs">
+      <DependentUpon>abmEspecialidades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\abmEstados.aspx.cs">
+      <DependentUpon>abmEstados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\abmEstados.aspx.designer.cs">
+      <DependentUpon>abmEstados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\abmLocalidades.aspx.cs">
+      <DependentUpon>abmLocalidades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\abmLocalidades.aspx.designer.cs">
+      <DependentUpon>abmLocalidades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\abmProvincias.aspx.cs">
+      <DependentUpon>abmProvincias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\abmProvincias.aspx.designer.cs">
+      <DependentUpon>abmProvincias.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\ficha.aspx.cs">
       <DependentUpon>ficha.aspx</DependentUpon>

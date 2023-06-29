@@ -1,3 +1,11 @@
+--create database TURNOS_MEDICOS
+--go
+
+--drop database TURNOS_MEDICOS
+--go
+
+use TURNOS_MEDICOS
+Go
 
 CREATE TABLE estados (
 	id tinyint not null primary key identity(1,1),
@@ -22,7 +30,7 @@ go
 
 CREATE TABLE usuarios(
 	id int not null primary key identity(1,1),
-	cod_usu int not null unique,
+	cod_usu varchar(10) not null unique,
 	password varchar(140) not null,
 	nombre_apellido varchar(200) not null,
 	email varchar(200) not null unique,
@@ -106,6 +114,7 @@ begin
 	from usuarios
 	inner join inserted on inserted.id = usuarios.id
 end
+go
 
 create trigger TR_deleteLogicoyFisico on usuarios
 instead of delete as
@@ -122,6 +131,7 @@ begin
 		inner join deleted on deleted.id = usuarios.id
 	end
 end
+go
 
 create trigger TR_turnos_automaticoFechamodi on turnos
 after update as 
@@ -131,6 +141,7 @@ begin
 	from turnos
 	inner join inserted on inserted.id = turnos.id
 end
+go
 
 create trigger TR_turnos_deleteLogicoyFisico on turnos
 instead of delete as
@@ -148,3 +159,4 @@ begin
 		inner join deleted on deleted.id = turnos.id
 	end
 end
+go

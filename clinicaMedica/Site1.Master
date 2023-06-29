@@ -40,11 +40,11 @@
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Configuracion
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Estado</a></li>
+                                        <li><a class="dropdown-item" href="/Pages/abmEstados.aspx">Estado</a></li>
                                         <li><a class="dropdown-item" href="/Pages/abmRoles.aspx">Rol</a></li>
-                                        <li><a class="dropdown-item" href="#">Especialidad</a></li>
-                                        <li><a class="dropdown-item" href="#">Localidad</a></li>
-                                        <li><a class="dropdown-item" href="#">Provincia</a></li>
+                                        <li><a class="dropdown-item" href="/Pages/abmEspecialidades.aspx">Especialidad</a></li>
+                                        <li><a class="dropdown-item" href="/Pages/abmLocalidades.aspx">Localidad</a></li>
+                                        <li><a class="dropdown-item" href="/Pages/abmProvincias.aspx">Provincia</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item">

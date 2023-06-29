@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Negocio
 {
-    internal class ProvinciaNegocio
+    public class ProvinciaNegocio
     {
         public List<Provincia> listar()
         {

@@ -17,14 +17,20 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT id, localidad FROM localidades");
+                datos.setearConsulta("SELECT localidades.id AS idL, localidad, provincia" +
+                                    " FROM localidades" +
+                                    " INNER JOIN provincias ON provincias.id = Localidades.id_prov");
+
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Localidad localidad = new Localidad();
-                    localidad.id = (short)datos.Lector["id"];
+                    localidad.id = (short)datos.Lector["idL"];
                     localidad.localidad = (string)datos.Lector["localidad"];
+                    
+                    localidad.provincia = new Provincia();
+                    localidad.provincia.provincia = (string)datos.Lector["provincia"];
 
 
                     lista.Add(localidad);

@@ -80,3 +80,11 @@ VALUES
     ('Santiago del Estero'),
 	('Tierra del Fuego'),
 	('Tucumán')
+
+INSERT INTO localidades(localidad, id_prov)
+VALUES
+	('Almagro', 1),
+	('Pacheco', 2),
+	('San Fernando', 2),
+	('Caballito', 1),
+	('San Telmo', 1)

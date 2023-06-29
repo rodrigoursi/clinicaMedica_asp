@@ -13,7 +13,7 @@ namespace clinicaMedica.Pages
     public partial class ficha : System.Web.UI.Page
     {
         RolNegocio Rol = new RolNegocio();
-        EspacialidadNegocio Especialidad = new EspacialidadNegocio();
+        EspecialidadNegocio Especialidad = new EspecialidadNegocio();
         LocalidadNegocio Loc = new LocalidadNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -54,7 +54,7 @@ namespace clinicaMedica.Pages
         }
         protected void cargarUsuario(Usuario oUsuario)
         {
-            oUsuario.codigoUsuario = int.Parse(AltaUsuario_codigo.Text);
+            oUsuario.codigoUsuario = AltaUsuario_codigo.Text;
             oUsuario.password = AltaUsuario_contra.Text;
             oUsuario.nombreYApellido = AltaUsuario_nombre.Text;
             oUsuario.emailUsuario = AltaUsuario_correo.Text;
