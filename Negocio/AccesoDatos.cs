@@ -22,10 +22,10 @@ namespace Negocio
 
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=TURNOS_MEDICOS; integrated security=true");
+            //conexion = new SqlConnection("server=.\\SQLEXPRESS; database=TURNOS_MEDICOS; integrated security=true");
             //conexion = new SqlConnection("server=.\\UTNLABORATORIO; database=CATALOGO_P3_DB; User Id=sa; Password=imprimir");
             //conexion = new SqlConnection("server=.; database=CLINICA; integrated security=true");
-            //conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CLINICA; integrated security=true");
+            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CLINICA; integrated security=true");
             comando = new SqlCommand();
         }
 

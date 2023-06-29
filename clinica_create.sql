@@ -4,26 +4,26 @@
 --drop database TURNOS_MEDICOS
 --go
 
-use TURNOS_MEDICOS
+use CLINICA
 Go
 
 CREATE TABLE estados (
 	id tinyint not null primary key identity(1,1),
-	codigo tinyint not null unique check(codigo > 0),
+	codigo varchar(10) not null unique,
 	estado varchar(50) not null
 )
 go
 
 CREATE TABLE roles (
 	id tinyint not null primary key identity(1,1),
-	codigo tinyint not null unique check(codigo > 0),
+	codigo varchar(10) not null unique,
 	rol varchar(50) not null
 )
 go
 
 CREATE TABLE especialidades (
 	id smallint not null primary key identity(1,1),
-	codigo smallint not null unique check(codigo > 0),
+	codigo varchar(10) not null unique,
 	especialidad varchar(50) not null
 )
 go
@@ -41,9 +41,9 @@ CREATE TABLE usuarios(
 	localidad tinyint not null,
 	especialidad smallint not null,
 	rol tinyint not null,
-	altaUsu int not null,
-	modiUsu int,
-	bajaUsu int,
+	altaUsu varchar(10) not null,
+	modiUsu varchar(10),
+	bajaUsu varchar(10),
 	altaFecha datetime not null default getdate(),
 	modiFecha datetime,
 	bajaFecha datetime,
@@ -60,9 +60,9 @@ CREATE TABLE turnos
 	fecha_hora datetime not null,
 	observaciones text not null,
 	estado tinyint not null,
-	altaUsu int not null,
-	modiUsu int,
-	bajaUsu int,
+	altaUsu varchar(10) not null,
+	modiUsu varchar(10),
+	bajaUsu varchar(10),
 	altaFecha datetime not null default getdate(),
 	modiFecha datetime,
 	bajaFecha datetime,
@@ -122,7 +122,7 @@ begin
 	declare @bajaFec datetime
 	select @bajaFec = bajaFecha from deleted
 	if @bajaFec is null begin
-		update usuarios set bajausu = 0, bajaFecha = getdate() 
+		update usuarios set bajausu = 'admin', bajaFecha = getdate() 
 		from usuarios 
 		inner join deleted on deleted.id = usuarios.id  end
 	else begin
@@ -149,7 +149,7 @@ begin
 	declare @bajaFec datetime
 	select @bajaFec = bajaFecha from deleted
 	if @bajaFec is null begin
-		update turnos set bajausu = 0, bajaFecha = getdate() 
+		update turnos set bajausu = 'admin', bajaFecha = getdate() 
 		from turnos 
 		inner join deleted on deleted.id = turnos.id  
 	end

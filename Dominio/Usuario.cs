@@ -21,9 +21,9 @@ namespace Dominio
         public Localidad localidad { get; set; }
         public Especialidad especialidad { get; set; }
         public Rol rol { get; set; }
-        public int altaUsuario { get; set; }
-        public int modificacionUsuario {get; set;}
-        public int bajaUsuario { get; set; }
+        public string altaUsuario { get; set; }
+        public string modificacionUsuario {get; set;}
+        public string bajaUsuario { get; set; }
         public DateTime altaFecha { get; set; }
         public DateTime modificacionFecha { get; set; }
         public DateTime bajaFecha { get; set; }            

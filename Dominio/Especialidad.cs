@@ -9,10 +9,10 @@ namespace Dominio
     public class Especialidad
     {
         public short id { get; set; }
-        public short codigo { get; set; }
+        public string codigo { get; set; }
         public string especialidad { get; set; }
         public Especialidad() { }
-        public Especialidad(short codigo, string nombre)
+        public Especialidad(string codigo, string nombre)
         {
             this.codigo = codigo;
             this.especialidad = nombre;

@@ -4,9 +4,11 @@
 }
 
 .formulario {
+    width: 50%;
+    background-color: aliceblue;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around
+    justify-content: space-around;
 }
 
 .formulario div {
@@ -17,7 +19,7 @@
     width: 90%;
 }
 
-.formulario {
-    width: 50%;
-    background-color:aliceblue;
+
+.cerrarModal {
+    display: flex;
 }

@@ -9,10 +9,10 @@ namespace Dominio
     public class Rol
     {
         public byte id { get; set; }
-        public byte codigo { get; set; }
+        public string codigo { get; set; }
         public string rol { get; set; }
         public Rol() { }
-        public Rol(byte codigo, string nombre)
+        public Rol(string codigo, string nombre)
         {
             this.codigo = codigo;
             this.rol = nombre;

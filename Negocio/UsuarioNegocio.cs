@@ -55,9 +55,9 @@ namespace Negocio
                     usuario.localidad.id = (short)datos.Lector["localidad"];
                     usuario.especialidad.id = (byte)datos.Lector["especialidad"];
                     usuario.rol.id = (byte)datos.Lector["rol"];
-                    usuario.altaUsuario = (int)datos.Lector["altaUsu"];
-                    usuario.modificacionUsuario = (int)datos.Lector["modiUsus"];
-                    usuario.bajaUsuario = (int)datos.Lector["bajaUsu"];
+                    usuario.altaUsuario = (string)datos.Lector["altaUsu"];
+                    usuario.modificacionUsuario = (string)datos.Lector["modiUsus"];
+                    usuario.bajaUsuario = (string)datos.Lector["bajaUsu"];
                     usuario.altaFecha = (DateTime)datos.Lector["altaFecha"];
                     usuario.modificacionFecha = (DateTime)datos.Lector["modiFecha"];
                     usuario.bajaFecha = (DateTime)datos.Lector["bajaFecha"];

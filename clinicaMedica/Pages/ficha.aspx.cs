@@ -15,6 +15,7 @@ namespace clinicaMedica.Pages
         RolNegocio Rol = new RolNegocio();
         EspecialidadNegocio Especialidad = new EspecialidadNegocio();
         LocalidadNegocio Loc = new LocalidadNegocio();
+        ProvinciaNegocio pro = new ProvinciaNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
             AltaUsuario_id.Enabled = false;
@@ -33,6 +34,13 @@ namespace clinicaMedica.Pages
                 AltaUsuario_loc.DataTextField = "localidad";
                 AltaUsuario_loc.DataBind();
                 AltaUsuario_loc.Items.Insert(0, new ListItem("Seleccionar localidad", ""));
+                AltaUsuario_loc.Items.Add(new ListItem("Nueva localidad", "nuevo"));
+
+                AltaUsuario_prov.DataSource = pro.listar();
+                AltaUsuario_prov.DataValueField = "id";
+                AltaUsuario_prov.DataTextField = "provincia";
+                AltaUsuario_prov.DataBind();
+                AltaUsuario_prov.Items.Insert(0, new ListItem("Seleccionar provincia", ""));
 
                 ficha_rol.DataSource = Rol.listar();
                 ficha_rol.DataValueField = "id";
@@ -69,10 +77,15 @@ namespace clinicaMedica.Pages
             oUsuario.rol.id = byte.Parse(ficha_rol.SelectedValue);
             oUsuario.especialidad = new Especialidad();
             oUsuario.especialidad.id = byte.Parse(ficha_esp.SelectedValue);
-            int altaUsuario = 1;
-            //String altaUsuario = Session["usuario"].ToString();
-            //oUsuario.altaUsuario = Convert.ToInt32(altaUsuario);
 
+            oUsuario.altaUsuario = Session["usuario"].ToString();
+
+        }
+        protected void cargarLocalidad(Localidad oLoc)
+        {
+            oLoc.localidad = AltaUsuario_altaLoc.Text;
+            oLoc.provincia = new Provincia();
+            oLoc.provincia.id = byte.Parse(AltaUsuario_prov.SelectedValue);
         }
 
         protected void AltaUsuario_agregar_Click(object sender, EventArgs e)
@@ -80,7 +93,32 @@ namespace clinicaMedica.Pages
             Usuario usuario = new Usuario();
             this.cargarUsuario(usuario);
             UsuarioNegocio negocio = new UsuarioNegocio();
-            negocio.agregar(usuario);
+            
+            try
+            {
+                negocio.agregar(usuario);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw;
+            }
+        }
+
+        protected void AltaUsuario_btnAgregar_loc_Click(object sender, EventArgs e)
+        {
+            Localidad loc = new Localidad();
+            this.cargarLocalidad(loc);
+            LocalidadNegocio negocio = new LocalidadNegocio();
+            try
+            {
+                negocio.agregar(loc);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw;
+            }
         }
     }
 }

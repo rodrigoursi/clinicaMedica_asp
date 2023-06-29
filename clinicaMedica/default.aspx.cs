@@ -16,7 +16,7 @@ namespace clinicaMedica
 
         protected void login_Click(object sender, EventArgs e)
         {
-            string usuario = login.Text;
+            string usuario = codigoUser.Text;
             Session.Add("usuario", usuario);
             Session.Add("rol", "admin");
         }

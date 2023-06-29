@@ -25,7 +25,7 @@ namespace Negocio
                 {
                     Rol rol = new Rol();
                     rol.id = (byte)datos.Lector["id"];
-                    rol.codigo = (byte)datos.Lector["codigo"];
+                    rol.codigo = (string)datos.Lector["codigo"];
                     rol.rol = (string)datos.Lector["rol"];
 
                     // Imprimir los valores para verificar

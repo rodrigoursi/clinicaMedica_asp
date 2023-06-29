@@ -2132,6 +2132,7 @@
     <Content Include="Pages\abmLocalidades.aspx" />
     <Content Include="Pages\abmProvincias.aspx" />
     <Content Include="Pages\ficha.aspx" />
+    <Content Include="Pages\ficha.js" />
     <Content Include="Pages\usuario.aspx" />
     <Content Include="Pages\abmRoles.aspx" />
     <Content Include="Web.config" />

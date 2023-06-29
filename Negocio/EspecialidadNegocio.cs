@@ -25,7 +25,7 @@ namespace Negocio
                 {
                     Especialidad especialidad = new Especialidad();
                     especialidad.id = (short)datos.Lector["id"];
-                    especialidad.codigo = (short)datos.Lector["codigo"];
+                    especialidad.codigo = (string)datos.Lector["codigo"];
                     especialidad.especialidad = (string)datos.Lector["especialidad"];
 
 
