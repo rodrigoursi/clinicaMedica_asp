@@ -24,7 +24,7 @@ namespace Negocio
                 {
                     Estado estado = new Estado();
                     estado.id = (byte)datos.Lector["id"];
-                    estado.codigo = (byte)datos.Lector["codigo"];
+                    estado.codigo = (string)datos.Lector["codigo"];
                     estado.estado = (string)datos.Lector["estado"];
 
 

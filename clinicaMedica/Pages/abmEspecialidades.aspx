@@ -11,21 +11,21 @@
             <asp:BoundField HeaderText="especialidad" DataField="especialidad" />
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href='<%# "/pages/rol.aspx?id=" + Eval("id") %>'>
+                    <a href='<%# "/pages/FichaEspecialidades.aspx?id=" + Eval("id") %>'>
                        <i class="fa-solid fa-eye" title="ver"></i>
                     </a>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href='<%# "usuario.aspx?id=" + Eval("id") %>'>
+                    <a href='<%# "/pages/FichaEspecialidades.aspx?id=" + Eval("id") %>'>
                        <i class="fa-solid fa-file-pen" title="editar"></i>
                     </a>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href="./../default.aspx">
+                    <a href='<%# "/pages/FichaEspecialidades.aspx?id=" + Eval("id") %>'>
                        <i class="fa-solid fa-trash" title="borrar"></i>
                     </a>
                 </ItemTemplate>

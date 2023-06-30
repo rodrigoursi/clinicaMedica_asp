@@ -9,11 +9,11 @@ namespace Dominio
     public class Estado
     {
         public byte id { get; set; }
-        public byte codigo { get; set; }
+        public string codigo { get; set; }
         public string estado { get; set; }
 
         public Estado() { }
-        public Estado(byte codigo, string nombre) 
+        public Estado(string codigo, string nombre) 
         {
             this.codigo = codigo;
             this.estado = nombre;

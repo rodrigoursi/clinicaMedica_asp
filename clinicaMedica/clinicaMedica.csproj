@@ -2133,6 +2133,9 @@
     <Content Include="Pages\abmProvincias.aspx" />
     <Content Include="Pages\ficha.aspx" />
     <Content Include="Pages\ficha.js" />
+    <Content Include="Pages\FichaEspecialidades.aspx" />
+    <Content Include="Pages\FichaEstado.aspx" />
+    <Content Include="Pages\FichaRoles.aspx" />
     <Content Include="Pages\usuario.aspx" />
     <Content Include="Pages\abmRoles.aspx" />
     <Content Include="Web.config" />
@@ -2182,6 +2185,27 @@
     </Compile>
     <Compile Include="Pages\ficha.aspx.designer.cs">
       <DependentUpon>ficha.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FichaEspecialidades.aspx.cs">
+      <DependentUpon>FichaEspecialidades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\FichaEspecialidades.aspx.designer.cs">
+      <DependentUpon>FichaEspecialidades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FichaEstado.aspx.cs">
+      <DependentUpon>FichaEstado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\FichaEstado.aspx.designer.cs">
+      <DependentUpon>FichaEstado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FichaRoles.aspx.cs">
+      <DependentUpon>FichaRoles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\FichaRoles.aspx.designer.cs">
+      <DependentUpon>FichaRoles.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\usuario.aspx.cs">
       <DependentUpon>usuario.aspx</DependentUpon>
