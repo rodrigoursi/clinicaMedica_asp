@@ -75,7 +75,7 @@
                     <asp:DropDownList ID="AltaUsuario_prov" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" id="modal_cargarLoc_cerrar">Cerrar</button>
                     <asp:Button Text="AGREGAR" CssClass="btn btn-primary" ID="AltaUsuario_btnAgregar_loc" OnClick="AltaUsuario_btnAgregar_loc_Click" runat="server" />
                 </div>
             </div>

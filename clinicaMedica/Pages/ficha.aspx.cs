@@ -119,6 +119,20 @@ namespace clinicaMedica.Pages
                 Session.Add("error", ex);
                 throw;
             }
+            finally
+            {
+                AltaUsuario_loc.DataSource = Loc.listar();
+                AltaUsuario_loc.DataValueField = "id";
+                AltaUsuario_loc.DataTextField = "localidad";
+                AltaUsuario_loc.DataBind();
+                AltaUsuario_loc.Items.Insert(0, new ListItem("Seleccionar localidad", ""));
+                AltaUsuario_loc.Items.Add(new ListItem("Nueva localidad", "nuevo"));
+            }
+        }
+
+        protected void validarCampos()
+        {
+
         }
     }
 }
