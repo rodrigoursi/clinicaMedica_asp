@@ -132,7 +132,7 @@ namespace clinicaMedica.Pages
 
         protected void validarCampos()
         {
-
+            // codigo para validar los campos.
         }
     }
 }
