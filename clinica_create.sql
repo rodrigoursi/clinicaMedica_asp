@@ -32,7 +32,7 @@ CREATE TABLE especialidades (
 go
 
 
-CREATE OR ALTER TABLE usuarios(
+CREATE TABLE usuarios(
 	id int not null primary key identity(1,1),
 	cod_usu varchar(10) not null unique,
 	password varchar(140) not null,

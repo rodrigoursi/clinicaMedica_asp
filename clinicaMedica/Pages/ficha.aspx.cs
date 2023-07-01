@@ -114,6 +114,7 @@ namespace clinicaMedica.Pages
             Localidad loc = new Localidad();
             this.cargarLocalidad(loc);
             LocalidadNegocio negocio = new LocalidadNegocio();
+            if (loc.localidad == "") return;
             try
             {
                 negocio.agregar(loc);
@@ -136,7 +137,7 @@ namespace clinicaMedica.Pages
 
         protected bool validarCampos()
         {
-            if(AltaUsuario_loc.SelectedValue == "" || ficha_rol.SelectedValue == "" || ficha_esp.SelectedValue == "")
+            if (AltaUsuario_loc.SelectedValue == "" || ficha_rol.SelectedValue == "" || ficha_esp.SelectedValue == "" || AltaUsuario_fecNac.SelectedDate == DateTime.MinValue)
             {
                 return false;
             }
