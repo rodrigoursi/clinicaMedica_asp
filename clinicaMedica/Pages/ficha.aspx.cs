@@ -90,6 +90,10 @@ namespace clinicaMedica.Pages
 
         protected void AltaUsuario_agregar_Click(object sender, EventArgs e)
         {
+            if(!this.validarCampos())
+            {
+                return;
+            }
             Usuario usuario = new Usuario();
             this.cargarUsuario(usuario);
             UsuarioNegocio negocio = new UsuarioNegocio();
@@ -130,9 +134,13 @@ namespace clinicaMedica.Pages
             }
         }
 
-        protected void validarCampos()
+        protected bool validarCampos()
         {
-            // codigo para validar los campos.
+            if(AltaUsuario_loc.SelectedValue == "" || ficha_rol.SelectedValue == "" || ficha_esp.SelectedValue == "")
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
