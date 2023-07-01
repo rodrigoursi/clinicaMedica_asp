@@ -4,8 +4,11 @@
 --drop database TURNOS_MEDICOS
 --go
 
-use CLINICA
-Go
+--use CLINICA
+--Go
+
+USE TURNOS_MEDICOS
+GO
 
 CREATE TABLE estados (
 	id tinyint not null primary key identity(1,1),
@@ -28,7 +31,8 @@ CREATE TABLE especialidades (
 )
 go
 
-CREATE TABLE usuarios(
+
+CREATE OR ALTER TABLE usuarios(
 	id int not null primary key identity(1,1),
 	cod_usu varchar(10) not null unique,
 	password varchar(140) not null,
@@ -38,7 +42,7 @@ CREATE TABLE usuarios(
 	numero_doc varchar(30) not null unique,
 	fecha_nacimiento date not null,
 	direccion varchar(50) not null,
-	localidad tinyint not null,
+	localidad smallint not null,
 	especialidad smallint not null,
 	rol tinyint not null,
 	altaUsu varchar(10) not null,

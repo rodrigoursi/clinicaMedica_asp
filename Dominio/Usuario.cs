@@ -26,7 +26,7 @@ namespace Dominio
         public string bajaUsuario { get; set; }
         public DateTime altaFecha { get; set; }
         public DateTime modificacionFecha { get; set; }
-        public DateTime bajaFecha { get; set; }            
+        public DateTime bajaFecha { get; set; }
         public Usuario() { }
         public Usuario(string codigo, string nombreCompleto)
         {

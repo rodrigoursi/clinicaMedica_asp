@@ -31,7 +31,7 @@ namespace Negocio
                                         "especialidad, " +
                                         "rol, " +
                                         "altaUsu, " +
-                                        "modiUsus, " +
+                                        "modiUsu, " +
                                         "bajaUsu, " +
                                         "altaFecha, " +
                                         "modiFecha, " +
@@ -52,15 +52,22 @@ namespace Negocio
                     usuario.numeroDeDocumento = (string)datos.Lector["numero_doc"];
                     usuario.fechaDeNacimiento = (DateTime)datos.Lector["fecha_nacimiento"];
                     usuario.direccion = (string)datos.Lector["direccion"];
+
+                    usuario.localidad = new Localidad();
                     usuario.localidad.id = (short)datos.Lector["localidad"];
-                    usuario.especialidad.id = (byte)datos.Lector["especialidad"];
+
+                    usuario.especialidad = new Especialidad();
+                    usuario.especialidad.id = (short)datos.Lector["especialidad"];
+
+                    usuario.rol = new Rol();
                     usuario.rol.id = (byte)datos.Lector["rol"];
+
                     usuario.altaUsuario = (string)datos.Lector["altaUsu"];
-                    usuario.modificacionUsuario = (string)datos.Lector["modiUsus"];
-                    usuario.bajaUsuario = (string)datos.Lector["bajaUsu"];
+                    //usuario.modificacionUsuario = (string)datos.Lector["modiUsu"];
+                    //usuario.bajaUsuario = (string)datos.Lector["bajaUsu"];
                     usuario.altaFecha = (DateTime)datos.Lector["altaFecha"];
-                    usuario.modificacionFecha = (DateTime)datos.Lector["modiFecha"];
-                    usuario.bajaFecha = (DateTime)datos.Lector["bajaFecha"];
+                    //usuario.modificacionFecha = (DateTime)datos.Lector["modiFecha"];
+                    //usuario.bajaFecha = (DateTime)datos.Lector["bajaFecha"];
 
 
                     lista.Add(usuario);
@@ -70,7 +77,9 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al capturar los datos de la tabla de USUARIOS");
+                MessageBox.Show("Error al capturar los datos de la tabla de USUARIOS" + ex.Message +  " / " + 
+                    ex.GetType().Name + " / " + ex.StackTrace);
+
                 throw ex;
             }
             finally

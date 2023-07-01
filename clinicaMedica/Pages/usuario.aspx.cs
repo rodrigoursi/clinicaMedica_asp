@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -39,25 +40,9 @@ namespace clinicaMedica.Pages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                List<usuario> users = new List<usuario>();
-                for(int i = 1; i < 10; i++)
-                {
-                    usuario user = new usuario(); // Crear una nueva instancia en cada iteración
-                    user.codigo = 1111;
-                    user.nombre = "rodrigo";
-                    user.email = "rodrigo@rodrigo.com";
-                    user.tipo_documento = "pasaporte";
-                    user.numero_doc = "1213584584";
-                    user.direccion = "lambare 500";
-                    user.localidad = "escobar";
-                    user.id = i;
-                    users.Add(user);
-                }
-                GridAbmUser.DataSource = users;
-                GridAbmUser.DataBind();
-            }
+            UsuarioNegocio negocio = new UsuarioNegocio();
+            GridAbmUser.DataSource = negocio.listar();
+            GridAbmUser.DataBind();
 
         }
 

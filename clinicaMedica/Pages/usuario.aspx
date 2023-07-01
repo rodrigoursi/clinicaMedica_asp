@@ -7,11 +7,14 @@
         <asp:GridView ID="GridAbmUser" runat="server" DataKeyNames="id" AutoGenerateColumns="false" CssClass="table">
         <HeaderStyle CssClass="cabecera"/>
         <Columns>
-            <asp:BoundField HeaderText="codigo" DataField="codigo" />
-            <asp:BoundField HeaderText="nombre" DataField="nombre" />
-            <asp:BoundField HeaderText="email" DataField="email" />
-            <asp:BoundField HeaderText="tipo de documento" DataField="tipo_documento" />
-            <asp:BoundField HeaderText="numero de documento" DataField="numero_doc" />
+            <asp:BoundField HeaderText="codigo" DataField="codigoUsuario" />
+            <asp:BoundField HeaderText="nombre" DataField="nombreYApellido" />
+            <asp:BoundField HeaderText="email" DataField="emailUsuario" />
+            <asp:BoundField HeaderText="tipo de documento" DataField="tipoDeDocumento" />
+            <asp:BoundField HeaderText="numero de documento" DataField="numeroDeDocumento" />
+            <asp:BoundField HeaderText="Localidad" DataField="localidad" />
+            <asp:BoundField HeaderText="Rol" DataField="rol" />
+            <asp:BoundField HeaderText="Especialidad" DataField="especialidad" />
             <asp:TemplateField>
                 <ItemTemplate>
                     <a href='<%# "/pages/ficha.aspx?id=" + Eval("id") %>'>

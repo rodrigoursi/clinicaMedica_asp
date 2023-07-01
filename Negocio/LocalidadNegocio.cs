@@ -30,7 +30,9 @@ namespace Negocio
                     localidad.localidad = (string)datos.Lector["localidad"];
                     
                     localidad.provincia = new Provincia();
-                    localidad.provincia.provincia = (string)datos.Lector["provincia"];
+                    string provinciaa = datos.Lector["provincia"].ToString();
+
+                    localidad.provincia.provincia = provinciaa;
 
 
                     lista.Add(localidad);
