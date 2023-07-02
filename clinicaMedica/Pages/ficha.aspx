@@ -55,6 +55,15 @@
             </div>
             <asp:DropDownList ID="ficha_rol" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
             <asp:DropDownList ID="ficha_esp" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
+            <asp:Repeater ID="listaHorarios" runat="server">
+                <ItemTemplate>
+                    <div class="mb-3">
+                        <asp:Label ID="lbl_dia" runat="server" Text=<%#Eval("dia") %> ></asp:Label>
+                        <asp:TextBox runat="server" CssClass="form-control mb-3" id="AltaUsuario_hIni"/>
+                        <asp:TextBox runat="server" CssClass="form-control mb-3" id="AltaUsuario_hFin"/>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
             <asp:Button Text="AGREGAR" CssClass="btn btn-primary mb-3" ID="AltaUsuario_agregar" runat="server" OnClick="AltaUsuario_agregar_Click" />
         </div>
     </div>

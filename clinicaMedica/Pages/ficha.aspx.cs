@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Negocio;
 using Dominio;
 using System.Web.Services.Description;
+using System.Reflection.Emit;
 
 namespace clinicaMedica.Pages
 {
@@ -16,10 +17,13 @@ namespace clinicaMedica.Pages
         EspecialidadNegocio Especialidad = new EspecialidadNegocio();
         LocalidadNegocio Loc = new LocalidadNegocio();
         ProvinciaNegocio pro = new ProvinciaNegocio();
+        List<ficha> dias = new List<ficha>();
+
+        public int id { get; set; }
+        public String dia { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             AltaUsuario_id.Enabled = false;
-            
             if (!IsPostBack)
             {
                 this.cargarBoxs();
@@ -53,6 +57,15 @@ namespace clinicaMedica.Pages
                 ficha_esp.DataTextField = "especialidad";
                 ficha_esp.DataBind();
                 ficha_esp.Items.Insert(0, new ListItem("Selecciona una especialidad", ""));
+
+                // esto esta en modo prueba
+                dias.Add(new ficha { id = 1, dia = "lunes" });
+                dias.Add(new ficha { id = 2, dia = "martes" });
+                dias.Add(new ficha { id = 3, dia = "miercoles" });
+                dias.Add(new ficha { id = 4, dia = "jueves" });
+                dias.Add(new ficha { id = 5, dia = "viernes" });
+                listaHorarios.DataSource = dias;
+                listaHorarios.DataBind();
             }
             catch (Exception ex)
             {
@@ -94,6 +107,8 @@ namespace clinicaMedica.Pages
             {
                 return;
             }
+            this.cargarHorario();
+
             Usuario usuario = new Usuario();
             this.cargarUsuario(usuario);
             UsuarioNegocio negocio = new UsuarioNegocio();
@@ -142,6 +157,22 @@ namespace clinicaMedica.Pages
                 return false;
             }
             return true;
+        }
+        protected void cargarHorario()
+        {
+            foreach (RepeaterItem item in listaHorarios.Items)
+            {
+                int indice = item.ItemIndex;
+
+                System.Web.UI.WebControls.Label label_dia = (System.Web.UI.WebControls.Label)item.FindControl("lbl_dia");
+                TextBox txtHIni = (TextBox)item.FindControl("AltaUsuario_hIni");
+                TextBox txtHFin = (TextBox)item.FindControl("AltaUsuario_hFin");
+                //int id = dias[indice].id;
+                string dia = label_dia.Text;
+                int horaInicio = int.Parse(txtHIni.Text);
+                int horaFin = int.Parse(txtHFin.Text);
+            }
+            return;
         }
     }
 }

@@ -132,6 +132,15 @@ namespace clinicaMedica.Pages
         protected global::System.Web.UI.WebControls.DropDownList ficha_esp;
 
         /// <summary>
+        /// Control listaHorarios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater listaHorarios;
+
+        /// <summary>
         /// Control AltaUsuario_agregar.
         /// </summary>
         /// <remarks>
