@@ -8,7 +8,7 @@
         <HeaderStyle CssClass="cabecera"/>
         <Columns>
             <asp:BoundField HeaderText="localidad" DataField="localidad" />
-            <asp:BoundField HeaderText="provincia" DataField="provincia" />
+            <asp:BoundField HeaderText="provincia" DataField="provincia.provincia" />
             <asp:TemplateField>
                 <ItemTemplate>
                     <a href='<%# "/pages/rol.aspx?id=" + Eval("id") %>'>

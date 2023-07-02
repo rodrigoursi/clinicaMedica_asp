@@ -15,20 +15,48 @@ namespace clinicaMedica.Pages
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["id"] != null)
+                if (Request.QueryString["mod"] != null)
                 {
-                    byte id;
-                    if (byte.TryParse(Request.QueryString["id"], out id))
+                    if (Request.QueryString["id"] != null)
                     {
-                        EstadoNegocio negocio = new EstadoNegocio();
-                        List<Estado> lista = negocio.listar();
-                        foreach (Estado estado in lista)
+                        byte id;
+                        if (byte.TryParse(Request.QueryString["id"], out id))
                         {
-                            if (estado.id == id)
+                            EstadoNegocio negocio = new EstadoNegocio();
+                            List<Estado> lista = negocio.listar();
+                            foreach (Estado estado in lista)
                             {
-                                Estados_codigo.Text = estado.codigo;
-                                Estados_estado.Text = estado.estado;
-                                break;
+                                if (estado.id == id)
+                                {
+                                    Estados_codigo.Text = estado.codigo;
+                                    Estados_estado.Text = estado.estado;
+                                    break;
+                                }
+                            }
+                        }
+
+                        byte mod;
+                        if (byte.TryParse(Request.QueryString["mod"], out mod))
+                        {
+                            if (mod == 1) // VER
+                            {
+                                Estados_codigo.Enabled = false;
+                                Estados_estado.Enabled = false;
+                                Estado_agregar.Text = "Modificar";
+                                Estado_cancelar.Text = "Volver";
+                            }
+                            if (mod == 2) //EDITAR
+                            {
+                                Estados_codigo.Enabled = true;
+                                Estados_estado.Enabled = true;
+                                Estado_agregar.Text = "Guardar";
+                                Estado_cancelar.Text = "Cancelar";
+                            }
+                            if (mod == 3) //ELIMINAR
+                            {
+                                EstadoNegocio negocio = new EstadoNegocio();
+                                negocio.eliminar(id);
+
                             }
                         }
                     }

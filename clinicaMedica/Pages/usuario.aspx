@@ -12,9 +12,11 @@
             <asp:BoundField HeaderText="email" DataField="emailUsuario" />
             <asp:BoundField HeaderText="tipo de documento" DataField="tipoDeDocumento" />
             <asp:BoundField HeaderText="numero de documento" DataField="numeroDeDocumento" />
-            <asp:BoundField HeaderText="Localidad" DataField="localidad" />
-            <asp:BoundField HeaderText="Rol" DataField="rol" />
-            <asp:BoundField HeaderText="Especialidad" DataField="especialidad" />
+            <asp:BoundField HeaderText="Rol" DataField="rol.rol" />
+            <asp:BoundField HeaderText="Especialidad" DataField="especialidad.especialidad" />
+            <asp:BoundField HeaderText="Localidad" DataField="localidad.localidad" />
+            <asp:BoundField HeaderText="Provincia" DataField="localidad.provincia.provincia" />
+
             <asp:TemplateField>
                 <ItemTemplate>
                     <a href='<%# "/pages/ficha.aspx?id=" + Eval("id") %>'>

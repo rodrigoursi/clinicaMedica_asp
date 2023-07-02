@@ -88,3 +88,7 @@ VALUES
 	('San Fernando', 2),
 	('Caballito', 1),
 	('San Telmo', 1)
+
+INSERT INTO usuarios(cod_usu, password, nombre_apellido, email, tipo_documento, numero_doc, fecha_nacimiento, direccion, localidad, especialidad, rol, altaUsu, altaFecha)
+VALUES
+	('ADM-001', 'admin', 'Admin', 'admin@admin.com', 'DNI', '33444555', '02/03/2020', 'Av. liniers 500', 1, 1, 1, 'Pepe', '02/03/2023')

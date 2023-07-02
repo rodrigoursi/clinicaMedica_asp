@@ -17,9 +17,9 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT localidades.id AS idL, localidad, provincia" +
-                                    " FROM localidades" +
-                                    " INNER JOIN provincias ON provincias.id = Localidades.id_prov");
+                datos.setearConsulta("SELECT L.id AS idL, L.localidad, P.id AS idP, P.provincia" +
+                                    " FROM localidades AS L" +
+                                    " INNER JOIN provincias AS P ON P.id = L.id_prov");
 
                 datos.ejecutarLectura();
 
@@ -30,10 +30,8 @@ namespace Negocio
                     localidad.localidad = (string)datos.Lector["localidad"];
                     
                     localidad.provincia = new Provincia();
-                    string provinciaa = datos.Lector["provincia"].ToString();
-
-                    localidad.provincia.provincia = provinciaa;
-
+                    localidad.provincia.id = (byte)datos.Lector["idP"];
+                    localidad.provincia.provincia = (string)datos.Lector["provincia"];
 
                     lista.Add(localidad);
                 }

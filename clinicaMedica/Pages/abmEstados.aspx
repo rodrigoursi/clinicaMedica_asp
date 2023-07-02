@@ -11,22 +11,22 @@
             <asp:BoundField HeaderText="estado" DataField="estado" />
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href='<%# "/pages/FichaEstado.aspx?id=" + Eval("id") %>'>
+                    <a href='<%# "/pages/FichaEstado.aspx?id=" + Eval("id") + "&mod=1" %>'>
                        <i class="fa-solid fa-eye" title="ver"></i>
                     </a>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href='<%# "/pages/FichaEstado.aspx?id=" + Eval("id") %>'>
+                    <a href='<%# "/pages/FichaEstado.aspx?id=" + Eval("id") + "&mod=2" %>'>
                        <i class="fa-solid fa-file-pen" title="editar"></i>
                     </a>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href='<%# "/pages/FichaEstado.aspx?id=" + Eval("id") %>'>
-                       <i class="fa-solid fa-trash" title="borrar"></i>
+                    <a href='<%# "/pages/FichaEstado.aspx?id=" + Eval("id") + "&mod=3" %>'>
+                        <i class="fa-solid fa-trash" title="borrar"></i>
                     </a>
                 </ItemTemplate>
             </asp:TemplateField>

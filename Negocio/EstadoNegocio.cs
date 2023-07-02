@@ -101,7 +101,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("DELETE FORM estados WHERE id= @id");
+                datos.setearConsulta("DELETE FROM estados WHERE id= @id");
                 datos.setearParametro("@id", id);
                 resultado = datos.ejecutarUpdate();
             }

@@ -16,5 +16,7 @@ namespace clinicaMedica.Pages
             GridAbmEstados.DataSource = negocio.listar();
             GridAbmEstados.DataBind();
         }
+
+
     }
 }

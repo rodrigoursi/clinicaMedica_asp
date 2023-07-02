@@ -18,7 +18,7 @@ namespace Negocio
             try
             {
                 datos.setearConsulta("SELECT " +
-                                        "id, " +
+                                        "usuarios.id AS idU, " +
                                         "cod_usu, " +
                                         "password, " +
                                         "nombre_apellido, " +
@@ -27,9 +27,14 @@ namespace Negocio
                                         "numero_doc, " +
                                         "fecha_nacimiento, " +
                                         "direccion, " +
-                                        "localidad, " +
-                                        "especialidad, " +
-                                        "rol, " +
+                                        "L.id AS idL, " +
+                                        "L.localidad, " +
+                                        "P.id AS idP, " +
+                                        "P.provincia, " +
+                                        "E.id AS idE, " +
+                                        "E.especialidad, " +
+                                        "R.id AS idR, " +
+                                        "R.rol, " +
                                         "altaUsu, " +
                                         "modiUsu, " +
                                         "bajaUsu, " +
@@ -37,13 +42,17 @@ namespace Negocio
                                         "modiFecha, " +
                                         "bajaFecha " +
                                     "FROM " +
-                                        "usuarios");
+                                        "usuarios " +
+                                    "INNER JOIN Localidades AS L ON L.id = usuarios.localidad " +
+                                    "INNER JOIN provincias AS P ON P.id = L.id_prov " +
+                                    "INNER JOIN Especialidades AS E ON E.id = usuarios.especialidad " +
+                                    "INNER JOIN Roles AS R ON R.id = usuarios.rol");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Usuario usuario = new Usuario();
-                    usuario.id = (int)datos.Lector["id"];
+                    usuario.id = (int)datos.Lector["idU"];
                     usuario.codigoUsuario = (string)datos.Lector["cod_usu"];
                     usuario.password = (string)datos.Lector["password"];
                     usuario.nombreYApellido = (string)datos.Lector["nombre_apellido"];
@@ -54,13 +63,20 @@ namespace Negocio
                     usuario.direccion = (string)datos.Lector["direccion"];
 
                     usuario.localidad = new Localidad();
-                    usuario.localidad.id = (short)datos.Lector["localidad"];
+                    usuario.localidad.id = (short)datos.Lector["idL"];
+                    usuario.localidad.localidad = (string)datos.Lector["localidad"];
+                    usuario.localidad.provincia = new Provincia();
+                    usuario.localidad.provincia.id = (byte)datos.Lector["idP"];
+                    usuario.localidad.provincia.provincia = (string)datos.Lector["provincia"];
 
                     usuario.especialidad = new Especialidad();
-                    usuario.especialidad.id = (short)datos.Lector["especialidad"];
+                    usuario.especialidad.id = (short)datos.Lector["idE"];
+                    usuario.especialidad.especialidad = (string)datos.Lector["especialidad"];
 
                     usuario.rol = new Rol();
-                    usuario.rol.id = (byte)datos.Lector["rol"];
+                    usuario.rol.id = (byte)datos.Lector["idR"];
+                    usuario.rol.rol = (string)datos.Lector["rol"];
+
 
                     usuario.altaUsuario = (string)datos.Lector["altaUsu"];
                     //usuario.modificacionUsuario = (string)datos.Lector["modiUsu"];
