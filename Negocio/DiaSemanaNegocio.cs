@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Negocio
 {
-    internal class DiaSemanaNegocio
+    public class DiaSemanaNegocio
     {
         public List<DiaSemana> listar()
         {

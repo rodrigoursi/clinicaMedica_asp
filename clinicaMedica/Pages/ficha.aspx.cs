@@ -17,12 +17,14 @@ namespace clinicaMedica.Pages
         EspecialidadNegocio Especialidad = new EspecialidadNegocio();
         LocalidadNegocio Loc = new LocalidadNegocio();
         ProvinciaNegocio pro = new ProvinciaNegocio();
-        List<ficha> dias = new List<ficha>();
+        DiaSemanaNegocio dSem = new DiaSemanaNegocio();
+        List<DiaSemana> dias = new List<DiaSemana>();
 
         public int id { get; set; }
         public String dia { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            dias = dSem.listar();
             AltaUsuario_id.Enabled = false;
             if (!IsPostBack)
             {
@@ -58,14 +60,18 @@ namespace clinicaMedica.Pages
                 ficha_esp.DataBind();
                 ficha_esp.Items.Insert(0, new ListItem("Selecciona una especialidad", ""));
 
+                //dias = dSem.listar();
+                listaHorarios.DataSource = dias;
+                listaHorarios.DataBind();
                 // esto esta en modo prueba
+                /*
                 dias.Add(new ficha { id = 1, dia = "lunes" });
                 dias.Add(new ficha { id = 2, dia = "martes" });
                 dias.Add(new ficha { id = 3, dia = "miercoles" });
                 dias.Add(new ficha { id = 4, dia = "jueves" });
                 dias.Add(new ficha { id = 5, dia = "viernes" });
                 listaHorarios.DataSource = dias;
-                listaHorarios.DataBind();
+                listaHorarios.DataBind();*/
             }
             catch (Exception ex)
             {
@@ -107,10 +113,9 @@ namespace clinicaMedica.Pages
             {
                 return;
             }
-            this.cargarHorario();
-
             Usuario usuario = new Usuario();
             this.cargarUsuario(usuario);
+            this.cargarHorario(usuario);
             UsuarioNegocio negocio = new UsuarioNegocio();
             
             try
@@ -158,19 +163,29 @@ namespace clinicaMedica.Pages
             }
             return true;
         }
-        protected void cargarHorario()
+        protected void cargarHorario(Usuario usuario)
         {
             foreach (RepeaterItem item in listaHorarios.Items)
             {
-                int indice = item.ItemIndex;
-
                 System.Web.UI.WebControls.Label label_dia = (System.Web.UI.WebControls.Label)item.FindControl("lbl_dia");
                 TextBox txtHIni = (TextBox)item.FindControl("AltaUsuario_hIni");
                 TextBox txtHFin = (TextBox)item.FindControl("AltaUsuario_hFin");
                 //int id = dias[indice].id;
                 string dia = label_dia.Text;
-                int horaInicio = int.Parse(txtHIni.Text);
-                int horaFin = int.Parse(txtHFin.Text);
+                string horaInicio = txtHIni.Text;
+                string horaFin = txtHFin.Text;
+                DateTime horaI = DateTime.Parse(horaInicio);
+                DateTime horaF = DateTime.Parse(horaFin);
+                Horarios horario = new Horarios();
+                horario.horaInicio = horaI;
+                horario.horaFin = horaF;
+                DiaSemana idDia = dias.Find(x => x.diaSemana == dia);
+                horario.idDia = idDia;
+                usuario.id = 3;
+                horario.idMedico = usuario;
+                HorarioNegocio horaNeg = new HorarioNegocio();
+                horaNeg.agregar(horario);
+
             }
             return;
         }

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Negocio
 {
-    internal class HorarioNegocio
+    public class HorarioNegocio
     {
         public List<Horarios> listar()
         {
@@ -83,8 +83,8 @@ namespace Negocio
             try
             {
                 datos.setearConsulta("INSERT INTO horarios (id_medico, id_dia, hora_ini, hora_fin) VALUES (@medico, @dia, @inicio, @fin)");
-                datos.setearParametro("@medico", horario.idMedico);
-                datos.setearParametro("@dia", horario.idDia);
+                datos.setearParametro("@medico", horario.idMedico.id);
+                datos.setearParametro("@dia", horario.idDia.id);
                 datos.setearParametro("@inicio", horario.horaInicio);
                 datos.setearParametro("@fin", horario.horaFin);
                 //datos.setearParametro("@turno", horario.turnoAsociado);
