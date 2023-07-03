@@ -58,7 +58,7 @@
             <asp:Repeater ID="listaHorarios" runat="server">
                 <ItemTemplate>
                     <div class="mb-3">
-                        <asp:Label ID="lbl_dia" runat="server" Text=<%#Eval("diaSemana") + ":" %> ></asp:Label>
+                        <asp:Label ID="lbl_dia" runat="server" Text=<%#Eval("diaSemana") %> ></asp:Label>
                         <asp:TextBox runat="server" CssClass="form-control mb-3" id="AltaUsuario_hIni" Placeholder="Ejemplo formato 8:00" />
                         <asp:TextBox runat="server" CssClass="form-control mb-3" id="AltaUsuario_hFin" Placeholder="Ejemplo formato 14:00" />
                     </div>

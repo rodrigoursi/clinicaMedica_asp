@@ -158,7 +158,7 @@ namespace Negocio
             return resultado;
         }
 
-        public int agregar(Usuario usuario)
+        public int agregar(Usuario usuario, bool devId = false)
         {
             int resultado = 0;
             AccesoDatos datos = new AccesoDatos();
@@ -166,32 +166,33 @@ namespace Negocio
             try
             {
                 datos.setearConsulta("INSERT INTO " +
-                                        "usuarios (" +
-                                        "cod_usu, " +
-                                        "password, " +
-                                        "nombre_apellido, " +
-                                        "email, " +
-                                        "tipo_documento, " +
-                                        "numero_doc, " +
-                                        "fecha_nacimiento, " +
-                                        "direccion, " +
-                                        "localidad, " +
-                                        "especialidad, " +
-                                        "rol, " +
-                                        "altaUsu) " +
-                                    "VALUES " +
-                                        "(@codigo," +
-                                        "@password," +
-                                        "@nombreApellido," +
-                                        "@email," +
-                                        "@tipoDocumento," +
-                                        "@numeroDocumento," +
-                                        "@fechaNacimiento," +
-                                        "@direccion," +
-                                        "@localidad," +
-                                        "@especialidad," +
-                                        "@rol," +
-                                        "@altaUsu)");
+                                    "usuarios (" +
+                                    "cod_usu, " +
+                                    "password, " +
+                                    "nombre_apellido, " +
+                                    "email, " +
+                                    "tipo_documento, " +
+                                    "numero_doc, " +
+                                    "fecha_nacimiento, " +
+                                    "direccion, " +
+                                    "localidad, " +
+                                    "especialidad, " +
+                                    "rol, " +
+                                    "altaUsu) " +
+                                "VALUES " +
+                                    "(@codigo," +
+                                    "@password," +
+                                    "@nombreApellido," +
+                                    "@email," +
+                                    "@tipoDocumento," +
+                                    "@numeroDocumento," +
+                                    "@fechaNacimiento," +
+                                    "@direccion," +
+                                    "@localidad," +
+                                    "@especialidad," +
+                                    "@rol," +
+                                    "@altaUsu)");
+                
 
                 datos.setearParametro("@id", usuario.id);
                 datos.setearParametro("@codigo", usuario.codigoUsuario);

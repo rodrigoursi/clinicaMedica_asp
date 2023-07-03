@@ -181,7 +181,7 @@ namespace clinicaMedica.Pages
                 horario.horaFin = horaF;
                 DiaSemana idDia = dias.Find(x => x.diaSemana == dia);
                 horario.idDia = idDia;
-                usuario.id = 3;
+                usuario.id = 4;
                 horario.idMedico = usuario;
                 HorarioNegocio horaNeg = new HorarioNegocio();
                 horaNeg.agregar(horario);

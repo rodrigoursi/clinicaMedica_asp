@@ -53,7 +53,7 @@ namespace Negocio
         {
             comando.Parameters.AddWithValue(nombre, valor);
         }
-        public int ejecutarUpdate()
+        public int ejecutarUpdate(bool devId = false)
         {
             comando.Connection = conexion;
             try
@@ -62,7 +62,16 @@ namespace Negocio
                 transaccion = conexion.BeginTransaction();
                 comando.Transaction = transaccion;
                 filasAfectadas = comando.ExecuteNonQuery();
-                if (filasAfectadas == 1) transaccion.Commit();
+                if (filasAfectadas == 1) 
+                {
+                    transaccion.Commit();
+                    if(devId)
+                    {
+                        comando.CommandText = "SELECT SCOPE_IDENTITY();";
+                        object idInsertado = comando.ExecuteScalar();
+                        filasAfectadas = Convert.ToInt32(idInsertado);
+                    }
+                } 
                 else transaccion.Rollback();
             }
             catch (Exception ex)
