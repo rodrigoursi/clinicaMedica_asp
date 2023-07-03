@@ -25,7 +25,8 @@
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href='<%# "/pages/FichaEstado.aspx?id=" + Eval("id") + "&mod=3" %>'>
+                    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click"  class="fa-solid fa-trash" Text="ELIMINAR" CommandArgument='<%# Eval("ID") %>'/>
+                    <a href='<%# "/pages/ABMEstados.aspx" %>' CommandName="Eliminar" CommandArgument='<%# Eval("ID") %>' >
                         <i class="fa-solid fa-trash" title="borrar"></i>
                     </a>
                 </ItemTemplate>

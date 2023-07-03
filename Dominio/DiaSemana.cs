@@ -9,11 +9,13 @@ namespace Dominio
     public class DiaSemana
     {
         public byte id { get; set; }
-        public byte codDIa { get; set; }
+        public byte codDia { get; set; }
         public string diaSemana { get; set; }
-        public DiaSemana(byte codDIa, string diaSemana)
+        public DiaSemana() { }
+
+        public DiaSemana(byte codDia, string diaSemana)
         {
-            this.codDIa = codDIa;
+            this.codDia = codDia;
             this.diaSemana = diaSemana;
         }
     }

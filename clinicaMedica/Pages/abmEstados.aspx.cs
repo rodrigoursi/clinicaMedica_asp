@@ -12,11 +12,44 @@ namespace clinicaMedica.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            EstadoNegocio negocio = new EstadoNegocio();
-            GridAbmEstados.DataSource = negocio.listar();
-            GridAbmEstados.DataBind();
+
+            if (!IsPostBack)
+            {
+                // Configuración de la GridView
+                EstadoNegocio negocio = new EstadoNegocio();
+                GridAbmEstados.DataSource = negocio.listar();
+                GridAbmEstados.DataBind();
+
+            }
         }
 
+        //protected void GridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        //{
+        //    if (e.CommandName == "Eliminar")
+        //    {
+        //        int rowIndex = Convert.ToInt32(e.CommandArgument);
+        //        GridViewRow row = GridAbmEstados.Rows[rowIndex];
+        //        byte id = Convert.ToByte(GridAbmEstados.DataKeys[row.RowIndex].Value);
 
+        //        EliminarRegistro(id);
+
+        //        // Volver a enlazar los datos a la GridView
+        //        GridAbmEstados.DataBind();
+        //    }
+
+
+        //}
+        //private void EliminarRegistro(byte id)
+        //{
+        //    EstadoNegocio negocio = new EstadoNegocio();
+        //    negocio.eliminar(id);
+        //}
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            this.Title = e.ToString();
+            EstadoNegocio negocio = new EstadoNegocio();
+            negocio.eliminar(3);
+        }
     }
 }
