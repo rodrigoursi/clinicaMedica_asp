@@ -25,8 +25,8 @@
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click"  class="fa-solid fa-trash" Text="ELIMINAR" CommandArgument='<%# Eval("ID") %>'/>
-                    <a href='<%# "/pages/ABMEstados.aspx" %>' CommandName="Eliminar" CommandArgument='<%# Eval("ID") %>' >
+                    <a href='<%# "/pages/ABMEstados.aspx?id=" + Eval("id") + "&mod=3" %>'
+                     onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?')">
                         <i class="fa-solid fa-trash" title="borrar"></i>
                     </a>
                 </ItemTemplate>

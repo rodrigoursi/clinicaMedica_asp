@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,41 +16,31 @@ namespace clinicaMedica.Pages
 
             if (!IsPostBack)
             {
-                // Configuración de la GridView
-                EstadoNegocio negocio = new EstadoNegocio();
-                GridAbmEstados.DataSource = negocio.listar();
-                GridAbmEstados.DataBind();
+                if (Request.QueryString["mod"] != null)
+                {
+                    if (Request.QueryString["id"] != null)
+                    {
+                        byte id;
+                        if (byte.TryParse(Request.QueryString["id"], out id))
+                        {
+                            byte mod;
+                            if (byte.TryParse(Request.QueryString["mod"], out mod))
+                            {
+                                if (mod == 3) //ELIMINAR
+                                {
+                                    EstadoNegocio negocio = new EstadoNegocio();
+                                    negocio.eliminar(id);
 
+                                }
+                            }
+                        }
+                    }
+                }
             }
-        }
 
-        //protected void GridView_RowCommand(object sender, GridViewCommandEventArgs e)
-        //{
-        //    if (e.CommandName == "Eliminar")
-        //    {
-        //        int rowIndex = Convert.ToInt32(e.CommandArgument);
-        //        GridViewRow row = GridAbmEstados.Rows[rowIndex];
-        //        byte id = Convert.ToByte(GridAbmEstados.DataKeys[row.RowIndex].Value);
-
-        //        EliminarRegistro(id);
-
-        //        // Volver a enlazar los datos a la GridView
-        //        GridAbmEstados.DataBind();
-        //    }
-
-
-        //}
-        //private void EliminarRegistro(byte id)
-        //{
-        //    EstadoNegocio negocio = new EstadoNegocio();
-        //    negocio.eliminar(id);
-        //}
-
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            this.Title = e.ToString();
-            EstadoNegocio negocio = new EstadoNegocio();
-            negocio.eliminar(3);
+            EstadoNegocio negocio2 = new EstadoNegocio();
+            GridAbmEstados.DataSource = negocio2.listar();
+            GridAbmEstados.DataBind();
         }
     }
 }
