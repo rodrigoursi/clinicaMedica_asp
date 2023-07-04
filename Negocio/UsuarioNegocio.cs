@@ -158,7 +158,7 @@ namespace Negocio
             return resultado;
         }
 
-        public int agregar(Usuario usuario, bool devId = false)
+        public int agregar(Usuario usuario)
         {
             int resultado = 0;
             AccesoDatos datos = new AccesoDatos();
@@ -243,6 +243,78 @@ namespace Negocio
                 datos.cerrarConexion();
             }
             return resultado;
+        }
+        public int cargarConId(Usuario usuario)
+        {
+            List<Usuario> lista = new List<Usuario>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("INSERT INTO " +
+                                    "usuarios (" +
+                                    "cod_usu, " +
+                                    "password, " +
+                                    "nombre_apellido, " +
+                                    "email, " +
+                                    "tipo_documento, " +
+                                    "numero_doc, " +
+                                    "fecha_nacimiento, " +
+                                    "direccion, " +
+                                    "localidad, " +
+                                    "especialidad, " +
+                                    "rol, " +
+                                    "altaUsu) " +
+                                "VALUES " +
+                                    "(@codigo," +
+                                    "@password," +
+                                    "@nombreApellido," +
+                                    "@email," +
+                                    "@tipoDocumento," +
+                                    "@numeroDocumento," +
+                                    "@fechaNacimiento," +
+                                    "@direccion," +
+                                    "@localidad," +
+                                    "@especialidad," +
+                                    "@rol," +
+                                    "@altaUsu); select top 1 id from usuarios order by id desc;");
+
+                //datos.setearParametro("@id", usuario.id);
+                datos.setearParametro("@codigo", usuario.codigoUsuario);
+                datos.setearParametro("@password", usuario.password);
+                datos.setearParametro("@nombreApellido", usuario.nombreYApellido);
+                datos.setearParametro("@email", usuario.emailUsuario);
+                datos.setearParametro("@tipoDocumento", usuario.tipoDeDocumento);
+                datos.setearParametro("@numeroDocumento", usuario.numeroDeDocumento);
+                datos.setearParametro("@fechaNacimiento", usuario.fechaDeNacimiento);
+                datos.setearParametro("@direccion", usuario.direccion);
+                datos.setearParametro("@localidad", usuario.localidad.id);
+                datos.setearParametro("@especialidad", usuario.especialidad.id);
+                datos.setearParametro("@rol", usuario.rol.id);
+                datos.setearParametro("@altaUsu", usuario.altaUsuario);
+                datos.ejecutarLectura();
+
+                //datos.Lector.Read();
+                int id = 0;
+                
+                while (datos.Lector.Read())
+                {
+                    id = (int)datos.Lector[0];
+                }
+                
+                return id;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al capturar los datos de la tabla de USUARIOS" + ex.Message + " / " +
+                    ex.GetType().Name + " / " + ex.StackTrace);
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }

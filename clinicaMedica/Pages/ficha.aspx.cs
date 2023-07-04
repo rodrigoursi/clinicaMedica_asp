@@ -115,12 +115,12 @@ namespace clinicaMedica.Pages
             }
             Usuario usuario = new Usuario();
             this.cargarUsuario(usuario);
-            this.cargarHorario(usuario);
             UsuarioNegocio negocio = new UsuarioNegocio();
             
             try
             {
-                negocio.agregar(usuario);
+                int xId = negocio.cargarConId(usuario);
+                this.cargarHorario(usuario, xId);
             }
             catch (Exception ex)
             {
@@ -163,7 +163,7 @@ namespace clinicaMedica.Pages
             }
             return true;
         }
-        protected void cargarHorario(Usuario usuario)
+        protected void cargarHorario(Usuario usuario, int id)
         {
             foreach (RepeaterItem item in listaHorarios.Items)
             {
@@ -181,7 +181,7 @@ namespace clinicaMedica.Pages
                 horario.horaFin = horaF;
                 DiaSemana idDia = dias.Find(x => x.diaSemana == dia);
                 horario.idDia = idDia;
-                usuario.id = 4;
+                usuario.id = id;
                 horario.idMedico = usuario;
                 HorarioNegocio horaNeg = new HorarioNegocio();
                 horaNeg.agregar(horario);

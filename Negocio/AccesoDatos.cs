@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Dominio;
 
@@ -22,10 +23,10 @@ namespace Negocio
 
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=TURNOS_MEDICOS; integrated security=true");
+            //conexion = new SqlConnection("server=.\\SQLEXPRESS; database=TURNOS_MEDICOS; integrated security=true");
             //conexion = new SqlConnection("server=.\\UTNLABORATORIO; database=CLINICA; User Id=sa; Password=imprimir");
             //conexion = new SqlConnection("server=.; database=CLINICA; integrated security=true");
-            //conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CLINICA; integrated security=true");
+            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CLINICA; integrated security=true");
             comando = new SqlCommand();
         }
 
@@ -53,7 +54,7 @@ namespace Negocio
         {
             comando.Parameters.AddWithValue(nombre, valor);
         }
-        public int ejecutarUpdate(bool devId = false)
+        public int ejecutarUpdate()
         {
             comando.Connection = conexion;
             try
@@ -62,15 +63,10 @@ namespace Negocio
                 transaccion = conexion.BeginTransaction();
                 comando.Transaction = transaccion;
                 filasAfectadas = comando.ExecuteNonQuery();
+                Thread.Sleep(20);
                 if (filasAfectadas == 1) 
                 {
                     transaccion.Commit();
-                    if(devId)
-                    {
-                        comando.CommandText = "SELECT SCOPE_IDENTITY();";
-                        object idInsertado = comando.ExecuteScalar();
-                        filasAfectadas = Convert.ToInt32(idInsertado);
-                    }
                 } 
                 else transaccion.Rollback();
             }
