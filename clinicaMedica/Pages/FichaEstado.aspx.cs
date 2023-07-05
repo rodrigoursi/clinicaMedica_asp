@@ -13,51 +13,49 @@ namespace clinicaMedica.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+
+            if (Request.QueryString["mod"] != null)
             {
-                if (Request.QueryString["mod"] != null)
+                if (Request.QueryString["id"] != null)
                 {
-                    if (Request.QueryString["id"] != null)
+                    byte id;
+                    if (byte.TryParse(Request.QueryString["id"], out id))
                     {
-                        byte id;
-                        if (byte.TryParse(Request.QueryString["id"], out id))
+                        EstadoNegocio negocio = new EstadoNegocio();
+                        List<Estado> lista = negocio.listar();
+                        foreach (Estado estado in lista)
                         {
-                            EstadoNegocio negocio = new EstadoNegocio();
-                            List<Estado> lista = negocio.listar();
-                            foreach (Estado estado in lista)
+                            if (estado.id == id)
                             {
-                                if (estado.id == id)
-                                {
-                                    Estados_codigo.Text = estado.codigo;
-                                    Estados_estado.Text = estado.estado;
-                                    break;
-                                }
+                                Estados_codigo.Text = estado.codigo;
+                                Estados_estado.Text = estado.estado;
+                                break;
                             }
                         }
+                    }
 
-                        byte mod;
-                        if (byte.TryParse(Request.QueryString["mod"], out mod))
+                    byte mod;
+                    if (byte.TryParse(Request.QueryString["mod"], out mod))
+                    {
+                        if (mod == 1) // VER
                         {
-                            if (mod == 1) // VER
-                            {
-                                Estados_codigo.Enabled = false;
-                                Estados_estado.Enabled = false;
-                                Estado_agregar.Text = "Modificar";
-                                Estado_cancelar.Text = "Volver";
-                            }
-                            if (mod == 2) //EDITAR
-                            {
-                                Estados_codigo.Enabled = true;
-                                Estados_estado.Enabled = true;
-                                Estado_agregar.Text = "Guardar";
-                                Estado_cancelar.Text = "Cancelar";
-                            }
-                            if (mod == 3) //ELIMINAR
-                            {
-                                EstadoNegocio negocio = new EstadoNegocio();
-                                negocio.eliminar(id);
+                            Estados_codigo.Enabled = false;
+                            Estados_estado.Enabled = false;
+                            Estado_agregar.Text = "Modificar";
+                            Estado_cancelar.Text = "Volver";
+                        }
+                        if (mod == 2) //EDITAR
+                        {
+                            Estados_codigo.Enabled = true;
+                            Estados_estado.Enabled = true;
+                            Estado_agregar.Text = "Guardar";
+                            Estado_cancelar.Text = "Cancelar";
+                        }
+                        if (mod == 3) //ELIMINAR
+                        {
+                            EstadoNegocio negocio = new EstadoNegocio();
+                            negocio.eliminar(id);
 
-                            }
                         }
                     }
                 }

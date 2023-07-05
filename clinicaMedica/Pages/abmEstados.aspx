@@ -11,7 +11,7 @@
             <asp:BoundField HeaderText="estado" DataField="estado" />
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href='<%# "/pages/FichaEstado.aspx?id=" + Eval("id") + "&mod=1" %>'>
+                    <a href='<%# "/pages/FichaEstado.aspx?mod=1&id=" + Eval("id") %>'>
                        <i class="fa-solid fa-eye" title="ver"></i>
                     </a>
                 </ItemTemplate>

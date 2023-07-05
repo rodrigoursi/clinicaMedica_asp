@@ -91,4 +91,4 @@ VALUES
 
 INSERT INTO usuarios(cod_usu, password, nombre_apellido, email, tipo_documento, numero_doc, fecha_nacimiento, direccion, localidad, especialidad, rol, altaUsu, altaFecha)
 VALUES
-	('ADM-001', 'admin', 'Admin', 'admin@admin.com', 'DNI', '33444555', '02/03/2020', 'Av. liniers 500', 1, 1, 1, 'Pepe', '02/03/2023')
+	('ADM-001', 'admin', 'Admin', 'admin@admin.com', 'DNI', '11111111', '01/01/2020', 'Av. liniers 500', 1, 1, 1, 'Admin', '01/01/2021')
