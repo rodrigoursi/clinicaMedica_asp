@@ -70,7 +70,7 @@ namespace clinicaMedica.Pages
 
         protected void Estado_cancelar_Click(Object sender, EventArgs e)
         {
-            Response.Redirect("ABMRoles.aspx");
+            Response.Redirect("ABMEstados.aspx");
         }
     }
 }
