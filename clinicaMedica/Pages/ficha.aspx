@@ -4,6 +4,7 @@
     <script defer src="ficha.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager runat="server" />
     <h1 style="text-align:center">ALTA DE USUARIO</h1>
     <div class="container formFicha my-2">
         <div class="imagen-user">
@@ -51,19 +52,30 @@
             </div>
             <div class="mb-3 text-center">
                 <label for="AltaUsuario_fecNac" class="form-label">Fecha de nacimiento</label>
-                <asp:Calendar runat="server" ID="AltaUsuario_fecNac" />
+                <asp:Calendar runat="server" ID="AltaUsuario_fecNac" CssClass="mb-3" />
             </div>
-            <asp:DropDownList ID="ficha_rol" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
-            <asp:DropDownList ID="ficha_esp" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
-            <asp:Repeater ID="listaHorarios" runat="server">
-                <ItemTemplate>
-                    <div class="mb-3">
-                        <asp:Label ID="lbl_dia" runat="server" Text=<%#Eval("diaSemana") %> ></asp:Label>
-                        <asp:TextBox runat="server" CssClass="form-control mb-3" id="AltaUsuario_hIni" Placeholder="Ejemplo formato 8:00" />
-                        <asp:TextBox runat="server" CssClass="form-control mb-3" id="AltaUsuario_hFin" Placeholder="Ejemplo formato 14:00" />
+            <asp:UpdatePanel runat="server" class="w-100 px-3 mb-3" >
+                <ContentTemplate>
+                    <asp:DropDownList ID="ficha_rol" CssClass="form-select mb-3" runat="server" OnSelectedIndexChanged="ficha_rol_SelectChanged" AutoPostBack="true"></asp:DropDownList>
+                    <asp:DropDownList ID="ficha_esp" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
+            <%
+            if(cargarHora == true)
+            {%>
+                    <div class="contenedor-horarios w-100">
+                    <asp:Repeater ID="listaHorarios" runat="server">
+                        <ItemTemplate>
+                            <div class="mb-3">
+                                <asp:Label ID="lbl_dia" runat="server" Text=<%#Eval("diaSemana") %> ></asp:Label>
+                                <asp:TextBox runat="server" CssClass="form-control mb-3" id="AltaUsuario_hIni" Placeholder="Ejemplo formato 8:00" />
+                                <asp:TextBox runat="server" CssClass="form-control mb-3" id="AltaUsuario_hFin" Placeholder="Ejemplo formato 14:00" />
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
                     </div>
-                </ItemTemplate>
-            </asp:Repeater>
+            <%}    
+            %>
+                    </ContentTemplate>
+            </asp:UpdatePanel>
             <asp:Button Text="AGREGAR" CssClass="btn btn-primary mb-3" ID="AltaUsuario_agregar" runat="server" OnClick="AltaUsuario_agregar_Click" />
         </div>
     </div>

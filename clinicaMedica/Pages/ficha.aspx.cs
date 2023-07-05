@@ -19,13 +19,14 @@ namespace clinicaMedica.Pages
         ProvinciaNegocio pro = new ProvinciaNegocio();
         DiaSemanaNegocio dSem = new DiaSemanaNegocio();
         List<DiaSemana> dias = new List<DiaSemana>();
-
+        public bool cargarHora { get; set; }
         public int id { get; set; }
         public String dia { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             dias = dSem.listar();
             AltaUsuario_id.Enabled = false;
+            //cargarHora = false;
             if (!IsPostBack)
             {
                 this.cargarBoxs();
@@ -188,6 +189,19 @@ namespace clinicaMedica.Pages
 
             }
             return;
+        }
+
+        protected void ficha_rol_SelectChanged(object sender, EventArgs e)
+        {
+            if(ficha_rol.SelectedValue == "") 
+            { 
+                cargarHora = false;
+            } else
+            {
+                byte selecionado = byte.Parse(ficha_rol.SelectedValue);
+                List<byte> listaId = Rol.horariosSi();
+                cargarHora = listaId.Exists(id => id == selecionado);
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Dominio;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -118,6 +119,33 @@ namespace Negocio
                 datos.cerrarConexion();
             }
             return resultado;
+        }
+
+        public List<byte> horariosSi()
+        {
+            List <byte> listaId = new List<byte>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT id FROM roles WHERE horariosSi = 1");
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    byte id = (byte)datos.Lector["id"];
+                    listaId.Add(id);
+                }
+                return listaId;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al capturar los datos de la tabla de ROLES");
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }

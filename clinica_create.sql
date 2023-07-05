@@ -20,7 +20,8 @@ go
 CREATE TABLE roles (
 	id tinyint not null primary key identity(1,1),
 	codigo varchar(10) not null unique,
-	rol varchar(50) not null CHECK (rol LIKE '%[a-zA-Z]%')
+	rol varchar(50) not null CHECK (rol LIKE '%[a-zA-Z]%'),
+	horariosSi bit not null default 0
 )
 go
 

@@ -16,10 +16,17 @@
     width: 40%;
 }
 
+
 .formulario select {
     width: 90%;
 }
 
+.contenedor-horarios {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
 
 .cerrarModal {
     display: flex;
