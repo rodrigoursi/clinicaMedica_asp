@@ -34,13 +34,13 @@ VALUES
   (20, 'Cirugía General')
 GO
 
-INSERT INTO roles(codigo, rol)
+INSERT INTO roles(codigo, rol, horariosSi)
 VALUES
-  (1, 'Administrador'),
-  (2, 'Empleado'),
-  (3, 'Medico'),
-  (4, 'Paciente'),
-  (5, 'Otro')
+  (1, 'Administrador', 0),
+  (2, 'Empleado', 0),
+  (3, 'Medico', 1),
+  (4, 'Paciente', 0),
+  (5, 'Otro', 0)
 GO
 
 INSERT INTO dSemana(cod_dia, diaSemana)

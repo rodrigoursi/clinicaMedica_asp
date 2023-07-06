@@ -11,6 +11,7 @@ namespace Dominio
         public byte id { get; set; }
         public string codigo { get; set; }
         public string rol { get; set; }
+        public bool horariosSi { get; set; }
         public Rol() { }
         public Rol(string codigo, string nombre)
         {

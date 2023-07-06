@@ -12,8 +12,32 @@ namespace clinicaMedica.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            EspecialidadNegocio negocio = new EspecialidadNegocio();
-            GridAbmEspecialidades.DataSource = negocio.listar();
+            if (!IsPostBack)
+            {
+                if (Request.QueryString["mod"] != null)
+                {
+                    if (Request.QueryString["id"] != null)
+                    {
+                        byte id;
+                        if (byte.TryParse(Request.QueryString["id"], out id))
+                        {
+                            byte mod;
+                            if (byte.TryParse(Request.QueryString["mod"], out mod))
+                            {
+                                if (mod == 3) //ELIMINAR
+                                {
+                                    EspecialidadNegocio negocio = new EspecialidadNegocio();
+                                    negocio.eliminar(id);
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            EspecialidadNegocio negocio2 = new EspecialidadNegocio();
+            GridAbmEspecialidades.DataSource = negocio2.listar();
             GridAbmEspecialidades.DataBind();
 
         }

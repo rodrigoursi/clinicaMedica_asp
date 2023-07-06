@@ -13,7 +13,7 @@ namespace clinicaMedica.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Request.QueryString["mod"] != null)
             {
                 if (Request.QueryString["id"] != null)
                 {
@@ -30,6 +30,31 @@ namespace clinicaMedica.Pages
                                 Especialidad_especialidad.Text = especialidad.especialidad;
                                 break;
                             }
+                        }
+                    }
+
+                    byte mod;
+                    if (byte.TryParse(Request.QueryString["mod"], out mod))
+                    {
+                        if (mod == 1) // VER
+                        {
+                            Especialidad_codigo.Enabled = false;
+                            Especialidad_especialidad.Enabled = false;
+                            AltaEspecialidad_agregar.Text = "Modificar";
+                            AltaEspecialidad_cancelar.Text = "Volver";
+                        }
+                        if (mod == 2) //EDITAR
+                        {
+                            Especialidad_codigo.Enabled = true;
+                            Especialidad_especialidad.Enabled = true;
+                            AltaEspecialidad_agregar.Text = "Guardar";
+                            AltaEspecialidad_cancelar.Text = "Cancelar";
+                        }
+                        if (mod == 3) //ELIMINAR
+                        {
+                            EspecialidadNegocio negocio = new EspecialidadNegocio();
+                            negocio.eliminar(id);
+
                         }
                     }
                 }

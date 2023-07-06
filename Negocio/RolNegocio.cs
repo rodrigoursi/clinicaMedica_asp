@@ -19,7 +19,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT id, codigo, rol FROM roles");
+                datos.setearConsulta("SELECT id, codigo, rol, horariosSi FROM roles");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -28,6 +28,7 @@ namespace Negocio
                     rol.id = (byte)datos.Lector["id"];
                     rol.codigo = (string)datos.Lector["codigo"];
                     rol.rol = (string)datos.Lector["rol"];
+                    rol.horariosSi = (bool)datos.Lector["horariosSi"];
 
                     // Imprimir los valores para verificar
                     Debug.WriteLine($"id: {rol.id}, codigo: {rol.codigo}, nombre: {rol.rol}");
@@ -55,10 +56,11 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE roles SET codigo=@codigo, rol=@rol WHERE id=@id");
+                datos.setearConsulta("UPDATE roles SET codigo=@codigo, rol=@rol, horariosSi=@horariosSi WHERE id=@id");
                 datos.setearParametro("@id", rol.id);
                 datos.setearParametro("@codigo", rol.codigo);
                 datos.setearParametro("@rol", rol.rol);
+                datos.setearParametro("@horariosSi", rol.horariosSi);
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)
@@ -80,9 +82,10 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("INSERT INTO roles (codigo, rol) VALUES (@codigo, @rol)");
+                datos.setearConsulta("INSERT INTO roles (codigo, rol, horariosSi) VALUES (@codigo, @rol, @horariosSi)");
                 datos.setearParametro("@codigo", rol.codigo);
                 datos.setearParametro("@rol", rol.rol);
+                datos.setearParametro("@horariosSi", rol.horariosSi);
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)
