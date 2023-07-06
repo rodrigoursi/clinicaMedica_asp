@@ -52,7 +52,7 @@
             </div>
             <div class="mb-3 text-center">
                 <label for="AltaUsuario_fecNac" class="form-label">Fecha de nacimiento</label>
-                <asp:Calendar runat="server" ID="AltaUsuario_fecNac" CssClass="mb-3" />
+                <asp:TextBox runat="server" ID="AltaUsuario_fecNac" CssClass="form-control" Placeholder="Ejemplo formato 23/8/1990" />
             </div>
             <asp:UpdatePanel runat="server" class="w-100 px-3 mb-3" >
                 <ContentTemplate>

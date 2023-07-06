@@ -24,9 +24,16 @@ namespace clinicaMedica.Pages
         public String dia { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (ficha_rol.SelectedValue == "")
+            {
+                cargarHora = false;
+            }
+            else
+            {
+                validarRol();
+            }
             dias = dSem.listar();
             AltaUsuario_id.Enabled = false;
-            //cargarHora = false;
             if (!IsPostBack)
             {
                 this.cargarBoxs();
@@ -61,18 +68,8 @@ namespace clinicaMedica.Pages
                 ficha_esp.DataBind();
                 ficha_esp.Items.Insert(0, new ListItem("Selecciona una especialidad", ""));
 
-                //dias = dSem.listar();
                 listaHorarios.DataSource = dias;
                 listaHorarios.DataBind();
-                // esto esta en modo prueba
-                /*
-                dias.Add(new ficha { id = 1, dia = "lunes" });
-                dias.Add(new ficha { id = 2, dia = "martes" });
-                dias.Add(new ficha { id = 3, dia = "miercoles" });
-                dias.Add(new ficha { id = 4, dia = "jueves" });
-                dias.Add(new ficha { id = 5, dia = "viernes" });
-                listaHorarios.DataSource = dias;
-                listaHorarios.DataBind();*/
             }
             catch (Exception ex)
             {
@@ -89,7 +86,7 @@ namespace clinicaMedica.Pages
             oUsuario.tipoDeDocumento = AltaUsuario_tipoDoc.Text;
             oUsuario.numeroDeDocumento = AltaUsuario_doc.Text;
             oUsuario.direccion = AltaUsuario_dire.Text;
-            oUsuario.fechaDeNacimiento = AltaUsuario_fecNac.SelectedDate;
+            oUsuario.fechaDeNacimiento = DateTime.Parse(AltaUsuario_fecNac.Text);
 
             oUsuario.localidad = new Localidad();
             oUsuario.localidad.id = short.Parse(AltaUsuario_loc.SelectedValue);
@@ -121,7 +118,11 @@ namespace clinicaMedica.Pages
             try
             {
                 int xId = negocio.cargarConId(usuario);
-                this.cargarHorario(usuario, xId);
+                validarRol();
+                if (cargarHora)
+                {
+                    this.cargarHorario(usuario, xId);
+                }
             }
             catch (Exception ex)
             {
@@ -158,7 +159,7 @@ namespace clinicaMedica.Pages
 
         protected bool validarCampos()
         {
-            if (AltaUsuario_loc.SelectedValue == "" || ficha_rol.SelectedValue == "" || ficha_esp.SelectedValue == "" || AltaUsuario_fecNac.SelectedDate == DateTime.MinValue)
+            if (AltaUsuario_loc.SelectedValue == "" || ficha_rol.SelectedValue == "" || ficha_esp.SelectedValue == "")
             {
                 return false;
             }
@@ -198,10 +199,15 @@ namespace clinicaMedica.Pages
                 cargarHora = false;
             } else
             {
-                byte selecionado = byte.Parse(ficha_rol.SelectedValue);
-                List<byte> listaId = Rol.horariosSi();
-                cargarHora = listaId.Exists(id => id == selecionado);
+                validarRol();
             }
+        }
+
+        protected void validarRol()
+        {
+            byte selecionado = byte.Parse(ficha_rol.SelectedValue);
+            List<byte> listaId = Rol.horariosSi();
+            cargarHora = listaId.Exists(id => id == selecionado);
         }
     }
 }
