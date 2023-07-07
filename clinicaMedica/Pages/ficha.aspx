@@ -56,11 +56,7 @@
             </div>
             <asp:UpdatePanel runat="server" class="w-100 px-3 mb-3" >
                 <ContentTemplate>
-                    <%
-                    if (Request.QueryString["rolId"] == null)
-                    {%>
-                        <asp:DropDownList ID="ficha_rol" CssClass="form-select mb-3" runat="server" OnSelectedIndexChanged="ficha_rol_SelectChanged" AutoPostBack="true"></asp:DropDownList>
-                    <%}%>  
+                    <asp:DropDownList ID="ficha_rol" CssClass="form-select mb-3" runat="server" OnSelectedIndexChanged="ficha_rol_SelectChanged" AutoPostBack="true"></asp:DropDownList>
                     <asp:DropDownList ID="ficha_esp" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
             <%
             if(cargarHora == true)

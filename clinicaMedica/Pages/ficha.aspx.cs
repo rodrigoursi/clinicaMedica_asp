@@ -34,6 +34,7 @@ namespace clinicaMedica.Pages
             }
             dias = dSem.listar();
             AltaUsuario_id.Enabled = false;
+            if (Request.QueryString["rolId"] != null) ficha_rol.Enabled = false;
             if (!IsPostBack)
             {
                 this.cargarBoxs();
@@ -61,6 +62,10 @@ namespace clinicaMedica.Pages
                 ficha_rol.DataTextField = "rol";
                 ficha_rol.DataBind();
                 ficha_rol.Items.Insert(0, new ListItem("Selecciona un rol", ""));
+                if (Request.QueryString["rolId"] != null)
+                {
+                    ficha_rol.SelectedValue = Request.QueryString["rolId"].ToString();
+                }
 
                 ficha_esp.DataSource = Especialidad.listar();
                 ficha_esp.DataValueField = "id";
