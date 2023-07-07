@@ -3,6 +3,9 @@
     <link href="../Css/usuario.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <%
+        string rolId = Request.QueryString["rolId"].ToString();
+    %>
     <div class="container contenedor-grid my-4">
         <asp:GridView ID="GridAbmUser" runat="server" DataKeyNames="id" AutoGenerateColumns="false" CssClass="table">
         <HeaderStyle CssClass="cabecera"/>
@@ -26,7 +29,7 @@
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href='<%# "usuario.aspx?id=" + Eval("id") %>'>
+                    <a href='<%# "ficha.aspx?id=" + Eval("id") %>'>
                        <i class="fa-solid fa-file-pen" title="editar"></i>
                     </a>
                 </ItemTemplate>
@@ -40,6 +43,6 @@
             </asp:TemplateField>
         </Columns>
         </asp:GridView>
-        <div><a href="/pages/ficha.aspx" class="btn btn-success">AGREGAR</a></div>
+        <div><a href='<%="/pages/ficha.aspx?rolId=" + rolId%> 'class="btn btn-success">AGREGAR</a></div>
     </div>
 </asp:Content>
