@@ -13,7 +13,7 @@
                 <asp:TextBox runat="server" CssClass="form-control" id="Especialidad_codigo"/>
             </div>
             <div class="mb-2">
-                <label for="Especialidad_especialidad" class="form-label">Id</label>
+                <label for="Especialidad_especialidad" class="form-label">Nombre</label>
                 <asp:TextBox runat="server" CssClass="form-control" id="Especialidad_especialidad"/>
             </div>
             <div class="mb-2">

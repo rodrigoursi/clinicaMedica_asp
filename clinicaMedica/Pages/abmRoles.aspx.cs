@@ -12,8 +12,32 @@ namespace clinicaMedica.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            RolNegocio negocio = new RolNegocio();
-            GridAbmRoles.DataSource = negocio.listar();
+            if (!IsPostBack)
+            {
+                if (Request.QueryString["mod"] != null)
+                {
+                    if (Request.QueryString["id"] != null)
+                    {
+                        byte id;
+                        if (byte.TryParse(Request.QueryString["id"], out id))
+                        {
+                            byte mod;
+                            if (byte.TryParse(Request.QueryString["mod"], out mod))
+                            {
+                                if (mod == 3) //ELIMINAR
+                                {
+                                    RolNegocio negocio = new RolNegocio();
+                                    negocio.eliminar(id);
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            RolNegocio negocio2 = new RolNegocio();
+            GridAbmRoles.DataSource = negocio2.listar();
             GridAbmRoles.DataBind();
         }
     }

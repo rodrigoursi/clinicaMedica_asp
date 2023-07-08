@@ -110,7 +110,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("DELETE FORM horarios WHERE id= @id");
+                datos.setearConsulta("DELETE FROM horarios WHERE id= @id");
                 datos.setearParametro("@id", id);
                 resultado = datos.ejecutarUpdate();
             }

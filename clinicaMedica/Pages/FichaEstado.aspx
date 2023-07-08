@@ -13,7 +13,7 @@
                 <asp:TextBox runat="server" CssClass="form-control" id="Estados_codigo"/>
             </div>
             <div class="mb-2">
-                <label for="Estados_estado" class="form-label">Id</label>
+                <label for="Estados_estado" class="form-label">Nombre</label>
                 <asp:TextBox runat="server" CssClass="form-control" id="Estados_estado"/>
             </div>
             <div class="mb-2">

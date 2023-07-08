@@ -11,27 +11,28 @@
             <asp:BoundField HeaderText="provincia" DataField="provincia.provincia" />
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href='<%# "/pages/rol.aspx?id=" + Eval("id") %>'>
+                    <a href='<%# "/pages/FichaLocalidades.aspx?id=" + Eval("id") +"&mod=1" %>'>
                        <i class="fa-solid fa-eye" title="ver"></i>
                     </a>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href='<%# "usuario.aspx?id=" + Eval("id") %>'>
+                    <a href='<%# "/pages/FichaLocalidades.aspx?id=" + Eval("id") +"&mod=2" %>'>
                        <i class="fa-solid fa-file-pen" title="editar"></i>
                     </a>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href="./../default.aspx">
-                       <i class="fa-solid fa-trash" title="borrar"></i>
+                    <a href='<%# "/pages/ABMLocalidades.aspx?id=" + Eval("id") + "&mod=3" %>'
+                     onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?')">
+                        <i class="fa-solid fa-trash" title="borrar"></i>
                     </a>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
         </asp:GridView>
-        <div><a href="/pages/ficha.aspx" class="btn btn-success">AGREGAR</a></div>
+        <div><a href="/pages/FichaLocalidades.aspx?id=0&mod=0" class="btn btn-success">AGREGAR</a></div>
     </div>
 </asp:Content>

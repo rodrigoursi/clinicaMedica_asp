@@ -11,50 +11,55 @@ namespace clinicaMedica.Pages
 {
     public partial class FichaEspecialidades : System.Web.UI.Page
     {
+        byte id;
+        byte mod;
+        Especialidad nuevaEspecialidad = new Especialidad();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["mod"] != null)
+            if (!IsPostBack)
             {
-                if (Request.QueryString["id"] != null)
+                if (Request.QueryString["mod"] != null)
                 {
-                    byte id;
-                    if (byte.TryParse(Request.QueryString["id"], out id))
+                    if (Request.QueryString["id"] != null)
                     {
-                        EspecialidadNegocio negocio = new EspecialidadNegocio();
-                        List<Especialidad> lista = negocio.listar();
-                        foreach (Especialidad especialidad in lista)
-                        {
-                            if (especialidad.id == id)
-                            {
-                                Especialidad_codigo.Text = especialidad.codigo;
-                                Especialidad_especialidad.Text = especialidad.especialidad;
-                                break;
-                            }
-                        }
-                    }
-
-                    byte mod;
-                    if (byte.TryParse(Request.QueryString["mod"], out mod))
-                    {
-                        if (mod == 1) // VER
-                        {
-                            Especialidad_codigo.Enabled = false;
-                            Especialidad_especialidad.Enabled = false;
-                            AltaEspecialidad_agregar.Text = "Modificar";
-                            AltaEspecialidad_cancelar.Text = "Volver";
-                        }
-                        if (mod == 2) //EDITAR
-                        {
-                            Especialidad_codigo.Enabled = true;
-                            Especialidad_especialidad.Enabled = true;
-                            AltaEspecialidad_agregar.Text = "Guardar";
-                            AltaEspecialidad_cancelar.Text = "Cancelar";
-                        }
-                        if (mod == 3) //ELIMINAR
+                        if (byte.TryParse(Request.QueryString["id"], out id))
                         {
                             EspecialidadNegocio negocio = new EspecialidadNegocio();
-                            negocio.eliminar(id);
+                            List<Especialidad> lista = negocio.listar();
+                            foreach (Especialidad especialidad in lista)
+                            {
+                                if (especialidad.id == id) // CARGA LOS DATOS DEL REGISTRO SELECCIONADO EN EL ABM
+                                {
+                                    Especialidad_codigo.Text = especialidad.codigo;
+                                    Especialidad_especialidad.Text = especialidad.especialidad;
+                                    break;
+                                }
+                            }
+                        }
 
+                        if (byte.TryParse(Request.QueryString["mod"], out mod))
+                        {
+                            if (mod == 1) // VER
+                            {
+                                Especialidad_codigo.Enabled = false;
+                                Especialidad_especialidad.Enabled = false;
+                                AltaEspecialidad_agregar.Text = "Modificar";
+                                AltaEspecialidad_cancelar.Text = "Volver";
+
+                            }
+                            if (mod == 2) //EDITAR
+                            {
+                                Especialidad_codigo.Enabled = true;
+                                Especialidad_especialidad.Enabled = true;
+                                AltaEspecialidad_agregar.Text = "Guardar";
+                                AltaEspecialidad_cancelar.Text = "Cancelar";
+                            }
+                            if (mod == 3) //ELIMINAR
+                            {
+                                EstadoNegocio negocio = new EstadoNegocio();
+                                negocio.eliminar(id);
+
+                            }
                         }
                     }
                 }
@@ -63,7 +68,31 @@ namespace clinicaMedica.Pages
 
         protected void AltaEspecialidad_agregar_Click(object sender, EventArgs e)
         {
+            if (AltaEspecialidad_agregar.Text == "Modificar")   // RECARGA EN MODO EDICION
+            {
+                id = byte.Parse(Request.QueryString["id"]);
+                Response.Redirect(("/Pages/FichaEspecialidades.aspx?id=" + id + "&mod=2"));
 
+            }
+            if (byte.Parse(Request.QueryString["mod"]) == 0 && byte.Parse(Request.QueryString["id"]) == 0)  // CONFIRMAR AGREGAR
+            {
+                EspecialidadNegocio negocio = new EspecialidadNegocio();
+                nuevaEspecialidad.codigo = Especialidad_codigo.Text;
+                nuevaEspecialidad.especialidad = Especialidad_especialidad.Text;
+
+                negocio.agregar(nuevaEspecialidad);
+            }
+
+            if (byte.Parse(Request.QueryString["mod"]) == 2 && byte.Parse(Request.QueryString["id"]) != 0) // CONFIRMAR EDITAR
+            {
+                EspecialidadNegocio negocio = new EspecialidadNegocio();
+                nuevaEspecialidad.id = byte.Parse(Request.QueryString["id"]);
+                nuevaEspecialidad.codigo = Especialidad_codigo.Text;
+                nuevaEspecialidad.especialidad = Especialidad_especialidad.Text;
+
+                negocio.editar(nuevaEspecialidad);
+            }
+            Response.Redirect("ABMEspecialidades.aspx");
         }
 
         protected void AltaEspecialidad_cancelar_Click(Object sender, EventArgs e)

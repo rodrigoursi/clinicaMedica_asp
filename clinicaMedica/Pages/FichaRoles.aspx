@@ -9,11 +9,11 @@
             <img src="./../Assets/images/Roles.png" alt="Alternate Text" /></div>
         <div class="formulario">
             <div class="mb-2">
-                <label for="Rol_codigo" class="form-label">Id</label>
+                <label for="Rol_codigo" class="form-label">Codigo</label>
                 <asp:TextBox runat="server" CssClass="form-control" id="Rol_codigo"/>
             </div>
             <div class="mb-2">
-                <label for="Rol_rol" class="form-label">Codigo</label>
+                <label for="Rol_rol" class="form-label">Nombre</label>
                 <asp:TextBox runat="server" CssClass="form-control" id="Rol_rol"/>
             </div>
             <div class="mb-2">

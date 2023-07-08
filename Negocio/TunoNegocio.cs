@@ -149,7 +149,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("DELETE FORM turnos WHERE id= @id");
+                datos.setearConsulta("DELETE FROM turnos WHERE id= @id");
                 datos.setearParametro("@id", id);
                 resultado = datos.ejecutarUpdate();
             }

@@ -2130,6 +2130,8 @@
     <Content Include="Pages\ficha.js" />
     <Content Include="Pages\FichaEspecialidades.aspx" />
     <Content Include="Pages\FichaEstado.aspx" />
+    <Content Include="Pages\FichaLocalidades.aspx" />
+    <Content Include="Pages\FichaProvincias.aspx" />
     <Content Include="Pages\FichaRoles.aspx" />
     <Content Include="Pages\usuario.aspx" />
     <Content Include="Pages\abmRoles.aspx" />
@@ -2194,6 +2196,20 @@
     </Compile>
     <Compile Include="Pages\FichaEstado.aspx.designer.cs">
       <DependentUpon>FichaEstado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FichaLocalidades.aspx.cs">
+      <DependentUpon>FichaLocalidades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\FichaLocalidades.aspx.designer.cs">
+      <DependentUpon>FichaLocalidades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FichaProvincias.aspx.cs">
+      <DependentUpon>FichaProvincias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\FichaProvincias.aspx.designer.cs">
+      <DependentUpon>FichaProvincias.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\FichaRoles.aspx.cs">
       <DependentUpon>FichaRoles.aspx</DependentUpon>

@@ -34,6 +34,6 @@
         </Columns>
         </asp:GridView>
     <div>
-        <a href="/pages/FichaEstado.aspx" class="btn btn-success">AGREGAR</a></div>
+        <a href="/pages/FichaEstado.aspx?id=0&mod=0" class="btn btn-success">AGREGAR</a></div>
     </div>
 </asp:Content>

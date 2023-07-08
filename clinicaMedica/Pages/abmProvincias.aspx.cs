@@ -12,8 +12,32 @@ namespace clinicaMedica.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ProvinciaNegocio negocio = new ProvinciaNegocio();
-            GridAbmProvincias.DataSource = negocio.listar();
+            if (!IsPostBack)
+            {
+                if (Request.QueryString["mod"] != null)
+                {
+                    if (Request.QueryString["id"] != null)
+                    {
+                        byte id;
+                        if (byte.TryParse(Request.QueryString["id"], out id))
+                        {
+                            byte mod;
+                            if (byte.TryParse(Request.QueryString["mod"], out mod))
+                            {
+                                if (mod == 3) //ELIMINAR
+                                {
+                                    ProvinciaNegocio negocio = new ProvinciaNegocio();
+                                    negocio.eliminar(id);
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            ProvinciaNegocio negocio2 = new ProvinciaNegocio();
+            GridAbmProvincias.DataSource = negocio2.listar();
             GridAbmProvincias.DataBind();
         }
     }

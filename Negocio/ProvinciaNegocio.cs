@@ -98,7 +98,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("DELETE FORM provincias WHERE id= @id");
+                datos.setearConsulta("DELETE FROM provincias WHERE id= @id");
                 datos.setearParametro("@id", id);
                 resultado = datos.ejecutarUpdate();
             }

@@ -108,7 +108,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("DELETE FORM roles WHERE id= @id");
+                datos.setearConsulta("DELETE FROM roles WHERE id= @id");
                 datos.setearParametro("@id", id);
                 resultado = datos.ejecutarUpdate();
             }
