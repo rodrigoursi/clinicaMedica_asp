@@ -97,7 +97,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="modal_cargarLoc_cerrar">Cerrar</button>
-                    <asp:Button Text="AGREGAR" CssClass="btn btn-primary" ID="AltaUsuario_btnAgregar_loc" OnClick="AltaUsuario_btnAgregar_loc_Click" runat="server" />
+                    <asp:Button Text="GRABAR" CssClass="btn btn-primary" ID="AltaUsuario_btnAgregar_loc" OnClick="AltaUsuario_btnAgregar_loc_Click" runat="server" />
                 </div>
             </div>
         </div>

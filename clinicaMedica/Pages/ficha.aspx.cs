@@ -24,7 +24,6 @@ namespace clinicaMedica.Pages
         public String dia { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            
             if (ficha_rol.SelectedValue == "" && Request.QueryString["rolId"] == null)
             {
                 cargarHora = false;
@@ -35,7 +34,7 @@ namespace clinicaMedica.Pages
             }
             dias = dSem.listar();
             AltaUsuario_id.Enabled = false;
-            if (Request.QueryString["rolId"] != null) ficha_rol.Enabled = false;
+            if (Request.QueryString["rolId"] != null && Request.QueryString["idEditar"] == null) ficha_rol.Enabled = false;
             if (!IsPostBack)
             {
                 this.cargarBoxs();
@@ -45,35 +44,39 @@ namespace clinicaMedica.Pages
         {
             try
             {
-                if(Request.QueryString["idEditar"] == null && Request.QueryString["idVer"] == null && Request.QueryString["idBorrar"] == null)
-                {
-                    AltaUsuario_loc.DataSource = Loc.listar();
-                    AltaUsuario_loc.DataValueField = "id";
-                    AltaUsuario_loc.DataTextField = "localidad";
-                    AltaUsuario_loc.DataBind();
-                    AltaUsuario_loc.Items.Insert(0, new ListItem("Seleccionar localidad", ""));
-                    AltaUsuario_loc.Items.Add(new ListItem("Nueva localidad", "nuevo"));
+                AltaUsuario_loc.DataSource = Loc.listar();
+                AltaUsuario_loc.DataValueField = "id";
+                AltaUsuario_loc.DataTextField = "localidad";
+                AltaUsuario_loc.DataBind();
+                AltaUsuario_loc.Items.Add(new ListItem("Nueva localidad", "nuevo"));
 
-                    AltaUsuario_prov.DataSource = pro.listar();
-                    AltaUsuario_prov.DataValueField = "id";
-                    AltaUsuario_prov.DataTextField = "provincia";
-                    AltaUsuario_prov.DataBind();
+                AltaUsuario_prov.DataSource = pro.listar();
+                AltaUsuario_prov.DataValueField = "id";
+                AltaUsuario_prov.DataTextField = "provincia";
+                AltaUsuario_prov.DataBind();
+
+                ficha_rol.DataSource = Rol.listar();
+                ficha_rol.DataValueField = "id";
+                ficha_rol.DataTextField = "rol";
+                ficha_rol.DataBind();
+
+                ficha_esp.DataSource = Especialidad.listar();
+                ficha_esp.DataValueField = "id";
+                ficha_esp.DataTextField = "especialidad";
+                ficha_esp.DataBind();
+                if (Request.QueryString["idEditar"] == null && Request.QueryString["idVer"] == null && Request.QueryString["idBorrar"] == null)
+                {
+                    AltaUsuario_loc.Items.Insert(0, new ListItem("Seleccionar localidad", ""));
+                    
                     AltaUsuario_prov.Items.Insert(0, new ListItem("Seleccionar provincia", ""));
 
-                    ficha_rol.DataSource = Rol.listar();
-                    ficha_rol.DataValueField = "id";
-                    ficha_rol.DataTextField = "rol";
-                    ficha_rol.DataBind();
                     ficha_rol.Items.Insert(0, new ListItem("Selecciona un rol", ""));
                     if (Request.QueryString["rolId"] != null)
                     {
                         ficha_rol.SelectedValue = Request.QueryString["rolId"].ToString();
                     }
 
-                    ficha_esp.DataSource = Especialidad.listar();
-                    ficha_esp.DataValueField = "id";
-                    ficha_esp.DataTextField = "especialidad";
-                    ficha_esp.DataBind();
+                    
                     ficha_esp.Items.Insert(0, new ListItem("Selecciona una especialidad", ""));
 
                     listaHorarios.DataSource = dias;
@@ -91,8 +94,11 @@ namespace clinicaMedica.Pages
                     AltaUsuario_tipoDoc.Text = usuario.tipoDeDocumento;
                     AltaUsuario_doc.Text = usuario.numeroDeDocumento;
                     AltaUsuario_dire.Text = usuario.direccion;
-                    AltaUsuario_fecNac.Text = usuario.fechaDeNacimiento.ToString();
-
+                    AltaUsuario_fecNac.Text = usuario.fechaDeNacimiento.ToShortDateString();
+                    AltaUsuario_loc.SelectedValue = usuario.localidad.id.ToString();
+                    ficha_rol.SelectedValue = usuario.rol.id.ToString();
+                    //ficha_rol.Enabled = true; hacer esto aca es al pedo, porq cuando hacer un postback (agregar localidad nueva el enable se pierde)
+                    ficha_esp.SelectedValue = usuario.especialidad.id.ToString();
                 }
                 
             }
@@ -142,12 +148,20 @@ namespace clinicaMedica.Pages
             
             try
             {
-                int xId = negocio.cargarConId(usuario);
-                validarRol();
-                if (cargarHora)
+                if (Request.QueryString["idEditar"] == null) // aca si eliminar tiene pantalla hay q agregarlo en null
                 {
-                    this.cargarHorario(usuario, xId);
+                    int xId = negocio.cargarConId(usuario);
+                    validarRol();
+                    if (cargarHora)
+                    {
+                        this.cargarHorario(usuario, xId);
+                    }
                 }
+                if (Request.QueryString["idEditar"] != null)
+                {
+                    // ACA REALIZAR LA LOGICA PARA QUE HAGA UPDATE
+                }
+                
             }
             catch (Exception ex)
             {
