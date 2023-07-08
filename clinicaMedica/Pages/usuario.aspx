@@ -29,7 +29,7 @@
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href='<%# "ficha.aspx?id=" + Eval("id") %>'>
+                    <a href='<%# "ficha.aspx?idEditar=" + Eval("id") + "&rolId=" + Eval("rol.id") %>'>
                        <i class="fa-solid fa-file-pen" title="editar"></i>
                     </a>
                 </ItemTemplate>

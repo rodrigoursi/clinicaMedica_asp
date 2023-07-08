@@ -104,6 +104,97 @@ namespace Negocio
             }
         }
 
+        public Usuario verUsuario(int id)
+        {
+            Usuario usuario = new Usuario();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT " +
+                                        "usuarios.id AS idU, " +
+                                        "cod_usu, " +
+                                        "password, " +
+                                        "nombre_apellido, " +
+                                        "email, " +
+                                        "tipo_documento, " +
+                                        "numero_doc, " +
+                                        "fecha_nacimiento, " +
+                                        "direccion, " +
+                                        "L.id AS idL, " +
+                                        "L.localidad, " +
+                                        "P.id AS idP, " +
+                                        "P.provincia, " +
+                                        "E.id AS idE, " +
+                                        "E.especialidad, " +
+                                        "R.id AS idR, " +
+                                        "R.rol, " +
+                                        "altaUsu, " +
+                                        "modiUsu, " +
+                                        "bajaUsu, " +
+                                        "altaFecha, " +
+                                        "modiFecha, " +
+                                        "bajaFecha " +
+                                    "FROM " +
+                                        "usuarios " +
+                                    "INNER JOIN Localidades AS L ON L.id = usuarios.localidad " +
+                                    "INNER JOIN provincias AS P ON P.id = L.id_prov " +
+                                    "INNER JOIN Especialidades AS E ON E.id = usuarios.especialidad " +
+                                    "INNER JOIN Roles AS R ON R.id = usuarios.rol " +
+                                    "WHERE usuarios.id= @id");
+                datos.setearParametro("@id", id);
+                datos.ejecutarLectura();
+
+                datos.Lector.Read();
+                usuario.id = (int)datos.Lector["idU"];
+                usuario.codigoUsuario = (string)datos.Lector["cod_usu"];
+                usuario.password = (string)datos.Lector["password"];
+                usuario.nombreYApellido = (string)datos.Lector["nombre_apellido"];
+                usuario.emailUsuario = (string)datos.Lector["email"];
+                usuario.tipoDeDocumento = (string)datos.Lector["tipo_documento"];
+                usuario.numeroDeDocumento = (string)datos.Lector["numero_doc"];
+                usuario.fechaDeNacimiento = (DateTime)datos.Lector["fecha_nacimiento"];
+                usuario.direccion = (string)datos.Lector["direccion"];
+
+                usuario.localidad = new Localidad();
+                usuario.localidad.id = (short)datos.Lector["idL"];
+                usuario.localidad.localidad = (string)datos.Lector["localidad"];
+                usuario.localidad.provincia = new Provincia();
+                usuario.localidad.provincia.id = (byte)datos.Lector["idP"];
+                usuario.localidad.provincia.provincia = (string)datos.Lector["provincia"];
+
+                usuario.especialidad = new Especialidad();
+                usuario.especialidad.id = (short)datos.Lector["idE"];
+                usuario.especialidad.especialidad = (string)datos.Lector["especialidad"];
+
+                usuario.rol = new Rol();
+                usuario.rol.id = (byte)datos.Lector["idR"];
+                usuario.rol.rol = (string)datos.Lector["rol"];
+
+
+                usuario.altaUsuario = (string)datos.Lector["altaUsu"];
+                //usuario.modificacionUsuario = (string)datos.Lector["modiUsu"];
+                //usuario.bajaUsuario = (string)datos.Lector["bajaUsu"];
+                usuario.altaFecha = (DateTime)datos.Lector["altaFecha"];
+                //usuario.modificacionFecha = (DateTime)datos.Lector["modiFecha"];
+                //usuario.bajaFecha = (DateTime)datos.Lector["bajaFecha"];
+
+
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al capturar los datos de la tabla de USUARIOS" + ex.Message + " / " +
+                    ex.GetType().Name + " / " + ex.StackTrace);
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public int editar(Usuario usuario)
         {
             int resultado = 0;

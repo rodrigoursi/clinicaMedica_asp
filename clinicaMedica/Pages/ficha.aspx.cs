@@ -24,7 +24,8 @@ namespace clinicaMedica.Pages
         public String dia { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (ficha_rol.SelectedValue == "")
+            
+            if (ficha_rol.SelectedValue == "" && Request.QueryString["rolId"] == null)
             {
                 cargarHora = false;
             }
@@ -44,37 +45,56 @@ namespace clinicaMedica.Pages
         {
             try
             {
-                AltaUsuario_loc.DataSource = Loc.listar();
-                AltaUsuario_loc.DataValueField = "id";
-                AltaUsuario_loc.DataTextField = "localidad";
-                AltaUsuario_loc.DataBind();
-                AltaUsuario_loc.Items.Insert(0, new ListItem("Seleccionar localidad", ""));
-                AltaUsuario_loc.Items.Add(new ListItem("Nueva localidad", "nuevo"));
-
-                AltaUsuario_prov.DataSource = pro.listar();
-                AltaUsuario_prov.DataValueField = "id";
-                AltaUsuario_prov.DataTextField = "provincia";
-                AltaUsuario_prov.DataBind();
-                AltaUsuario_prov.Items.Insert(0, new ListItem("Seleccionar provincia", ""));
-
-                ficha_rol.DataSource = Rol.listar();
-                ficha_rol.DataValueField = "id";
-                ficha_rol.DataTextField = "rol";
-                ficha_rol.DataBind();
-                ficha_rol.Items.Insert(0, new ListItem("Selecciona un rol", ""));
-                if (Request.QueryString["rolId"] != null)
+                if(Request.QueryString["idEditar"] == null && Request.QueryString["idVer"] == null && Request.QueryString["idBorrar"] == null)
                 {
-                    ficha_rol.SelectedValue = Request.QueryString["rolId"].ToString();
+                    AltaUsuario_loc.DataSource = Loc.listar();
+                    AltaUsuario_loc.DataValueField = "id";
+                    AltaUsuario_loc.DataTextField = "localidad";
+                    AltaUsuario_loc.DataBind();
+                    AltaUsuario_loc.Items.Insert(0, new ListItem("Seleccionar localidad", ""));
+                    AltaUsuario_loc.Items.Add(new ListItem("Nueva localidad", "nuevo"));
+
+                    AltaUsuario_prov.DataSource = pro.listar();
+                    AltaUsuario_prov.DataValueField = "id";
+                    AltaUsuario_prov.DataTextField = "provincia";
+                    AltaUsuario_prov.DataBind();
+                    AltaUsuario_prov.Items.Insert(0, new ListItem("Seleccionar provincia", ""));
+
+                    ficha_rol.DataSource = Rol.listar();
+                    ficha_rol.DataValueField = "id";
+                    ficha_rol.DataTextField = "rol";
+                    ficha_rol.DataBind();
+                    ficha_rol.Items.Insert(0, new ListItem("Selecciona un rol", ""));
+                    if (Request.QueryString["rolId"] != null)
+                    {
+                        ficha_rol.SelectedValue = Request.QueryString["rolId"].ToString();
+                    }
+
+                    ficha_esp.DataSource = Especialidad.listar();
+                    ficha_esp.DataValueField = "id";
+                    ficha_esp.DataTextField = "especialidad";
+                    ficha_esp.DataBind();
+                    ficha_esp.Items.Insert(0, new ListItem("Selecciona una especialidad", ""));
+
+                    listaHorarios.DataSource = dias;
+                    listaHorarios.DataBind();
                 }
+                if (Request.QueryString["idEditar"] != null)
+                {
+                    Usuario usuario = new Usuario();
+                    UsuarioNegocio negocio = new UsuarioNegocio();
+                    usuario = negocio.verUsuario(int.Parse(Request.QueryString["idEditar"]));
+                    AltaUsuario_codigo.Text = usuario.codigoUsuario;
+                    AltaUsuario_contra.Text = usuario.password;
+                    AltaUsuario_nombre.Text = usuario.nombreYApellido;
+                    AltaUsuario_correo.Text = usuario.emailUsuario;
+                    AltaUsuario_tipoDoc.Text = usuario.tipoDeDocumento;
+                    AltaUsuario_doc.Text = usuario.numeroDeDocumento;
+                    AltaUsuario_dire.Text = usuario.direccion;
+                    AltaUsuario_fecNac.Text = usuario.fechaDeNacimiento.ToString();
 
-                ficha_esp.DataSource = Especialidad.listar();
-                ficha_esp.DataValueField = "id";
-                ficha_esp.DataTextField = "especialidad";
-                ficha_esp.DataBind();
-                ficha_esp.Items.Insert(0, new ListItem("Selecciona una especialidad", ""));
-
-                listaHorarios.DataSource = dias;
-                listaHorarios.DataBind();
+                }
+                
             }
             catch (Exception ex)
             {
@@ -210,7 +230,7 @@ namespace clinicaMedica.Pages
 
         protected void validarRol()
         {
-            byte selecionado = byte.Parse(ficha_rol.SelectedValue);
+            byte selecionado = Request.QueryString["rolId"] != null ? byte.Parse(Request.QueryString["rolId"]) : byte.Parse(ficha_rol.SelectedValue);
             List<byte> listaId = Rol.horariosSi();
             cargarHora = listaId.Exists(id => id == selecionado);
         }
