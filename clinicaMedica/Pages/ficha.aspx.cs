@@ -8,6 +8,7 @@ using Negocio;
 using Dominio;
 using System.Web.Services.Description;
 using System.Reflection.Emit;
+using System.Security.Cryptography;
 
 namespace clinicaMedica.Pages
 {
@@ -38,6 +39,10 @@ namespace clinicaMedica.Pages
             if (!IsPostBack)
             {
                 this.cargarBoxs();
+            }
+            if (Request.QueryString["idEditar"] != null)
+            {
+                validarRol();
             }
         }
         protected void cargarBoxs()
@@ -79,9 +84,11 @@ namespace clinicaMedica.Pages
                     
                     ficha_esp.Items.Insert(0, new ListItem("Selecciona una especialidad", ""));
 
-                    listaHorarios.DataSource = dias;
-                    listaHorarios.DataBind();
+                    //listaHorarios.DataSource = dias;
+                    //listaHorarios.DataBind();
                 }
+                listaHorarios.DataSource = dias;
+                listaHorarios.DataBind();
                 if (Request.QueryString["idEditar"] != null)
                 {
                     Usuario usuario = new Usuario();
@@ -99,6 +106,14 @@ namespace clinicaMedica.Pages
                     ficha_rol.SelectedValue = usuario.rol.id.ToString();
                     //ficha_rol.Enabled = true; hacer esto aca es al pedo, porq cuando hacer un postback (agregar localidad nueva el enable se pierde)
                     ficha_esp.SelectedValue = usuario.especialidad.id.ToString();
+
+                    List<Horarios> listaHoras = new List<Horarios>();
+                    HorarioNegocio horario = new HorarioNegocio();
+                    string filtro = "inner join dsemana as sem on sem.id = horarios.id_dia where id_medico = " + usuario.id.ToString();
+                    listaHoras = horario.listar(filtro);
+                    //listaHorarios.DataSource = listaHoras;
+                    //listaHorarios.DataBind();
+                    completarHorarios(listaHoras);
                 }
                 
             }
@@ -159,7 +174,13 @@ namespace clinicaMedica.Pages
                 }
                 if (Request.QueryString["idEditar"] != null)
                 {
-                    // ACA REALIZAR LA LOGICA PARA QUE HAGA UPDATE
+                    usuario.id = int.Parse(Request.QueryString["idEditar"]);
+                    int resulrado = negocio.editar(usuario, 2);
+                    validarRol();
+                    if (cargarHora)
+                    {
+                        //this.cargarHorario(usuario, usuario.id);
+                    }
                 }
                 
             }
@@ -247,6 +268,29 @@ namespace clinicaMedica.Pages
             byte selecionado = Request.QueryString["rolId"] != null ? byte.Parse(Request.QueryString["rolId"]) : byte.Parse(ficha_rol.SelectedValue);
             List<byte> listaId = Rol.horariosSi();
             cargarHora = listaId.Exists(id => id == selecionado);
+        }
+        protected void completarHorarios(List<Horarios> listaHoras)
+        {
+            int i = 0;
+            foreach (RepeaterItem dia in listaHorarios.Items)
+            {
+
+                foreach (var item in listaHoras)
+                {
+                    byte id = item.idDia.id;
+                    if(id == dias[i].id)
+                    {
+                        TextBox textIni = (TextBox)dia.FindControl("AltaUsuario_hIni");
+                        TextBox textFin = (TextBox)dia.FindControl("AltaUsuario_hFin");
+                        textIni.Text = item.horaInicio.ToString("HH:mm");
+                        textFin.Text = item.horaFin.ToString("HH:mm");
+                    }
+                }
+                
+                
+                i++;
+                
+            }
         }
     }
 }

@@ -10,14 +10,14 @@ namespace Negocio
 {
     public class HorarioNegocio
     {
-        public List<Horarios> listar()
+        public List<Horarios> listar(string filtro = "")
         {
             List<Horarios> lista = new List<Horarios>();
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("SELECT id, id_medico, id_dia, hora_ini, hora_fin FROM horarios");
+                datos.setearConsulta("SELECT horarios.id, id_medico, id_dia, hora_ini, hora_fin FROM horarios " + filtro);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -26,8 +26,10 @@ namespace Negocio
                     horario.id = (int)datos.Lector["id"];
                     horario.idMedico.id = (int)datos.Lector["id_medico"];
                     horario.idDia.id = (byte)datos.Lector["id_dia"];
-                    horario.horaInicio = (DateTime)datos.Lector["hora_ini"];
-                    horario.horaInicio = (DateTime)datos.Lector["hora_fin"];
+                    string hora = datos.Lector["hora_ini"].ToString();
+                    horario.horaInicio = DateTime.Parse(hora);
+                    hora = datos.Lector["hora_fin"].ToString();
+                    horario.horaFin = DateTime.Parse(hora);
                     //horario.turnoAsociado.id = (int)datos.Lector["turno_asociado"];
 
 

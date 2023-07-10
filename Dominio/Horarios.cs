@@ -14,11 +14,16 @@ namespace Dominio
         public DateTime horaInicio { get; set; }
         public DateTime horaFin { get; set; }
         public Turno turnoAsociado { get; set; }
-        public Horarios() { }
+        public Horarios()
+        {
+            idMedico = new Usuario();
+            idDia = new DiaSemana();
+        }
         public Horarios(DateTime inicio)
         {
             this.horaInicio = inicio;
             this.horaFin = horaInicio.AddHours(1);
         }
+
     }
 }

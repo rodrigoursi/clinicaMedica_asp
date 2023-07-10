@@ -195,7 +195,7 @@ namespace Negocio
             }
         }
 
-        public int editar(Usuario usuario)
+        public int editar(Usuario usuario, int filasAfec = 1)
         {
             int resultado = 0;
             AccesoDatos datos = new AccesoDatos();
@@ -216,9 +216,8 @@ namespace Negocio
                                         "localidad=@localidad, " +
                                         "especialidad=@especialidad, " +
                                         "rol=@rol, " +
-                                        "modiUsu=@modiUsuario," +
-                                        "modiFecha=@modiFecha " +
-                                    "WHERE" +
+                                        "modiUsu=@modiUsuario " +
+                                    "WHERE " +
                                             "id=@id");
 
                 datos.setearParametro("@id", usuario.id);
@@ -233,9 +232,8 @@ namespace Negocio
                 datos.setearParametro("@localidad", usuario.localidad.id);
                 datos.setearParametro("@especialidad", usuario.especialidad.id);
                 datos.setearParametro("@rol", usuario.rol.id);
-                datos.setearParametro("@modiUsuario", usuario.modificacionFecha);
-                datos.setearParametro("@modiFecha", usuario.modificacionFecha);
-                resultado = datos.ejecutarUpdate();
+                datos.setearParametro("@modiUsuario", usuario.codigoUsuario); // aca hay q poner el codigo de usuario q esta haciendo la accion
+                resultado = datos.ejecutarUpdate(filasAfec);
             }
             catch (Exception ex)
             {

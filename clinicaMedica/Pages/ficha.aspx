@@ -62,7 +62,7 @@
             if(cargarHora == true)
             {%>
                     <div class="contenedor-horarios w-100">
-                    <asp:Repeater ID="listaHorarios" runat="server">
+                    <asp:Repeater ID="listaHorarios" runat="server" >
                         <ItemTemplate>
                             <div class="mb-3">
                                 <asp:Label ID="lbl_dia" runat="server" Text=<%#Eval("diaSemana") %> ></asp:Label>

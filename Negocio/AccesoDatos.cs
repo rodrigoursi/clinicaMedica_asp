@@ -54,7 +54,7 @@ namespace Negocio
         {
             comando.Parameters.AddWithValue(nombre, valor);
         }
-        public int ejecutarUpdate()
+        public int ejecutarUpdate(int filas = 1)
         {
             comando.Connection = conexion;
             try
@@ -64,7 +64,7 @@ namespace Negocio
                 comando.Transaction = transaccion;
                 filasAfectadas = comando.ExecuteNonQuery();
                 Thread.Sleep(20);
-                if (filasAfectadas == 1) 
+                if (filasAfectadas == filas) 
                 {
                     transaccion.Commit();
                 } 
