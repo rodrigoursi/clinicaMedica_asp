@@ -22,7 +22,7 @@
 
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href='<%# "/pages/ficha.aspx?id=" + Eval("id") %>'>
+                    <a href='<%# "/pages/ficha.aspx?id=" + Eval("id") + "&idEditar=" + Eval("id") %>'>
                        <i class="fa-solid fa-eye" title="ver"></i>
                     </a>
                 </ItemTemplate>

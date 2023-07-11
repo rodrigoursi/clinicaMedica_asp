@@ -54,7 +54,7 @@
                 <label for="AltaUsuario_fecNac" class="form-label">Fecha de nacimiento</label>
                 <asp:TextBox runat="server" ID="AltaUsuario_fecNac" CssClass="form-control" Placeholder="Ejemplo formato 23/8/1990" />
             </div>
-            <asp:UpdatePanel runat="server" class="w-100 px-3 mb-3" >
+            <asp:UpdatePanel runat="server" class="w-100 px-3 mb-3" ID="panelHorarios" UpdateMode="Conditional" >
                 <ContentTemplate>
                     <asp:DropDownList ID="ficha_rol" CssClass="form-select mb-3" runat="server" OnSelectedIndexChanged="ficha_rol_SelectChanged" AutoPostBack="true"></asp:DropDownList>
                     <asp:DropDownList ID="ficha_esp" CssClass="form-select mb-3" runat="server"></asp:DropDownList>

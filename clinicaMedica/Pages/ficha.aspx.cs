@@ -20,7 +20,7 @@ namespace clinicaMedica.Pages
         ProvinciaNegocio pro = new ProvinciaNegocio();
         DiaSemanaNegocio dSem = new DiaSemanaNegocio();
         List<DiaSemana> dias = new List<DiaSemana>();
-        
+
         public bool cargarHora { get; set; }
         public int id { get; set; }
         public String dia { get; set; }
@@ -45,6 +45,10 @@ namespace clinicaMedica.Pages
             if (Request.QueryString["idEditar"] != null)
             {
                 validarRol();
+            }
+            if (Request.QueryString["id"] != null)
+            {
+                apagarComboBox();
             }
         }
         protected void cargarBoxs()
@@ -71,7 +75,7 @@ namespace clinicaMedica.Pages
                 ficha_esp.DataValueField = "id";
                 ficha_esp.DataTextField = "especialidad";
                 ficha_esp.DataBind();
-                if (Request.QueryString["idEditar"] == null && Request.QueryString["idVer"] == null && Request.QueryString["idBorrar"] == null)
+                if (Request.QueryString["idEditar"] == null && Request.QueryString["id"] == null && Request.QueryString["idBorrar"] == null)
                 {
                     AltaUsuario_loc.Items.Insert(0, new ListItem("Seleccionar localidad", ""));
                     
@@ -98,6 +102,7 @@ namespace clinicaMedica.Pages
                     usuario = negocio.verUsuario(int.Parse(Request.QueryString["idEditar"]));
                     AltaUsuario_codigo.Text = usuario.codigoUsuario;
                     AltaUsuario_contra.Text = usuario.password;
+                    AltaUsuario_repeat.Text = usuario.password;
                     AltaUsuario_nombre.Text = usuario.nombreYApellido;
                     AltaUsuario_correo.Text = usuario.emailUsuario;
                     AltaUsuario_tipoDoc.Text = usuario.tipoDeDocumento;
@@ -307,11 +312,33 @@ namespace clinicaMedica.Pages
                         textFin.Text = item.horaFin.ToString("HH:mm");
                     }
                 }
-                
-                
                 i++;
-                
             }
+        }
+        protected void apagarComboBox()
+        {
+            AltaUsuario_codigo.Enabled = false;
+            AltaUsuario_contra.Enabled = false;
+            AltaUsuario_repeat.Enabled = false;
+            AltaUsuario_nombre.Enabled = false;
+            AltaUsuario_correo.Enabled = false;
+            AltaUsuario_tipoDoc.Enabled = false;
+            AltaUsuario_doc.Enabled = false;
+            AltaUsuario_dire.Enabled = false;
+            AltaUsuario_loc.Enabled = false;
+            AltaUsuario_fecNac.Enabled = false;
+            ficha_rol.Enabled = false;
+            ficha_esp.Enabled = false;
+            AltaUsuario_agregar.Visible = false;
+
+            foreach (RepeaterItem item in listaHorarios.Items)
+            {
+                TextBox AltaUsuario_hIni = (TextBox)item.FindControl("AltaUsuario_hIni");
+                TextBox AltaUsuario_hFin = (TextBox)item.FindControl("AltaUsuario_hFin");
+                AltaUsuario_hIni.Enabled = false;
+                AltaUsuario_hFin.Enabled = false;
+            }
+            panelHorarios.Update();
         }
     }
 }
