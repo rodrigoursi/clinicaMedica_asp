@@ -20,6 +20,7 @@ namespace clinicaMedica.Pages
         ProvinciaNegocio pro = new ProvinciaNegocio();
         DiaSemanaNegocio dSem = new DiaSemanaNegocio();
         List<DiaSemana> dias = new List<DiaSemana>();
+        
         public bool cargarHora { get; set; }
         public int id { get; set; }
         public String dia { get; set; }
@@ -36,6 +37,7 @@ namespace clinicaMedica.Pages
             dias = dSem.listar();
             AltaUsuario_id.Enabled = false;
             if (Request.QueryString["rolId"] != null && Request.QueryString["idEditar"] == null) ficha_rol.Enabled = false;
+
             if (!IsPostBack)
             {
                 this.cargarBoxs();
@@ -109,7 +111,7 @@ namespace clinicaMedica.Pages
 
                     List<Horarios> listaHoras = new List<Horarios>();
                     HorarioNegocio horario = new HorarioNegocio();
-                    string filtro = "inner join dsemana as sem on sem.id = horarios.id_dia where id_medico = " + usuario.id.ToString();
+                    string filtro = "where id_medico = " + usuario.id.ToString();
                     listaHoras = horario.listar(filtro);
                     //listaHorarios.DataSource = listaHoras;
                     //listaHorarios.DataBind();
@@ -179,7 +181,8 @@ namespace clinicaMedica.Pages
                     validarRol();
                     if (cargarHora)
                     {
-                        //this.cargarHorario(usuario, usuario.id);
+                        
+                        this.cargarHorario(usuario, usuario.id);
                     }
                 }
                 
@@ -225,8 +228,9 @@ namespace clinicaMedica.Pages
             }
             return true;
         }
-        protected void cargarHorario(Usuario usuario, int id)
+        protected void cargarHorario(Usuario usuario, int id, int horarioId = 0)
         {
+            int i = 0;
             foreach (RepeaterItem item in listaHorarios.Items)
             {
                 System.Web.UI.WebControls.Label label_dia = (System.Web.UI.WebControls.Label)item.FindControl("lbl_dia");
@@ -246,8 +250,25 @@ namespace clinicaMedica.Pages
                 usuario.id = id;
                 horario.idMedico = usuario;
                 HorarioNegocio horaNeg = new HorarioNegocio();
-                horaNeg.agregar(horario);
-
+                if (Request.QueryString["idEditar"] != null)
+                {
+                    List<Horarios> listaHoras = new List<Horarios>();
+                    string filtro = "where id_medico = " + usuario.id.ToString();
+                    listaHoras = horaNeg.listar(filtro);
+                    if(listaHoras.Count() > i)
+                    {
+                        horario.id = listaHoras[i].id;
+                        horaNeg.editar(horario);
+                    }else
+                    {
+                        horaNeg.agregar(horario);
+                    }
+                    
+                } else
+                {
+                    horaNeg.agregar(horario);
+                }
+                i++;
             }
             return;
         }

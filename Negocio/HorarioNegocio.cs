@@ -58,8 +58,8 @@ namespace Negocio
             {
                 datos.setearConsulta("UPDATE horarios SET  @medico=id_medico, @dia=id_dia, hora_ini=@inicio, hora_fin=@fin WHERE id=@id");
                 datos.setearParametro("@id", horario.id);
-                datos.setearParametro("@medico", horario.idMedico);
-                datos.setearParametro("@dia", horario.idDia);
+                datos.setearParametro("@medico", horario.idMedico.id);
+                datos.setearParametro("@dia", horario.idDia.id);
                 datos.setearParametro("@inicio", horario.horaInicio);
                 datos.setearParametro("@fin", horario.horaFin);
                 //datos.setearParametro("@turno", horario.turnoAsociado);

@@ -32,7 +32,7 @@ namespace clinicaMedica
             }
             else
             {
-                Response.Redirect("/default.aspx");
+                //Response.Redirect("/default.aspx");
 
                 Session.Add("usuario", codUser);
                 Session.Add("rol", "admin");
