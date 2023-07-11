@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Dominio;
+using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,9 +19,24 @@ namespace clinicaMedica
         protected void login_Click(object sender, EventArgs e)
         {
 
-            string usuario = codigoUser.Text;
-            Session.Add("usuario", usuario);
-            Session.Add("rol", "admin");
+            string codUser = codigoUser.Text;
+            string passUser = pass.Text;
+
+            UsuarioNegocio usuarioDb = new UsuarioNegocio();
+            Usuario currentUser = usuarioDb.login(codUser, passUser);
+
+            if (currentUser.id == 0)
+            {
+                loginMsg.Text = "ERROR: Usuario y/o contraseña incorrecta";
+
+            }
+            else
+            {
+                Response.Redirect("/default.aspx");
+
+                Session.Add("usuario", codUser);
+                Session.Add("rol", "admin");
+            }
         }
 
         protected void logout_Click(object sender, EventArgs e)

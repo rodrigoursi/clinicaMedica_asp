@@ -46,7 +46,7 @@ namespace Negocio
                                     "INNER JOIN Localidades AS L ON L.id = usuarios.localidad " +
                                     "INNER JOIN provincias AS P ON P.id = L.id_prov " +
                                     "INNER JOIN Especialidades AS E ON E.id = usuarios.especialidad " +
-                                    "INNER JOIN Roles AS R ON R.id = usuarios.rol");
+                                    "INNER JOIN Roles AS R ON R.id = usuarios.rol ");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -61,7 +61,7 @@ namespace Negocio
                     usuario.numeroDeDocumento = (string)datos.Lector["numero_doc"];
                     usuario.fechaDeNacimiento = (DateTime)datos.Lector["fecha_nacimiento"];
                     usuario.direccion = (string)datos.Lector["direccion"];
-
+                   
                     usuario.localidad = new Localidad();
                     usuario.localidad.id = (short)datos.Lector["idL"];
                     usuario.localidad.localidad = (string)datos.Lector["localidad"];
@@ -94,6 +94,48 @@ namespace Negocio
             catch (Exception ex)
             {
                 MessageBox.Show("Error al capturar los datos de la tabla de USUARIOS" + ex.Message +  " / " + 
+                    ex.GetType().Name + " / " + ex.StackTrace);
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public Usuario login(string codUsuario = "", string pass = "")
+        {
+            Usuario UsuarioLoggin = new Usuario();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT TOP 1" +
+                                        "id, " +
+                                        "cod_usu, " +
+                                        "password, " +
+                                        "rol " +
+                                     "FROM " +
+                                        "usuarios " +
+                                    "WHERE cod_usu = '" + codUsuario + "' AND  password = '" + pass + "'");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    UsuarioLoggin.id = (int)datos.Lector["id"];
+                    UsuarioLoggin.codigoUsuario = (string)datos.Lector["cod_usu"];
+                    UsuarioLoggin.password = (string)datos.Lector["password"];
+
+                    UsuarioLoggin.rol = new Rol();
+                    UsuarioLoggin.rol.id = (byte)datos.Lector["rol"];
+                }
+
+                return UsuarioLoggin;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al capturar los datos de la tabla de USUARIOS" + ex.Message + " / " +
                     ex.GetType().Name + " / " + ex.StackTrace);
 
                 throw ex;

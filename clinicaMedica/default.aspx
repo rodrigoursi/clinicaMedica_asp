@@ -8,7 +8,7 @@
             <h2 style="text-align:center;" class="my-5">Para utilizar el sistema debe iniciar sesion</h2>
 
             <!-- Modal -->
-            <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="modalLoginLabel" aria-hidden="true">
+            <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="modalLoginLabel" aria-hidden="true"  data-backdrop="static">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -28,6 +28,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             <asp:Button Text="Iniciar Sesion" runat="server" id="login" CssClass="btn btn-primary" OnClick="login_Click"/>
+                            <asp:Label ID="loginMsg" runat="server" Text=""></asp:Label>
                         </div>
                     </div>
                 </div>

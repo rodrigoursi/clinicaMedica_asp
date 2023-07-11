@@ -42,6 +42,15 @@ namespace clinicaMedica
         protected global::System.Web.UI.WebControls.Button login;
 
         /// <summary>
+        /// loginMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label loginMsg;
+
+        /// <summary>
         /// logout control.
         /// </summary>
         /// <remarks>
