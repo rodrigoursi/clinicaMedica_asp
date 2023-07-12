@@ -362,7 +362,7 @@ namespace Negocio
             {
                 datos.setearConsulta("DELETE FROM usuarios WHERE id=@id");
                 datos.setearParametro("@id", id);
-                resultado = datos.ejecutarUpdate();
+                resultado = datos.ejecutarDelete();
             }
             catch (Exception ex)
             {

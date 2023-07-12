@@ -23,10 +23,10 @@ namespace Negocio
 
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=TURNOS_MEDICOS; integrated security=true");
+            //conexion = new SqlConnection("server=.\\SQLEXPRESS; database=TURNOS_MEDICOS; integrated security=true");
             //conexion = new SqlConnection("server=.\\UTNLABORATORIO; database=CLINICA; User Id=sa; Password=imprimir");
             //conexion = new SqlConnection("server=.; database=CLINICA; integrated security=true");
-            //conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CLINICA; integrated security=true");
+            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CLINICA; integrated security=true");
             comando = new SqlCommand();
         }
 
@@ -68,6 +68,36 @@ namespace Negocio
                 {
                     transaccion.Commit();
                 } 
+                else transaccion.Rollback();
+            }
+            catch (Exception ex)
+            {
+                transaccion.Rollback();
+                throw ex;
+            }
+            finally
+            {
+                transaccion.Dispose();
+                transaccion = null;
+                conexion.Close();
+            }
+            return filasAfectadas;
+        }
+
+        public int ejecutarDelete(bool fisico =false)
+        {
+            int filas = fisico ? 2 : 3;
+            comando.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                transaccion = conexion.BeginTransaction();
+                comando.Transaction = transaccion;
+                filasAfectadas = comando.ExecuteNonQuery();
+                if (filasAfectadas == filas)
+                {
+                    transaccion.Commit();
+                }
                 else transaccion.Rollback();
             }
             catch (Exception ex)
