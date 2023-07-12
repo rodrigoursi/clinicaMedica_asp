@@ -36,13 +36,14 @@
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href="./../default.aspx">
-                       <i class="fa-solid fa-trash" title="borrar"></i>
+                    <a href='<%# "/pages/usuario.aspx?id=" + Eval("id") + "&mod=3&rolId=" +  Eval("rol.id") %>'
+                     onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?')">
+                        <i class="fa-solid fa-trash" title="borrar"></i>
                     </a>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
         </asp:GridView>
-        <div><a href='<%="/pages/ficha.aspx?rolId=" + rolId%> 'class="btn btn-success">AGREGAR</a></div>
+        <div><a href='<%="/pages/ficha.aspx?rolId=" + rolId%>' class="btn btn-success">AGREGAR</a></div>
     </div>
 </asp:Content>

@@ -42,8 +42,32 @@ namespace clinicaMedica.Pages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            UsuarioNegocio negocio = new UsuarioNegocio();
-            GridAbmUser.DataSource = negocio.listar();
+            if (!IsPostBack)
+            {
+                if (Request.QueryString["mod"] != null)
+                {
+                    if (Request.QueryString["id"] != null)
+                    {
+                        byte id;
+                        if (byte.TryParse(Request.QueryString["id"], out id))
+                        {
+                            byte mod;
+                            if (byte.TryParse(Request.QueryString["mod"], out mod))
+                            {
+                                if (mod == 3) //ELIMINAR
+                                {
+                                    UsuarioNegocio negocio = new UsuarioNegocio();
+                                    negocio.eliminar(id);
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            UsuarioNegocio negocio2 = new UsuarioNegocio();
+            GridAbmUser.DataSource = negocio2.listar();
             GridAbmUser.DataBind();
 
         }
