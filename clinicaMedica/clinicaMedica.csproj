@@ -2117,6 +2117,7 @@
     <Content Include="Assets\fontawesome\svgs\solid\yin-yang.svg" />
     <Content Include="Assets\fontawesome\svgs\solid\z.svg" />
     <Content Include="Assets\images\usermas.png" />
+    <Content Include="Css\cargarTurno.css" />
     <Content Include="Css\ficha.css" />
     <Content Include="Css\master.css" />
     <Content Include="Css\usuario.css" />
@@ -2126,6 +2127,7 @@
     <Content Include="Pages\abmEstados.aspx" />
     <Content Include="Pages\abmLocalidades.aspx" />
     <Content Include="Pages\abmProvincias.aspx" />
+    <Content Include="Pages\cargarTurno.aspx" />
     <Content Include="Pages\ficha.aspx" />
     <Content Include="Pages\ficha.js" />
     <Content Include="Pages\FichaEspecialidades.aspx" />
@@ -2175,6 +2177,13 @@
     </Compile>
     <Compile Include="Pages\abmProvincias.aspx.designer.cs">
       <DependentUpon>abmProvincias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\cargarTurno.aspx.cs">
+      <DependentUpon>cargarTurno.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\cargarTurno.aspx.designer.cs">
+      <DependentUpon>cargarTurno.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\ficha.aspx.cs">
       <DependentUpon>ficha.aspx</DependentUpon>

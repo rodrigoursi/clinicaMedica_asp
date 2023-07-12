@@ -1,0 +1,7 @@
+﻿.subcontenedor {
+    display: flex;
+    flex-wrap: wrap;
+}
+.subcontenedor div {
+    width: 40%;
+}
