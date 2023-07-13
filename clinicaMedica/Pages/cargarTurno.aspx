@@ -16,7 +16,7 @@
                 <label for="cargarTurno_documento" class="form-label">Documento</label>
                 <asp:TextBox runat="server" type="number" CssClass="form-control" id="cargarTurno_documento" />
             </div>
-            <asp:Button Text="buscar" runat="server" class="btn btn-success" ID="buscarDoc" />
+            <asp:Button Text="buscar" runat="server" class="btn btn-success" ID="buscarDoc" OnClick="buscarDoc_Click" />
         </div>
         <div class="mb-3">
             <label for="cargarTurno_documento" class="form-label">Paciente</label>
@@ -25,11 +25,11 @@
         <div class="mb-3 subcontenedor">
             <div>
                 <label for="cargaTurno_esp" class="form-label">Especialidad</label>
-                <asp:DropDownList ID="cargaTurno_Esp" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
+                <asp:DropDownList ID="cargaTurno_Esp" CssClass="form-select mb-3" runat="server" OnSelectedIndexChanged="cargaTurno_Esp_Changed" AutoPostBack="true" ></asp:DropDownList>
             </div>
             <div>
-                <label for="cargaTurno_prof" class="form-label">Profecional</label>
-                <asp:DropDownList ID="cargaTurno_prof" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
+                <label for="cargaTurno_prof" class="form-label">Profesional</label>
+                <asp:DropDownList ID="cargaTurno_prof" CssClass="form-select mb-3" runat="server" OnSelectedIndexChanged="cargaTurno_prof_Changed" AutoPostBack="true"></asp:DropDownList>
             </div>
         </div>
         <div class="mb-3">

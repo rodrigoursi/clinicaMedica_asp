@@ -448,5 +448,40 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public List<Usuario> buscarPor(string filtro)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Usuario> lista = new List<Usuario>();
+            try
+            {
+                datos.setearConsulta($"SELECT id, cod_usu, nombre_apellido, email, tipo_documento, numero_doc FROM usuarios WHERE {filtro}");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Usuario usuario = new Usuario();
+                    usuario.id = (int)datos.Lector["id"];
+                    usuario.codigoUsuario = (string)datos.Lector["cod_usu"];
+                    usuario.nombreYApellido = (string)datos.Lector["nombre_apellido"];
+                    usuario.emailUsuario = (string)datos.Lector["email"];
+                    usuario.tipoDeDocumento = (string)datos.Lector["tipo_documento"];
+                    usuario.numeroDeDocumento = (string)datos.Lector["numero_doc"];
+                    lista.Add(usuario);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al capturar los datos de la tabla de USUARIOS" + ex.Message + " / " +
+                    ex.GetType().Name + " / " + ex.StackTrace);
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

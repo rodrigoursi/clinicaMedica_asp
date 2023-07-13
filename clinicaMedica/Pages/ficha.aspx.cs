@@ -249,38 +249,44 @@ namespace clinicaMedica.Pages
                 System.Web.UI.WebControls.Label label_dia = (System.Web.UI.WebControls.Label)item.FindControl("lbl_dia");
                 TextBox txtHIni = (TextBox)item.FindControl("AltaUsuario_hIni");
                 TextBox txtHFin = (TextBox)item.FindControl("AltaUsuario_hFin");
-                //int id = dias[indice].id;
+                
                 string dia = label_dia.Text;
                 string horaInicio = txtHIni.Text;
                 string horaFin = txtHFin.Text;
-                DateTime horaI = DateTime.Parse(horaInicio);
-                DateTime horaF = DateTime.Parse(horaFin);
-                Horarios horario = new Horarios();
-                horario.horaInicio = horaI;
-                horario.horaFin = horaF;
-                DiaSemana idDia = dias.Find(x => x.diaSemana == dia);
-                horario.idDia = idDia;
-                usuario.id = id;
-                horario.idMedico = usuario;
-                HorarioNegocio horaNeg = new HorarioNegocio();
-                if (Request.QueryString["idEditar"] != null)
+                if(horaInicio != "" && horaFin != "")
                 {
-                    List<Horarios> listaHoras = new List<Horarios>();
-                    string filtro = "where id_medico = " + usuario.id.ToString();
-                    listaHoras = horaNeg.listar(filtro);
-                    if(listaHoras.Count() > i)
+                    DateTime horaI = DateTime.Parse(horaInicio);
+                    DateTime horaF = DateTime.Parse(horaFin);
+                    Horarios horario = new Horarios();
+                    horario.horaInicio = horaI;
+                    horario.horaFin = horaF;
+                    DiaSemana idDia = dias.Find(x => x.diaSemana == dia);
+                    horario.idDia = idDia;
+                    usuario.id = id;
+                    horario.idMedico = usuario;
+                    HorarioNegocio horaNeg = new HorarioNegocio();
+                    if (Request.QueryString["idEditar"] != null)
                     {
-                        horario.id = listaHoras[i].id;
-                        horaNeg.editar(horario);
-                    }else
+                        List<Horarios> listaHoras = new List<Horarios>();
+                        string filtro = "where id_medico = " + usuario.id.ToString();
+                        listaHoras = horaNeg.listar(filtro);
+                        if (listaHoras.Count() > i)
+                        {
+                            horario.id = listaHoras[i].id;
+                            horaNeg.editar(horario);
+                        }
+                        else
+                        {
+                            horaNeg.agregar(horario);
+                        }
+
+                    }
+                    else
                     {
                         horaNeg.agregar(horario);
                     }
-                    
-                } else
-                {
-                    horaNeg.agregar(horario);
                 }
+                
                 i++;
             }
             return;
