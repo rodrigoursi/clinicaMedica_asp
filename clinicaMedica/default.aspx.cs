@@ -27,7 +27,7 @@ namespace clinicaMedica
 
             if (currentUser.id == 0)
             {
-                loginMsg.Text = "ERROR: Usuario y/o contraseña incorrecta";
+                Response.Write("<script>alert('ERROR: Usuario y/o contraseña incorrecta');</script>");
 
             }
             else

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,10 +24,10 @@ namespace Negocio
 
         public AccesoDatos()
         {
-            //conexion = new SqlConnection("server=.\\SQLEXPRESS; database=TURNOS_MEDICOS; integrated security=true");
+            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=TURNOS_MEDICOS; integrated security=true");
             //conexion = new SqlConnection("server=.\\UTNLABORATORIO; database=CLINICA; User Id=sa; Password=imprimir");
             //conexion = new SqlConnection("server=.; database=CLINICA; integrated security=true");
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CLINICA; integrated security=true");
+            //econexion = new SqlConnection("server=.\\SQLEXPRESS; database=CLINICA; integrated security=true");
             comando = new SqlCommand();
         }
 

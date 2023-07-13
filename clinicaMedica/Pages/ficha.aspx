@@ -74,11 +74,14 @@
                     </div>
             <%}    
             %>
+                    
                     </ContentTemplate>
             </asp:UpdatePanel>
             <asp:Button Text="AGREGAR" CssClass="btn btn-primary mb-3" ID="AltaUsuario_agregar" runat="server" OnClick="AltaUsuario_agregar_Click" />
         </div>
     </div>
+        
+
 
     <!-- Modal -->
     <div class="modal modal_cargarLoc_user" id="modal_cargarLoc_user" tabindex="-1">

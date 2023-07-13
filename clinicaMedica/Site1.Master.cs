@@ -11,7 +11,7 @@ namespace clinicaMedica
 {
     public partial class Site1 : System.Web.UI.MasterPage
     {
-        public string iniciarSesion { get; set; }
+        public string iniciarSesion{ get; set; }
         public string abrirModal { get; set; }
         public List<Rol> roles { get; set; }
         protected void Page_Load(object sender, EventArgs e)

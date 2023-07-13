@@ -28,7 +28,6 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             <asp:Button Text="Iniciar Sesion" runat="server" id="login" CssClass="btn btn-primary" OnClick="login_Click"/>
-                            <asp:Label ID="loginMsg" runat="server" Text=""></asp:Label>
                         </div>
                     </div>
                 </div>

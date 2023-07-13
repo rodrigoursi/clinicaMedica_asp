@@ -10,6 +10,7 @@ using System.Web.Services.Description;
 using System.Reflection.Emit;
 using System.Security.Cryptography;
 
+
 namespace clinicaMedica.Pages
 {
     public partial class ficha : System.Web.UI.Page
@@ -100,6 +101,7 @@ namespace clinicaMedica.Pages
                     Usuario usuario = new Usuario();
                     UsuarioNegocio negocio = new UsuarioNegocio();
                     usuario = negocio.verUsuario(int.Parse(Request.QueryString["idEditar"]));
+                    AltaUsuario_id.Text = usuario.id.ToString();
                     AltaUsuario_codigo.Text = usuario.codigoUsuario;
                     AltaUsuario_contra.Text = usuario.password;
                     AltaUsuario_repeat.Text = usuario.password;
@@ -196,6 +198,12 @@ namespace clinicaMedica.Pages
             {
                 Session.Add("error", ex);
                 throw;
+            }
+            finally
+            {
+                Response.Write("<script>alert('Usuario creado correctamente!');</script>");
+                string rolId = Request.QueryString["rolId"];
+                //Response.Redirect("/Pages/usuario.aspx?rolId=" + rolId);
             }
         }
 

@@ -48,7 +48,7 @@ namespace clinicaMedica.Pages
                 {
                     if (Request.QueryString["id"] != null)
                     {
-                        byte id;
+                        byte id = 0;
                         if (byte.TryParse(Request.QueryString["id"], out id))
                         {
                             byte mod;
@@ -65,12 +65,13 @@ namespace clinicaMedica.Pages
                     }
                 }
             }
-
-            UsuarioNegocio negocio2 = new UsuarioNegocio();
-            GridAbmUser.DataSource = negocio2.listar();
-            GridAbmUser.DataBind();
-
+            byte idRol;
+            if (byte.TryParse(Request.QueryString["rolId"], out idRol))
+            {
+                UsuarioNegocio negocio2 = new UsuarioNegocio();
+                GridAbmUser.DataSource = negocio2.listar(idRol);
+                GridAbmUser.DataBind();
+            }
         }
-
     }
 }

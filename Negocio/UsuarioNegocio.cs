@@ -10,7 +10,7 @@ namespace Negocio
 {
     public class UsuarioNegocio
     {
-        public List<Usuario> listar()
+        public List<Usuario> listar(byte id= 0)
         {
             List<Usuario> lista = new List<Usuario>();
             AccesoDatos datos = new AccesoDatos();
@@ -46,7 +46,8 @@ namespace Negocio
                                     "INNER JOIN Localidades AS L ON L.id = usuarios.localidad " +
                                     "INNER JOIN provincias AS P ON P.id = L.id_prov " +
                                     "INNER JOIN Especialidades AS E ON E.id = usuarios.especialidad " +
-                                    "INNER JOIN Roles AS R ON R.id = usuarios.rol ");
+                                    "INNER JOIN Roles AS R ON R.id = usuarios.rol " +
+                                    "WHERE usuarios.rol = '" + id + "' AND bajaFecha IS NULL");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

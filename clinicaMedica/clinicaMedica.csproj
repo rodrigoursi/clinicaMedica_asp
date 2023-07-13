@@ -2128,6 +2128,7 @@
     <Content Include="Pages\abmLocalidades.aspx" />
     <Content Include="Pages\abmProvincias.aspx" />
     <Content Include="Pages\cargarTurno.aspx" />
+    <Content Include="Pages\ErrorPage.aspx" />
     <Content Include="Pages\ficha.aspx" />
     <Content Include="Pages\ficha.js" />
     <Content Include="Pages\FichaEspecialidades.aspx" />
@@ -2184,6 +2185,13 @@
     </Compile>
     <Compile Include="Pages\cargarTurno.aspx.designer.cs">
       <DependentUpon>cargarTurno.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ErrorPage.aspx.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ErrorPage.aspx.designer.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\ficha.aspx.cs">
       <DependentUpon>ficha.aspx</DependentUpon>
