@@ -10,14 +10,14 @@ namespace Negocio
 {
     public class TunoNegocio
     {
-        public List<Turno> listar()
+        public List<Turno> listar(string filtros = "")
         {
             List<Turno> lista = new List<Turno>();
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("SELECT id, id_paciente, id_medico, fecha_hora, observaciones, estado, altaUsu, modiUsus, bajaUsu, altaFecha, modiFecha, bajaFecha FROM turnos");
+                datos.setearConsulta("SELECT id, id_paciente, id_medico, fecha_hora, observaciones, estado, altaUsu, modiUsus, bajaUsu, altaFecha, modiFecha, bajaFecha FROM turnos" + filtros);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

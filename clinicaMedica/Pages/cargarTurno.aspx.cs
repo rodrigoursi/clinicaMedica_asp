@@ -97,6 +97,7 @@ namespace clinicaMedica.Pages
         protected void cargaTurno_fecha_changed(object sender, EventArgs e)
         {
             List<string> lsHoras = devolverHorarios();
+            validoHorarios(lsHoras);
             cargaTurno_hora.DataSource = lsHoras;
             cargaTurno_hora.DataBind();
             cargaTurno_hora.Items.Insert(0, new ListItem("Selecciona un horario", ""));
@@ -166,6 +167,12 @@ namespace clinicaMedica.Pages
             obj.fechaYHora = fechaYhora;
             obj.observaciones = cargarTurno_mot.Text;
             obj.estado = objEstado.Find(x => x.defecto);
+        }
+        protected void validoHorarios(List<string> lsHoras)
+        {
+            int idMedico = int.Parse(cargaTurno_prof.Text);
+            string fecha = cargaTurno_fecha.Text;
+            //string hora =
         }
     }
 }
