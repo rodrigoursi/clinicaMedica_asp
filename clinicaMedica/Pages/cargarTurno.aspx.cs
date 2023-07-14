@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.WebSockets;
 using Dominio;
 using Negocio;
 
@@ -12,16 +13,16 @@ namespace clinicaMedica.Pages
     public partial class cargarTurno : System.Web.UI.Page
     {
         private List<DiaSemana> diaSem = new List<DiaSemana>();
-        //List<Horarios> listaHorarios = new List<Horarios>();
+        List<Horarios> listaHorarios = new List<Horarios>();
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*if (cargaTurno_prof.SelectedValue != "")
+            if (cargaTurno_prof.SelectedValue != "")
             {
                 HorarioNegocio negHorario = new HorarioNegocio();
                 string filtro = $"WHERE id_medico = {cargaTurno_prof.SelectedValue} ORDER BY id_medico";
 
                 listaHorarios = negHorario.listar(filtro);
-            }*/
+            }
             
             DiaSemanaNegocio negDiaSem = new DiaSemanaNegocio();
             diaSem = negDiaSem.listar();
@@ -51,6 +52,11 @@ namespace clinicaMedica.Pages
 
             cargaTurno_prof.Items.Insert(0, new ListItem("Selecciona un profesional", ""));
             cargaTurno_prof.DataBind();
+
+            cargaTurno_fecha.Items.Insert(0, new ListItem("Selecciona una fecha", ""));
+            cargaTurno_fecha.DataBind();
+            cargaTurno_hora.Items.Insert(0, new ListItem("Selecciona un horario", ""));
+            cargaTurno_hora.DataBind();
         }
 
         protected void cargaTurno_Esp_Changed(object sender, EventArgs e)
@@ -68,34 +74,37 @@ namespace clinicaMedica.Pages
 
         protected void cargaTurno_prof_Changed(object sender, EventArgs e)
         {
-            HorarioNegocio negHorario = new HorarioNegocio();
-            string filtro = $"WHERE id_medico = {cargaTurno_prof.SelectedValue} ORDER BY id_medico";
-            List<Horarios> listaHorarios = new List<Horarios>();
-            listaHorarios = negHorario.listar(filtro);
+            //HorarioNegocio negHorario = new HorarioNegocio();
+            //string filtro = $"WHERE id_medico = {cargaTurno_prof.SelectedValue} ORDER BY id_medico";
+            //List<Horarios> listaHorarios = new List<Horarios>();
+            //listaHorarios = negHorario.listar(filtro);
             DiaSemana oDia = new DiaSemana();
             oDia = diaSem.Find(x => x.id == listaHorarios[0].idDia.id);
             int dia = (int)oDia.codDia;
             List<DateTime> fechas = devolverProximaFecha((DayOfWeek)dia, 3);
-            int i = 0;
-            cargaTurno_fecha.Items.Insert(0, "1");
-            //cargaTurno_fecha.Items.Insert(1, "2");
-            //cargaTurno_fecha.Items.Add(new ListItem(fechas[0].ToString("dd/MM/yyyy"), dia.ToString()));
-            //cargaTurno_fecha.Items.Add(new ListItem(fechas[1].ToString("dd/MM/yyyy"), dia.ToString()));
-            
-            cargaTurno_fecha.Items.Insert(1, new ListItem(fechas[0].ToString("dd/MM/yyyy"), dia.ToString()));
-            
-            cargaTurno_fecha.Items.Insert(2, new ListItem(fechas[1].ToString("dd/MM/yyyy"), dia.ToString()));
-            /*fechas.ForEach(x =>
+            List<ListItem> horarios = new List<ListItem>();
+            fechas.ForEach(x =>
             {
-                cargaTurno_fecha.Items.Insert(i, new ListItem(x.ToString("dd/MM/yyyy"), dia.ToString()));
-                i++;
-            });*/
+                //cargaTurno_fecha.Items.Add(new ListItem(x.ToString("dd/MM/yyyy"), dia.ToString()));
+                horarios.Add(new ListItem(x.ToString("dd/MM/yyyy"), dia.ToString()));
+            });
+            cargaTurno_fecha.DataSource = horarios;
             cargaTurno_fecha.DataBind();
+            cargaTurno_fecha.Items.Insert(0, new ListItem("Selecciona una fecha", ""));
+            
         }
         protected void cargaTurno_fecha_changed(object sender, EventArgs e)
         {
-            //cargaTurno_hora.Items.Insert(0, new ListItem(listaHorarios[0].horaInicio.ToString("H:mm:ss"), listaHorarios[0].id.ToString()));
-            cargaTurno_hora.Items.Insert(0, new ListItem("prueba", "0"));
+            List<DateTime> lsHoras = devolverHorarios();
+            cargaTurno_hora.DataSource = lsHoras;
+            cargaTurno_hora.DataBind();
+            cargaTurno_hora.Items.Insert(0, new ListItem("Selecciona un horario", ""));
+            /*lsHoras.ForEach(x =>
+            {
+                cargaTurno_hora.Items.Add(new ListItem(listaHorarios[0].horaInicio.ToString("H:mm:ss"), listaHorarios[0].id.ToString()));
+            });*/
+
+            //cargaTurno_hora.Items.Add(new ListItem("prueba", "0"));
 
         }
         protected List<DateTime> devolverProximaFecha(DayOfWeek diaObjetivo, int cantidad)
@@ -120,11 +129,19 @@ namespace clinicaMedica.Pages
 
             return proximasFechasObjetivo;
         }
-        /*protected List<DateTime> devolverHorarios(List<Horarios> horarios)
+        protected List<DateTime> devolverHorarios()
         {
-
-            //return listaHorarios;
-        }*/
+            List<DateTime> lista = new List<DateTime>();
+            lista.Add(listaHorarios[0].horaInicio);
+            DateTime horaActual = listaHorarios[0].horaInicio;
+            while (horaActual < listaHorarios[0].horaFin)
+            {
+                horaActual = horaActual.AddHours(1);
+                if(horaActual != listaHorarios[0].horaFin)
+                lista.Add(horaActual);
+            }
+            return lista;
+        }
 
     }
 }
