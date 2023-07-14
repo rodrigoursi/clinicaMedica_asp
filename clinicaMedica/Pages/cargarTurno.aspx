@@ -35,7 +35,7 @@
         <div class="mb-3">
             <div>
                 <label for="cargaTurno_fecha" class="form-label">Fecha</label>
-                <asp:DropDownList ID="cargaTurno_fecha" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
+                <asp:DropDownList ID="cargaTurno_fecha" CssClass="form-select mb-3" runat="server" OnSelectedIndexChanged="cargaTurno_fecha_changed" AutoPostBack="true" ></asp:DropDownList>
             </div>
             <div>
                 <label for="cargaTurno_hora" class="form-label">Hora</label>
