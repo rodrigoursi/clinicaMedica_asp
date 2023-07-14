@@ -51,5 +51,6 @@
             <label for="cargarTurno_mot" class="form-label">Motivo/s de la Consulta</label>
             <asp:TextBox runat="server" TextMode="MultiLine" id="cargarTurno_mot" CssClass="form-control" rows="3" />
         </div>
+        <asp:Button Text="GRABAR" CssClass="btn btn-primary mb-3" ID="grabarTurno" runat="server" OnClick="grabarTurno_Click" />
     </div>
 </asp:Content>

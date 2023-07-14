@@ -13,7 +13,8 @@ GO
 CREATE TABLE estados (
 	id tinyint not null primary key identity(1,1),
 	codigo varchar(10) not null unique,
-	estado varchar(50) not null CHECK (estado LIKE '%[a-zA-Z]%')
+	estado varchar(50) not null CHECK (estado LIKE '%[a-zA-Z]%'),
+	defecto bit not null default 0 
 )
 go
 

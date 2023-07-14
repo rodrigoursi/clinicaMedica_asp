@@ -11,6 +11,7 @@ namespace Dominio
         public byte id { get; set; }
         public string codigo { get; set; }
         public string estado { get; set; }
+        public bool defecto { get; set; }
 
         public Estado() { }
         public Estado(string codigo, string nombre) 

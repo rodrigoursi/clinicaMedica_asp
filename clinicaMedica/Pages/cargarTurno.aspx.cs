@@ -39,6 +39,7 @@ namespace clinicaMedica.Pages
             List<Usuario> lista = new List<Usuario>();
             lista = negUser.buscarPor(filtro);
             cargarTurno_paciente.Text = lista[0].nombreYApellido;
+            cargarTurno_paciente.Attributes["value"] = lista[0].id.ToString();
         }
         protected void cargarBoxes()
         {
@@ -95,7 +96,7 @@ namespace clinicaMedica.Pages
         }
         protected void cargaTurno_fecha_changed(object sender, EventArgs e)
         {
-            List<DateTime> lsHoras = devolverHorarios();
+            List<string> lsHoras = devolverHorarios();
             cargaTurno_hora.DataSource = lsHoras;
             cargaTurno_hora.DataBind();
             cargaTurno_hora.Items.Insert(0, new ListItem("Selecciona un horario", ""));
@@ -129,19 +130,42 @@ namespace clinicaMedica.Pages
 
             return proximasFechasObjetivo;
         }
-        protected List<DateTime> devolverHorarios()
+        protected List<string> devolverHorarios()
         {
-            List<DateTime> lista = new List<DateTime>();
-            lista.Add(listaHorarios[0].horaInicio);
+            List<string> lista = new List<string>();
+            lista.Add(listaHorarios[0].horaInicio.ToString("HH:mm:ss"));
             DateTime horaActual = listaHorarios[0].horaInicio;
             while (horaActual < listaHorarios[0].horaFin)
             {
                 horaActual = horaActual.AddHours(1);
                 if(horaActual != listaHorarios[0].horaFin)
-                lista.Add(horaActual);
+                    lista.Add(horaActual.ToString("HH:mm:ss"));
             }
             return lista;
         }
 
+        protected void grabarTurno_Click(object sender, EventArgs e)
+        {
+            Turno objTurno = new Turno();
+            cargar(objTurno);
+            TunoNegocio turno = new TunoNegocio();
+            turno.agregar(objTurno);
+        }
+        protected void cargar(Turno obj)
+        {
+            EstadoNegocio negEstado = new EstadoNegocio();
+            List<Estado> objEstado = negEstado.listar();
+            string fecha = cargaTurno_fecha.Text;
+            string hora = cargaTurno_hora.Text;
+            DateTime fechaYhora = DateTime.Parse(fecha + " " + hora);
+            Usuario objUser = new Usuario();
+            objUser.id = int.Parse(cargarTurno_paciente.Attributes["value"]);
+            obj.paciente = objUser;
+            objUser.id = int.Parse(cargaTurno_prof.SelectedValue);
+            obj.medico = objUser;
+            obj.fechaYHora = fechaYhora;
+            obj.observaciones = cargarTurno_mot.Text;
+            obj.estado = objEstado.Find(x => x.defecto);
+        }
     }
 }

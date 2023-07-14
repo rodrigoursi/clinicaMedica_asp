@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Negocio
 {
-    internal class TunoNegocio
+    public class TunoNegocio
     {
         public List<Turno> listar()
         {
@@ -103,30 +103,26 @@ namespace Negocio
             try
             {
                 datos.setearConsulta("INSERT INTO " +
-                                        "roles (codigo," +
-                                        "id_paciente," +
+                                        "turnos (id_paciente," +
                                         "id_medico," +
                                         "fecha_hora," +
                                         "observaciones," +
                                         "estado," +
-                                        "altaUsu," +
-                                        "altaFecha) " +
+                                        "altaUsu) " +
                                     "VALUES " +
                                         "(@paciente," +
                                         "@medico," +
                                         "@fechaHora," +
                                         "@observaciones," +
-                                        "@estado," +
-                                        "@altaUsuario," +
-                                        "@altaFecha)");
+                                        "@estado, " +
+                                        "@altaUsu)");
 
                 datos.setearParametro("@paciente", turno.paciente.id);
                 datos.setearParametro("@medico", turno.medico.id);
                 datos.setearParametro("@fechaHora", turno.fechaYHora);
                 datos.setearParametro("@observaciones", turno.observaciones);
                 datos.setearParametro("@estado", turno.estado.id);
-                datos.setearParametro("@modiUsuario", turno.modificacionUsuario.id);
-                datos.setearParametro("@modiFecha", turno.modificacionFecha);
+                datos.setearParametro("@altaUsu", "1234"); //aca hay q hacer q llegue el usuario q esta operando
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)

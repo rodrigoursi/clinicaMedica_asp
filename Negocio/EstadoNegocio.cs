@@ -17,7 +17,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT id, codigo, estado FROM estados");
+                datos.setearConsulta("SELECT id, codigo, estado, defecto FROM estados");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -26,6 +26,7 @@ namespace Negocio
                     estado.id = (byte)datos.Lector["id"];
                     estado.codigo = (string)datos.Lector["codigo"];
                     estado.estado = (string)datos.Lector["estado"];
+                    estado.defecto = (bool)datos.Lector["defecto"];
 
 
                     lista.Add(estado);
