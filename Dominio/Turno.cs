@@ -20,6 +20,14 @@ namespace Dominio
         public DateTime altaFecha { get; set; }
         public DateTime modificacionFecha { get; set; }
         public DateTime bajaFecha { get; set; }
-        public Turno() { }
+        public Turno() 
+        {
+            paciente = new Usuario();
+            medico = new Usuario();
+            estado = new Estado();
+            altaUsuario = new Usuario();
+            modificacionUsuario = new Usuario();
+            bajaUsuario = new Usuario();
+        }
     }
 }

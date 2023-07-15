@@ -17,7 +17,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT id, id_paciente, id_medico, fecha_hora, observaciones, estado, altaUsu, modiUsus, bajaUsu, altaFecha, modiFecha, bajaFecha FROM turnos" + filtros);
+                datos.setearConsulta("SELECT id, id_paciente, id_medico, fecha_hora, observaciones, estado, altaUsu, modiUsu, bajaUsu, altaFecha, modiFecha, bajaFecha FROM turnos" + filtros);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -26,15 +26,15 @@ namespace Negocio
                     turno.id = (int)datos.Lector["id"];
                     turno.paciente.id = (int)datos.Lector["id_paciente"];
                     turno.medico.id = (int)datos.Lector["id_medico"];
-                    turno.fechaYHora = (DateTime)datos.Lector["codigo"];
+                    turno.fechaYHora = (DateTime)datos.Lector["fecha_hora"];
                     turno.observaciones = (string)datos.Lector["observaciones"];
                     turno.estado.id = (byte)datos.Lector["estado"];
-                    turno.altaUsuario.id = (int)datos.Lector["altaUsu"];
-                    turno.modificacionUsuario.id = (int)datos.Lector["modiUsus"];
-                    turno.bajaUsuario.id = (int)datos.Lector["bajaUsu"];
+                    turno.altaUsuario.codigoUsuario = (string)datos.Lector["altaUsu"];
+                    turno.modificacionUsuario.codigoUsuario = datos.Lector["modiUsu"].ToString();
+                    turno.bajaUsuario.codigoUsuario = datos.Lector["bajaUsu"].ToString();
                     turno.altaFecha = (DateTime)datos.Lector["altaFecha"];
-                    turno.modificacionFecha = (DateTime)datos.Lector["modiFecha"];
-                    turno.bajaFecha = (DateTime)datos.Lector["bajaFecha"];
+                    turno.modificacionFecha = datos.Lector["modiFecha"] != DBNull.Value ? (DateTime)datos.Lector["modiFecha"] : DateTime.MinValue;
+                    turno.bajaFecha = datos.Lector["bajaFecha"] != DBNull.Value ? (DateTime)datos.Lector["bajaFecha"] : DateTime.MinValue;
 
 
                     lista.Add(turno);

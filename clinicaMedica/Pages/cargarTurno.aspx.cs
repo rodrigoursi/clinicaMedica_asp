@@ -98,7 +98,7 @@ namespace clinicaMedica.Pages
         protected void cargaTurno_fecha_changed(object sender, EventArgs e)
         {
             List<string> lsHoras = devolverHorarios();
-            //validoHorarios(lsHoras);
+            validoHorarios(lsHoras);
             cargaTurno_hora.DataSource = lsHoras;
             cargaTurno_hora.DataBind();
             cargaTurno_hora.Items.Insert(0, new ListItem("Selecciona un horario", ""));
@@ -159,11 +159,12 @@ namespace clinicaMedica.Pages
             string fecha = cargaTurno_fecha.Text;
             string hora = cargaTurno_hora.Text;
             DateTime fechaYhora = DateTime.Parse(fecha + " " + hora);
-            Usuario objUser = new Usuario();
-            objUser.id = int.Parse(cargarTurno_paciente.Attributes["value"]);
-            obj.paciente = objUser;
-            objUser.id = int.Parse(cargaTurno_prof.SelectedValue);
-            obj.medico = objUser;
+            Usuario objUserP = new Usuario();
+            Usuario objUserM = new Usuario();
+            objUserP.id = int.Parse(cargarTurno_paciente.Attributes["value"]);
+            obj.paciente = objUserP;
+            objUserM.id = int.Parse(cargaTurno_prof.SelectedValue);
+            obj.medico = objUserM;
             obj.fechaYHora = fechaYhora;
             obj.observaciones = cargarTurno_mot.Text;
             obj.estado = objEstado.Find(x => x.defecto);
@@ -173,7 +174,7 @@ namespace clinicaMedica.Pages
             int idMedico = int.Parse(cargaTurno_prof.Text);
             string fecha = cargaTurno_fecha.Text;
             List<Turno> objTurno = new List<Turno>();
-            objTurno = turno.listar($" WHERE bajaFecha IS NULL AND fecha_hora < AND id_medico = {idMedico} ");
+            objTurno = turno.listar($" WHERE bajaFecha IS NULL AND fecha_hora > GETDATE() AND id_medico = {idMedico} ");
             for( int i = lsHoras.Count() - 1; i > -1; i-- )
             {
                 DateTime fecha_hora = DateTime.Parse(fecha + " " + lsHoras[i]);
