@@ -13,7 +13,8 @@ namespace clinicaMedica.Pages
     public partial class cargarTurno : System.Web.UI.Page
     {
         private List<DiaSemana> diaSem = new List<DiaSemana>();
-        List<Horarios> listaHorarios = new List<Horarios>();
+        private List<Horarios> listaHorarios = new List<Horarios>();
+        private TunoNegocio turno = new TunoNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (cargaTurno_prof.SelectedValue != "")
@@ -97,7 +98,7 @@ namespace clinicaMedica.Pages
         protected void cargaTurno_fecha_changed(object sender, EventArgs e)
         {
             List<string> lsHoras = devolverHorarios();
-            validoHorarios(lsHoras);
+            //validoHorarios(lsHoras);
             cargaTurno_hora.DataSource = lsHoras;
             cargaTurno_hora.DataBind();
             cargaTurno_hora.Items.Insert(0, new ListItem("Selecciona un horario", ""));
@@ -149,7 +150,6 @@ namespace clinicaMedica.Pages
         {
             Turno objTurno = new Turno();
             cargar(objTurno);
-            TunoNegocio turno = new TunoNegocio();
             turno.agregar(objTurno);
         }
         protected void cargar(Turno obj)
@@ -172,7 +172,17 @@ namespace clinicaMedica.Pages
         {
             int idMedico = int.Parse(cargaTurno_prof.Text);
             string fecha = cargaTurno_fecha.Text;
-            //string hora =
+            List<Turno> objTurno = new List<Turno>();
+            objTurno = turno.listar($" WHERE bajaFecha IS NULL AND fecha_hora < AND id_medico = {idMedico} ");
+            for( int i = lsHoras.Count() - 1; i > -1; i-- )
+            {
+                DateTime fecha_hora = DateTime.Parse(fecha + " " + lsHoras[i]);
+
+                if (objTurno.Exists(x => x.fechaYHora == fecha_hora))
+                {
+                    lsHoras.RemoveAt(i);
+                }
+            }
         }
     }
 }
