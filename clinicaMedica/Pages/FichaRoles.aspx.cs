@@ -18,6 +18,14 @@ namespace clinicaMedica.Pages
         {
             if (!IsPostBack)
             {
+                Rol rolAux = new Rol();
+                rolAux = (Rol)Session["currentRol"];
+
+                if (rolAux.permisosConfiguracion == false)
+                {
+                    Response.Redirect("../default.aspx");
+                }
+
                 if (Request.QueryString["mod"] != null)
                 {
                     if (Request.QueryString["id"] != null)
@@ -32,6 +40,11 @@ namespace clinicaMedica.Pages
                                 {
                                     Rol_codigo.Text = rol.codigo;
                                     Rol_rol.Text = rol.rol;
+                                    horariosSi.Checked = rol.horariosSi;
+                                    permisosConfiguracion.Checked = rol.permisosConfiguracion;
+                                    permisosFichas.Checked = rol.permisosFichas;
+                                    permisosModificarTurno.Checked = rol.permisosModificarTurno;
+                                    permisosSoloTurnosPropios.Checked = rol.permisosSoloTurnosPropios;
                                     break;
                                 }
                             }
@@ -43,6 +56,11 @@ namespace clinicaMedica.Pages
                             {
                                 Rol_codigo.Enabled = false;
                                 Rol_rol.Enabled = false;
+                                horariosSi.Enabled = false;
+                                permisosConfiguracion.Enabled = false;
+                                permisosFichas.Enabled = false;
+                                permisosModificarTurno.Enabled = false;
+                                permisosSoloTurnosPropios.Enabled = false;
                                 AltaRoles_agregar.Text = "Modificar";
                                 AltaRol_cancelar.Text = "Volver";
 
@@ -51,6 +69,11 @@ namespace clinicaMedica.Pages
                             {
                                 Rol_codigo.Enabled = true;
                                 Rol_rol.Enabled = true;
+                                horariosSi.Enabled = true;
+                                permisosConfiguracion.Enabled = true;
+                                permisosFichas.Enabled = true;
+                                permisosModificarTurno.Enabled = true;
+                                permisosSoloTurnosPropios.Enabled = true;
                                 AltaRoles_agregar.Text = "Guardar";
                                 AltaRol_cancelar.Text = "Cancelar";
                             }
@@ -80,6 +103,11 @@ namespace clinicaMedica.Pages
                 RolNegocio negocio = new RolNegocio();
                 nuevoRol.codigo = Rol_codigo.Text;
                 nuevoRol.rol = Rol_rol.Text;
+                nuevoRol.horariosSi = horariosSi.Checked;
+                nuevoRol.permisosConfiguracion = permisosConfiguracion.Checked;
+                nuevoRol.permisosFichas = permisosFichas.Checked;
+                nuevoRol.permisosModificarTurno = permisosModificarTurno.Checked;
+                nuevoRol.permisosSoloTurnosPropios = permisosSoloTurnosPropios.Checked;
 
                 negocio.agregar(nuevoRol);
             }
@@ -90,6 +118,11 @@ namespace clinicaMedica.Pages
                 nuevoRol.id = byte.Parse(Request.QueryString["id"]);
                 nuevoRol.codigo = Rol_codigo.Text;
                 nuevoRol.rol = Rol_rol.Text;
+                nuevoRol.horariosSi = horariosSi.Checked;
+                nuevoRol.permisosConfiguracion = permisosConfiguracion.Checked;
+                nuevoRol.permisosFichas = permisosFichas.Checked;
+                nuevoRol.permisosModificarTurno = permisosModificarTurno.Checked;
+                nuevoRol.permisosSoloTurnosPropios = permisosSoloTurnosPropios.Checked;
 
                 negocio.editar(nuevoRol);
             }

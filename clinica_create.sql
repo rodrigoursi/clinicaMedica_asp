@@ -1,5 +1,5 @@
---create database TURNOS_MEDICOS
---go
+create database TURNOS_MEDICOS
+go
 
 --drop database TURNOS_MEDICOS
 --go
@@ -22,7 +22,11 @@ CREATE TABLE roles (
 	id tinyint not null primary key identity(1,1),
 	codigo varchar(10) not null unique,
 	rol varchar(50) not null CHECK (rol LIKE '%[a-zA-Z]%'),
-	horariosSi bit not null default 0
+	horariosSi bit not null default 0,
+	permisosConfiguracion bit not null default 0,
+	permisosFichas bit not null default 0,
+	permisosModificarTurno bit not null default 0,
+	permisosSoloTurnosPropios bit not null default 1
 )
 go
 

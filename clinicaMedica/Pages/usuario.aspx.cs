@@ -23,22 +23,22 @@ namespace clinicaMedica.Pages
 
         public string[] permisos { get; set; }
 
-        protected void Page_PreInit(object sender, EventArgs e)
-        {
-            permisos = new string[] { "admin" };
+        //protected void Page_PreInit(object sender, EventArgs e)
+        //{
+        //    permisos = new string[] { "admin" };
 
-            if (Session["usuario"] == null)
-            {
-                Response.Redirect("/");
-            }
-            foreach (var item in permisos)
-            {
-                if (item != Session["rol"].ToString())
-                {
-                    Response.Redirect("/");
-                }
-            }
-        }
+        //    if (Session["usuario"] == null)
+        //    {
+        //        Response.Redirect("/");
+        //    }
+        //    foreach (var item in permisos)
+        //    {
+        //        if (item != Session["currentRol"].ToString())
+        //        {
+        //            Response.Redirect("/");
+        //        }
+        //    }
+        //}
 
         protected void Page_Load(object sender, EventArgs e)
         {

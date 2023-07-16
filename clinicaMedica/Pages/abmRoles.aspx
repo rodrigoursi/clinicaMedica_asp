@@ -9,6 +9,11 @@
         <Columns>
             <asp:BoundField HeaderText="codigo" DataField="codigo" />
             <asp:BoundField HeaderText="rol" DataField="rol" />
+            <asp:BoundField HeaderText="Maneja Horarios?" DataField="horariosSi" />
+            <asp:BoundField HeaderText="Permiso Conf." DataField="permisosConfiguracion" />
+            <asp:BoundField HeaderText="Ve Fichas" DataField="permisosFichas" />
+            <asp:BoundField HeaderText="Gestiona Turnos" DataField="permisosModificarTurno" />
+            <asp:BoundField HeaderText="Solo Turnos propios" DataField="permisosSoloTurnosPropios" />
             <asp:TemplateField>
                 <ItemTemplate>
                     <a href='<%# "/pages/FichaRoles.aspx?id=" + Eval("id") + "&mod=1" %>'>

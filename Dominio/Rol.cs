@@ -12,10 +12,10 @@ namespace Dominio
         public string codigo { get; set; }
         public string rol { get; set; }
         public bool horariosSi { get; set; }
-        //public bool permisosConfiguracion { get; set; }
-        //public bool permisosRoles { get; set; }
-        //public bool permisosCrearTurno { get; set; }
-        //public bool permisosCerrarTurno { get; set; }
+        public bool permisosConfiguracion { get; set; }
+        public bool permisosFichas { get; set; }
+        public bool permisosModificarTurno { get; set; }
+        public bool permisosSoloTurnosPropios { get; set; }
         public Rol() { }
         public Rol(string codigo, string nombre)
         {

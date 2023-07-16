@@ -5,14 +5,13 @@ INSERT INTO estados(codigo, estado)
 VALUES
   (1, 'Borrador'),
   (2, 'Confirmado'),
-  (3, 'Reprogramado'),
-  (4, 'Realizado'),
-  (5, 'Cancelado')
+  (3, 'Realizado'),
+  (4, 'Cancelado')
 GO
 
 INSERT INTO especialidades (codigo, especialidad)
 VALUES
-  (1, 'Cardiología'),
+  (1, 'N/A'),
   (2, 'Dermatología'),
   (3, 'Endocrinología'),
   (4, 'Gastroenterología'),
@@ -34,13 +33,12 @@ VALUES
   (20, 'Cirugía General')
 GO
 
-INSERT INTO roles(codigo, rol, horariosSi)
+INSERT INTO roles(codigo, rol, horariosSi, permisosConfiguracion, permisosFichas, permisosModificarTurno, permisosSoloTurnosPropios)
 VALUES
-  (1, 'Administrador', 0),
-  (2, 'Empleado', 0),
-  (3, 'Medico', 1),
-  (4, 'Paciente', 0),
-  (5, 'Otro', 0)
+  (1, 'Administrador', 0, 1, 1, 1 ,0),
+  (2, 'Recepcionista', 0, 0, 0, 0 ,0),
+  (3, 'Medico', 1, 0, 1, 1 ,1),
+  (4, 'Paciente', 0, 0, 0, 0, 0)
 GO
 
 INSERT INTO dSemana(cod_dia, diaSemana)
@@ -91,4 +89,5 @@ VALUES
 
 INSERT INTO usuarios(cod_usu, password, nombre_apellido, email, tipo_documento, numero_doc, fecha_nacimiento, direccion, localidad, especialidad, rol, altaUsu, altaFecha)
 VALUES
+	('MED-3', 'med3', 'med3', 'med3@med3.com', 'DNI', '2222222', '01/01/2002', 'Av. liniers 400', 4, 6, 3, 'Admin', '01/01/2021'),
 	('ADM-001', 'admin', 'Admin', 'admin@admin.com', 'DNI', '11111111', '01/01/2020', 'Av. liniers 500', 1, 1, 1, 'Admin', '01/01/2021')

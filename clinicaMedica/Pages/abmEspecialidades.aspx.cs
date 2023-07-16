@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,15 @@ namespace clinicaMedica.Pages
     public partial class abmEspecialidades : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {   
+            Rol rolAux = new Rol();
+            rolAux = (Rol)Session["currentRol"];
+
+            if (rolAux.permisosConfiguracion == false)
+            {
+                Response.Redirect("../default.aspx");
+            }
+
             if (!IsPostBack)
             {
                 if (Request.QueryString["mod"] != null)

@@ -13,6 +13,13 @@ namespace clinicaMedica.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Rol rolAux = new Rol();
+            rolAux = (Rol)Session["currentRol"];
+
+            if (rolAux.permisosConfiguracion == false)
+            {
+                Response.Redirect("../default.aspx");
+            }
 
             if (!IsPostBack)
             {

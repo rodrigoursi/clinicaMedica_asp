@@ -35,7 +35,10 @@ namespace clinicaMedica
                 //Response.Redirect("/default.aspx");
 
                 Session.Add("usuario", codUser);
-                Session.Add("rol", "admin");
+
+                RolNegocio negocio = new RolNegocio();
+                Rol currentRol = negocio.RolDeUsuario(currentUser);
+                Session.Add("currentRol", currentRol);
             }
         }
 

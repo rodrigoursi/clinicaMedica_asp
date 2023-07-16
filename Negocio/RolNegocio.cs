@@ -19,7 +19,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT id, codigo, rol, horariosSi FROM roles");
+                datos.setearConsulta("SELECT id, codigo, rol, horariosSi, permisosConfiguracion, permisosFichas, permisosModificarTurno, permisosSoloTurnosPropios FROM roles");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -29,6 +29,10 @@ namespace Negocio
                     rol.codigo = (string)datos.Lector["codigo"];
                     rol.rol = (string)datos.Lector["rol"];
                     rol.horariosSi = (bool)datos.Lector["horariosSi"];
+                    rol.permisosConfiguracion = (bool)datos.Lector["permisosConfiguracion"];
+                    rol.permisosFichas = (bool)datos.Lector["permisosFichas"];
+                    rol.permisosModificarTurno = (bool)datos.Lector["permisosModificarTurno"];
+                    rol.permisosSoloTurnosPropios = (bool)datos.Lector["permisosSoloTurnosPropios"];
 
                     // Imprimir los valores para verificar
                     Debug.WriteLine($"id: {rol.id}, codigo: {rol.codigo}, nombre: {rol.rol}");
@@ -56,11 +60,16 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE roles SET codigo=@codigo, rol=@rol, horariosSi=@horariosSi WHERE id=@id");
+                datos.setearConsulta("UPDATE roles SET codigo=@codigo, rol=@rol, horariosSi=@horariosSi, permisosConfiguracion=@p1, permisosFichas=@p2, permisosModificarTurno=@p3, permisosSoloTurnosPropios=@p4 WHERE id=@id");
                 datos.setearParametro("@id", rol.id);
                 datos.setearParametro("@codigo", rol.codigo);
                 datos.setearParametro("@rol", rol.rol);
                 datos.setearParametro("@horariosSi", rol.horariosSi);
+                datos.setearParametro("@p1", rol.permisosConfiguracion);
+                datos.setearParametro("@p2", rol.permisosFichas);
+                datos.setearParametro("@p3", rol.permisosModificarTurno);
+                datos.setearParametro("@p4", rol.permisosSoloTurnosPropios);
+
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)
@@ -82,10 +91,14 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("INSERT INTO roles (codigo, rol, horariosSi) VALUES (@codigo, @rol, @horariosSi)");
+                datos.setearConsulta("INSERT INTO roles (codigo, rol, horariosSi, permisosConfiguracion, permisosFichas, permisosModificarTurno, permisosSoloTurnosPropios) VALUES (@codigo, @rol, @horariosSi, @p1, @p2, @p3, @p4)");
                 datos.setearParametro("@codigo", rol.codigo);
                 datos.setearParametro("@rol", rol.rol);
                 datos.setearParametro("@horariosSi", rol.horariosSi);
+                datos.setearParametro("@p1", rol.permisosConfiguracion);
+                datos.setearParametro("@p2", rol.permisosFichas);
+                datos.setearParametro("@p3", rol.permisosModificarTurno);
+                datos.setearParametro("@p4", rol.permisosSoloTurnosPropios);
                 resultado = datos.ejecutarUpdate();
             }
             catch (Exception ex)
@@ -139,6 +152,47 @@ namespace Negocio
                     listaId.Add(id);
                 }
                 return listaId;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al capturar los datos de la tabla de ROLES");
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public Rol RolDeUsuario(Usuario usuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT TOP 1 id, codigo, rol, horariosSi, permisosConfiguracion, permisosFichas, permisosModificarTurno, permisosSoloTurnosPropios FROM roles WHERE roles.id = @idRolUsuario");
+                datos.setearParametro("@idRolUsuario", usuario.rol.id);
+
+                datos.ejecutarLectura();
+
+                Rol rol = new Rol();
+                while (datos.Lector.Read())
+                {
+                    rol.id = (byte)datos.Lector["id"];
+                    rol.codigo = (string)datos.Lector["codigo"];
+                    rol.rol = (string)datos.Lector["rol"];
+                    rol.horariosSi = (bool)datos.Lector["horariosSi"];
+                    rol.permisosConfiguracion = (bool)datos.Lector["permisosConfiguracion"];
+                    rol.permisosFichas = (bool)datos.Lector["permisosFichas"];
+                    rol.permisosModificarTurno = (bool)datos.Lector["permisosModificarTurno"];
+                    rol.permisosSoloTurnosPropios = (bool)datos.Lector["permisosSoloTurnosPropios"];
+
+                    // Imprimir los valores para verificar
+                    Debug.WriteLine($"id: {rol.id}, codigo: {rol.codigo}, nombre: {rol.rol}");
+
+                }
+
+                return rol;
             }
             catch (Exception ex)
             {
