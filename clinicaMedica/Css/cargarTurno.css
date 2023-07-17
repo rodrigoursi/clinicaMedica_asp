@@ -1,7 +1,33 @@
-﻿.subcontenedor {
+﻿.contenedor-cargarTurnos {
+    background-color: aliceblue;
+}
+
+.subcontenedor {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 .subcontenedor div {
     width: 40%;
+}
+
+.formulario-turno {
+    display: flex;
+    flex-direction: column;
+}
+
+.formulario-turno div {
+    width: 60%;
+}
+
+#ContentPlaceHolder1_panelTurnos .subcontenedor {
+    width: 100%;
+}
+
+#ContentPlaceHolder1_panelTurnos .subcontenedor div {
+    width: 40%;
+}
+
+.btn-grabar {
+    width: 20%;
 }

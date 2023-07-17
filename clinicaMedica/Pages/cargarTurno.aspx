@@ -4,55 +4,57 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" />
-    <div>
+    <div class="container contenedor-cargarTurnos">
         <div>
-        <i class="fa-regular fa-calendar-days"></i>
-        <h3 style="display:inline-block">Turnos</h3>
-    </div>
-    <p>Completa el siguiente formulario para reservar el turno</p>
-    <hr />
-    <h4>Datos del paciente</h4>
-    <div class="formulario-turno mt-4">
-        <div class="mb-3 subcontenedor">
-            <div>
-                <label for="cargarTurno_documento" class="form-label">Documento</label>
-                <asp:TextBox runat="server" type="number" CssClass="form-control" id="cargarTurno_documento" />
-            </div>
-            <asp:Button Text="buscar" runat="server" class="btn btn-success" ID="buscarDoc" OnClick="buscarDoc_Click" />
+            <i class="fa-regular fa-calendar-days"></i>
+            <h3 style="display: inline-block">Turnos</h3>
         </div>
-        <div class="mb-3">
-            <label for="cargarTurno_documento" class="form-label">Paciente</label>
-            <asp:TextBox runat="server" CssClass="form-control" id="cargarTurno_paciente" />
-        </div>
-        <asp:UpdatePanel runat="server" ID="panelTurnos" >
-            <ContentTemplate>
+        <p>Completa el siguiente formulario para reservar el turno</p>
+        <hr />
+        <h4>Datos del paciente</h4>
+        <div class="formulario-turno mt-4">
             <div class="mb-3 subcontenedor">
                 <div>
-                    <label for="cargaTurno_esp" class="form-label">Especialidad</label>
-                    <asp:DropDownList ID="cargaTurno_Esp" CssClass="form-select mb-3" runat="server" OnSelectedIndexChanged="cargaTurno_Esp_Changed" AutoPostBack="true" ></asp:DropDownList>
-                </div>
-                <div>
-                    <label for="cargaTurno_prof" class="form-label">Profesional</label>
-                    <asp:DropDownList ID="cargaTurno_prof" CssClass="form-select mb-3" runat="server" OnSelectedIndexChanged="cargaTurno_prof_Changed" AutoPostBack="true"></asp:DropDownList>
+                    <label for="cargarTurno_documento" class="form-label">Documento</label>
+                    <div style="display:flex; width:100%">
+                        <asp:TextBox runat="server" type="number" CssClass="form-control me-4" ID="cargarTurno_documento" />
+                        <asp:Button Text="BUSCAR" runat="server" class="btn btn-success" ID="buscarDoc" OnClick="buscarDoc_Click" />
+                    </div>
                 </div>
             </div>
             <div class="mb-3">
-                <div>
-                    <label for="cargaTurno_fecha" class="form-label">Fecha</label>
-                    <asp:DropDownList ID="cargaTurno_fecha" CssClass="form-select mb-3" runat="server" OnSelectedIndexChanged="cargaTurno_fecha_changed" AutoPostBack="true" ></asp:DropDownList>
-                </div>
-                <div>
-                    <label for="cargaTurno_hora" class="form-label">Hora</label>
-                    <asp:DropDownList ID="cargaTurno_hora" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
-                </div>
+                <label for="cargarTurno_documento" class="form-label">Paciente</label>
+                <asp:TextBox runat="server" CssClass="form-control" ID="cargarTurno_paciente" />
             </div>
-        </ContentTemplate>
-        </asp:UpdatePanel>
-        <div class="mb-3">
-            <label for="cargarTurno_mot" class="form-label">Motivo/s de la Consulta</label>
-            <asp:TextBox runat="server" TextMode="MultiLine" id="cargarTurno_mot" CssClass="form-control" rows="3" />
+            <asp:UpdatePanel runat="server" ID="panelTurnos">
+                <ContentTemplate>
+                    <div class="mb-3 subcontenedor">
+                        <div>
+                            <label for="cargaTurno_esp" class="form-label">Especialidad</label>
+                            <asp:DropDownList ID="cargaTurno_Esp" CssClass="form-select mb-3" runat="server" OnSelectedIndexChanged="cargaTurno_Esp_Changed" AutoPostBack="true"></asp:DropDownList>
+                        </div>
+                        <div>
+                            <label for="cargaTurno_prof" class="form-label">Profesional</label>
+                            <asp:DropDownList ID="cargaTurno_prof" CssClass="form-select mb-3" runat="server" OnSelectedIndexChanged="cargaTurno_prof_Changed" AutoPostBack="true"></asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="mb-3 subcontenedor">
+                        <div>
+                            <label for="cargaTurno_fecha" class="form-label">Fecha</label>
+                            <asp:DropDownList ID="cargaTurno_fecha" CssClass="form-select mb-3" runat="server" OnSelectedIndexChanged="cargaTurno_fecha_changed" AutoPostBack="true"></asp:DropDownList>
+                        </div>
+                        <div>
+                            <label for="cargaTurno_hora" class="form-label">Hora</label>
+                            <asp:DropDownList ID="cargaTurno_hora" CssClass="form-select mb-3" runat="server"></asp:DropDownList>
+                        </div>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            <div class="mb-3">
+                <label for="cargarTurno_mot" class="form-label">Motivo/s de la Consulta</label>
+                <asp:TextBox runat="server" TextMode="MultiLine" ID="cargarTurno_mot" CssClass="form-control" Rows="5" />
+            </div>
+            <asp:Button Text="GRABAR" CssClass="btn btn-primary mb-3 btn-grabar" ID="grabarTurno" runat="server" OnClick="grabarTurno_Click" />
         </div>
-        <asp:Button Text="GRABAR" CssClass="btn btn-primary mb-3" ID="grabarTurno" runat="server" OnClick="grabarTurno_Click" />
-    </div>
     </div>
 </asp:Content>
