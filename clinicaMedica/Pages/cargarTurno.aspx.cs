@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -80,6 +81,34 @@ namespace clinicaMedica.Pages
             //string filtro = $"WHERE id_medico = {cargaTurno_prof.SelectedValue} ORDER BY id_medico";
             //List<Horarios> listaHorarios = new List<Horarios>();
             //listaHorarios = negHorario.listar(filtro);
+            List<ListItem> horarios = new List<ListItem>();
+            List<DateTime> fechas = new List<DateTime>();
+            listaHorarios.ForEach(lista =>
+            {
+                DiaSemana oDia = new DiaSemana();
+                oDia = diaSem.Find(x => x.id == lista.idDia.id);
+                int dia = (int)oDia.codDia;
+                fechas.AddRange(devolverProximaFecha((DayOfWeek)dia, 3));
+                fechas.Sort();
+                //List<ListItem> horarios = new List<ListItem>();
+                /*fechas.ForEach(x =>
+                {
+                    //cargaTurno_fecha.Items.Add(new ListItem(x.ToString("dd/MM/yyyy"), dia.ToString()));
+                    horarios.Add(new ListItem(x.ToString("dd/MM/yyyy"), dia.ToString()));
+                });*/
+                //cargaTurno_fecha.DataSource = horarios;
+                //cargaTurno_fecha.DataBind();
+                //cargaTurno_fecha.Items.Insert(0, new ListItem("Selecciona una fecha", ""));
+            });
+            fechas.ForEach(x =>
+            {
+                //cargaTurno_fecha.Items.Add(new ListItem(x.ToString("dd/MM/yyyy"), dia.ToString()));
+                horarios.Add(new ListItem(x.ToString("dd/MM/yyyy"), ((int)x.DayOfWeek).ToString()));
+            });
+            cargaTurno_fecha.DataSource = horarios;
+            cargaTurno_fecha.DataBind();
+            cargaTurno_fecha.Items.Insert(0, new ListItem("Selecciona una fecha", ""));
+            /*
             DiaSemana oDia = new DiaSemana();
             oDia = diaSem.Find(x => x.id == listaHorarios[0].idDia.id);
             int dia = (int)oDia.codDia;
@@ -92,8 +121,8 @@ namespace clinicaMedica.Pages
             });
             cargaTurno_fecha.DataSource = horarios;
             cargaTurno_fecha.DataBind();
-            cargaTurno_fecha.Items.Insert(0, new ListItem("Selecciona una fecha", ""));
-            
+            cargaTurno_fecha.Items.Insert(0, new ListItem("Selecciona una fecha", ""));*/
+
         }
         protected void cargaTurno_fecha_changed(object sender, EventArgs e)
         {
