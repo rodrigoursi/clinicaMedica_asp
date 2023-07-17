@@ -5,6 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" />
     <div>
+        <div>
         <i class="fa-regular fa-calendar-days"></i>
         <h3 style="display:inline-block">Turnos</h3>
     </div>
@@ -52,5 +53,6 @@
             <asp:TextBox runat="server" TextMode="MultiLine" id="cargarTurno_mot" CssClass="form-control" rows="3" />
         </div>
         <asp:Button Text="GRABAR" CssClass="btn btn-primary mb-3" ID="grabarTurno" runat="server" OnClick="grabarTurno_Click" />
+    </div>
     </div>
 </asp:Content>

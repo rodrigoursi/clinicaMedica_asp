@@ -1,0 +1,20 @@
+﻿.contenedor-activo {
+    display: flex;
+    justify-content: end;
+}
+
+
+
+.contenedor-buscadores {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contenedor-botonBuscar {
+    display: flex;
+    justify-content: center;
+}
+
+.ancho {
+   min-width: 200px;
+}

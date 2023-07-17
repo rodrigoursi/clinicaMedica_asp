@@ -2117,6 +2117,7 @@
     <Content Include="Assets\fontawesome\svgs\solid\yin-yang.svg" />
     <Content Include="Assets\fontawesome\svgs\solid\z.svg" />
     <Content Include="Assets\images\usermas.png" />
+    <Content Include="Css\abmTurnos.css" />
     <Content Include="Css\cargarTurno.css" />
     <Content Include="Css\ficha.css" />
     <Content Include="Css\master.css" />
