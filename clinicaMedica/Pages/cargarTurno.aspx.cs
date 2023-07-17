@@ -124,10 +124,17 @@ namespace clinicaMedica.Pages
             // Calcular las próximas fechas objetivo
             List<DateTime> proximasFechasObjetivo = new List<DateTime>();
 
-            for (int i = 0; i < cantidad; i++)
+            int i = 0;
+            while(i < cantidad)
             {
                 DateTime proximaFechaObjetivo = fechaActual.AddDays(diasHastaObjetivo + (7 * i));
-                proximasFechasObjetivo.Add(proximaFechaObjetivo);
+                if (proximaFechaObjetivo != DateTime.Today)
+                {
+                    proximasFechasObjetivo.Add(proximaFechaObjetivo);
+
+                }
+                else cantidad++;
+                i++;
             }
 
             return proximasFechasObjetivo;
@@ -174,7 +181,7 @@ namespace clinicaMedica.Pages
             int idMedico = int.Parse(cargaTurno_prof.Text);
             string fecha = cargaTurno_fecha.Text;
             List<Turno> objTurno = new List<Turno>();
-            objTurno = turno.listar($" WHERE bajaFecha IS NULL AND fecha_hora > GETDATE() AND id_medico = {idMedico} ");
+            objTurno = turno.listar($" WHERE T.bajaFecha IS NULL AND T.fecha_hora > GETDATE() AND T.id_medico = {idMedico} ");
             for( int i = lsHoras.Count() - 1; i > -1; i-- )
             {
                 DateTime fecha_hora = DateTime.Parse(fecha + " " + lsHoras[i]);
