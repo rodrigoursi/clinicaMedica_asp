@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="clinicaMedica.Site1" %>
+<%@ Import Namespace="Dominio" %>
 
 <!DOCTYPE html>
 
@@ -18,26 +19,42 @@
             <header class="header mb-4">
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="default.aspx">TuTurno.com</a>
+                        <a class="navbar-brand" href="../default.aspx">TuTurno.com</a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuario
-                                    </a>
+                                    <%
+                                    Rol rolAux = new Rol();
+                                    rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
+
+                                    if (rolAux != null && rolAux.permisosFichas == true)
+                                    {       
+                                    %>
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuario</a>
                                     <ul class="dropdown-menu">
-                                        <%
-                                        foreach(var rol in roles)
-                                        {%>
+                                    <%
+                                            foreach (var rol in roles)
+                                            {%>
                                             <li><a class="dropdown-item" href= '<%= "/Pages/usuario.aspx?rolId=" + rol.id  %>'><%=rol.rol %></a></li>
-                                       <% }%>                                     
+                                       <%   }
+                                    }
+                                    %>                                     
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="/pages/cargarTurno.aspx">Turno</a>
+                                    <a class="nav-link active" aria-current="page" href="/pages/ABMTurnos.aspx">Mis Turnos</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="/pages/cargarTurno.aspx">Nuevo Turno</a>
+                                </li>
+                                <%
+
+                                    if (rolAux != null && rolAux.permisosConfiguracion == true)
+                                    {
+                                %>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Configuracion
                                     </a>
@@ -49,6 +66,8 @@
                                         <li><a class="dropdown-item" href="/Pages/abmProvincias.aspx">Provincia</a></li>
                                     </ul>
                                 </li>
+                                <% }%> 
+                                <li class="nav-divider"></li>
                                 <li class="nav-item">
                                     <a class="nav-link active btn" aria-current="page" data-bs-toggle="modal" data-bs-target=<%=this.abrirModal %> ><%=this.iniciarSesion %></a>
                                 </li>

@@ -2127,6 +2127,7 @@
     <Content Include="Pages\abmEstados.aspx" />
     <Content Include="Pages\abmLocalidades.aspx" />
     <Content Include="Pages\abmProvincias.aspx" />
+    <Content Include="Pages\abmTurnos.aspx" />
     <Content Include="Pages\cargarTurno.aspx" />
     <Content Include="Pages\ErrorPage.aspx" />
     <Content Include="Pages\ficha.aspx" />
@@ -2178,6 +2179,13 @@
     </Compile>
     <Compile Include="Pages\abmProvincias.aspx.designer.cs">
       <DependentUpon>abmProvincias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\abmTurnos.aspx.cs">
+      <DependentUpon>abmTurnos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\abmTurnos.aspx.designer.cs">
+      <DependentUpon>abmTurnos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\cargarTurno.aspx.cs">
       <DependentUpon>cargarTurno.aspx</DependentUpon>

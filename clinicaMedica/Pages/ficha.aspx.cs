@@ -27,6 +27,14 @@ namespace clinicaMedica.Pages
         public String dia { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            Rol rolAux = new Rol();
+            rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
+
+            if (rolAux == null || rolAux.permisosFichas == false)
+            {
+                Response.Redirect("../default.aspx");
+            }
+
             if (ficha_rol.SelectedValue == "" && Request.QueryString["rolId"] == null)
             {
                 cargarHora = false;

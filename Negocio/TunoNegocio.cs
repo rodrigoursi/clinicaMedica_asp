@@ -17,18 +17,49 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT id, id_paciente, id_medico, fecha_hora, observaciones, estado, altaUsu, modiUsu, bajaUsu, altaFecha, modiFecha, bajaFecha FROM turnos" + filtros);
+                datos.setearConsulta("SELECT " +
+                                        "T.id, " +
+                                        "T.id_paciente, " +
+                                        "P.nombre_apellido AS nombrePaciente, " +
+                                        "T.id_medico, " +
+                                        "M.nombre_apellido AS nombreMedico, " +
+                                        "T.fecha_hora, " +
+                                        "T.observaciones, " +
+                                        "T.estado, " +
+                                        "E.estado AS nombreEstado, " +
+                                        "T.altaUsu, " +
+                                        "T.modiUsu, " +
+                                        "T.bajaUsu, " +
+                                        "T.altaFecha, " +
+                                        "T.modiFecha, " +
+                                        "T.bajaFecha " +
+                                    "FROM turnos AS T " + 
+                                    "INNER JOIN usuarios AS P ON P.id = T.id_paciente " +
+                                    "INNER JOIN usuarios AS M ON M.id = T.id_medico " +
+                                    "INNER JOIN estados AS E ON E.id = T.estado " +
+                                        filtros);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Turno turno = new Turno();
                     turno.id = (int)datos.Lector["id"];
-                    turno.paciente.id = (int)datos.Lector["id_paciente"];
-                    turno.medico.id = (int)datos.Lector["id_medico"];
                     turno.fechaYHora = (DateTime)datos.Lector["fecha_hora"];
                     turno.observaciones = (string)datos.Lector["observaciones"];
+
+
+                    turno.paciente = new Usuario();
+                    turno.paciente.id = (int)datos.Lector["id_paciente"];
+                    turno.paciente.nombreYApellido = (string)datos.Lector["nombrePaciente"];
+
+                    turno.medico = new Usuario();
+                    turno.medico.id = (int)datos.Lector["id_medico"];
+                    turno.medico.nombreYApellido = (string)datos.Lector["nombreMedico"];
+
+                    turno.estado = new Estado();
                     turno.estado.id = (byte)datos.Lector["estado"];
+                    turno.estado.estado = (string)datos.Lector["nombreEstado"];
+                    
                     turno.altaUsuario.codigoUsuario = (string)datos.Lector["altaUsu"];
                     turno.modificacionUsuario.codigoUsuario = datos.Lector["modiUsu"].ToString();
                     turno.bajaUsuario.codigoUsuario = datos.Lector["bajaUsu"].ToString();

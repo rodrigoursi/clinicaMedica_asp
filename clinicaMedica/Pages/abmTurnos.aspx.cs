@@ -1,28 +1,28 @@
-﻿using System;
+﻿using Dominio;
+using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Dominio;
-using Negocio;
 
 namespace clinicaMedica.Pages
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class abmTurnos : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Rol rolAux = new Rol();
+            rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
+
+            if (rolAux == null || rolAux.permisosModificarTurno == false)
+            {
+                Response.Redirect("../default.aspx");
+            }
+
             if (!IsPostBack)
             {
-                Rol rolAux = new Rol();
-                rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
-
-                if (rolAux == null || rolAux.permisosConfiguracion == false)
-                {
-                    Response.Redirect("../default.aspx");
-                }
-
                 if (Request.QueryString["mod"] != null)
                 {
                     if (Request.QueryString["id"] != null)
@@ -35,7 +35,7 @@ namespace clinicaMedica.Pages
                             {
                                 if (mod == 3) //ELIMINAR
                                 {
-                                    RolNegocio negocio = new RolNegocio();
+                                    TunoNegocio negocio = new TunoNegocio();
                                     negocio.eliminar(id);
 
                                 }
@@ -44,10 +44,9 @@ namespace clinicaMedica.Pages
                     }
                 }
             }
-
-            RolNegocio negocio2 = new RolNegocio();
-            GridAbmRoles.DataSource = negocio2.listar();
-            GridAbmRoles.DataBind();
+            TunoNegocio negocio2 = new TunoNegocio();
+            GridAbmLocalidades.DataSource = negocio2.listar();
+            GridAbmLocalidades.DataBind();
         }
     }
 }

@@ -16,6 +16,8 @@ namespace clinicaMedica
         public List<Rol> roles { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
             //this.iniciarSesion = Session["usuario"] == null ? "ENTRAR" : "SALIR";
             RolNegocio negocio = new RolNegocio();
             roles = negocio.listar();

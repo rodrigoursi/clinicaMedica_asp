@@ -21,9 +21,9 @@ namespace clinicaMedica.Pages
             if (!IsPostBack)
             {
                 Rol rolAux = new Rol();
-                rolAux = (Rol)Session["currentRol"];
+                rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
 
-                if (rolAux.permisosConfiguracion == false)
+                if (rolAux == null || rolAux.permisosConfiguracion == false)
                 {
                     Response.Redirect("../default.aspx");
                 }
