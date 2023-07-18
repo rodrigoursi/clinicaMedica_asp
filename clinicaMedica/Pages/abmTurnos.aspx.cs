@@ -44,8 +44,20 @@ namespace clinicaMedica.Pages
                     }
                 }
             }
-            TunoNegocio negocio2 = new TunoNegocio();
-            GridAbmLocalidades.DataSource = negocio2.listar();
+            EstadoNegocio estadoNegocio = new EstadoNegocio();
+            ambTurnos_dropListActivo.DataSource = estadoNegocio.listar();
+            ambTurnos_dropListActivo.DataBind();
+
+            UsuarioNegocio usuarioNegocioMedico = new UsuarioNegocio();
+            ambTurnos_dropListMed.DataSource = usuarioNegocioMedico.listarNombres();
+            ambTurnos_dropListMed.DataBind();
+
+            UsuarioNegocio usuarioNegocioPaciente = new UsuarioNegocio();
+            ambTurnos_dropListPac.DataSource = usuarioNegocioPaciente.listar();
+            ambTurnos_dropListPac.DataBind();
+
+            TunoNegocio TurnoNegocio = new TunoNegocio();
+            GridAbmLocalidades.DataSource = TurnoNegocio.listar();
             GridAbmLocalidades.DataBind();
         }
     }

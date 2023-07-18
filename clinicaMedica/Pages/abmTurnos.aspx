@@ -7,13 +7,13 @@
 <div class="container contenedor-grid my-4">
     <div class="contenedor-activo">
         <div class="mb-3 ancho">
-            <asp:DropDownList ID="ambTurnos_dropListActivo" CssClass="form-select" runat="server"></asp:DropDownList>
+            <asp:DropDownList ID="ambTurnos_dropListActivo" DataTextField="estado" CssClass="form-select" runat="server"></asp:DropDownList>
         </div>
     </div>
     <div class="contenedor-buscadores">
         <div class="mb-3 ancho">
             <label for="ambTurnos_dropListMed" class="form-label">Medico</label>
-            <asp:DropDownList ID="ambTurnos_dropListMed" CssClass="form-select" runat="server"></asp:DropDownList>
+            <asp:DropDownList ID="ambTurnos_dropListMed"  CssClass="form-select" runat="server"></asp:DropDownList>
         </div>
         <div class="mb-3 ancho">
             <label for="ambTurnos_dropListPac" class="form-label">Paciente</label>

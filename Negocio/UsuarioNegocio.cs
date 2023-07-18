@@ -238,6 +238,41 @@ namespace Negocio
             }
         }
 
+        public List<string> listarNombres(string especialidad="3")
+        {
+            List<string> usuarios = new List<string>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT nombre_apellido FROM usuarios " +
+                                    "WHERE especialidad =" + especialidad);
+                
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    string usuario;
+                    usuario = (string)datos.Lector["nombre_apellido"];
+
+                    usuarios.Add(usuario);
+                }
+
+                    return usuarios;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al capturar los datos de la tabla de USUARIOS" + ex.Message + " / " +
+                    ex.GetType().Name + " / " + ex.StackTrace);
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public int editar(Usuario usuario, int filasAfec = 1)
         {
             int resultado = 0;
