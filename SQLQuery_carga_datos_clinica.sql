@@ -109,4 +109,20 @@ VALUES
 
 INSERT INTO turnos(id_paciente, id_medico, fecha_hora, observaciones, estado, altaUsu)
 VALUES
-	(3, 6, '2023-07-19 13:00:00', 'observacion general', 1, 'Admin')
+	(1, 5, '2023-07-17 13:00:00', 'observacion general', 1, 'Admin'),
+	(2, 5, '2023-07-18 13:00:00', 'observacion general', 1, 'Admin'),
+	(3, 5, '2023-07-17 13:00:00', 'observacion general', 1, 'Admin'),
+	(4, 5, '2023-07-16 13:00:00', 'observacion general', 1, 'Admin'),
+	(5, 5, '2023-07-22 13:00:00', 'observacion general', 1, 'Admin'),
+	(1, 5, '2023-07-17 13:00:00', 'observacion general', 1, 'Admin'),
+	(2, 5, '2023-07-17 13:00:00', 'observacion general', 1, 'Admin'),
+	(3, 5, '2023-07-17 13:00:00', 'observacion general', 1, 'Admin'),
+	(4, 5, '2023-07-16 13:00:00', 'observacion general', 1, 'Admin'),
+	(5, 5, '2023-07-21 13:00:00', 'observacion general', 1, 'Admin'),
+	(1, 5, '2023-07-19 13:00:00', 'observacion general', 1, 'Admin'),
+	(2, 6, '2023-07-19 13:00:00', 'observacion general', 2, 'Admin'),
+	(3, 6, '2023-07-19 13:00:00', 'observacion general', 3, 'Admin'),
+	(1, 7, '2023-07-19 13:00:00', 'observacion general', 4, 'Admin'),
+	(2, 8, '2023-07-19 13:00:00', 'observacion general', 5, 'Admin'),
+	(3, 9, '2023-07-19 13:00:00', 'observacion general', 2, 'Admin'),
+	(3, 6, '2023-07-19 13:00:00', 'observacion general', 3, 'Admin')

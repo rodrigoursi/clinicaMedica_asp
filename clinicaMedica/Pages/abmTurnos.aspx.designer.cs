@@ -15,13 +15,13 @@ namespace clinicaMedica.Pages
     {
 
         /// <summary>
-        /// ambTurnos_dropListActivo control.
+        /// ambTurnos_dropListEstado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ambTurnos_dropListActivo;
+        protected global::System.Web.UI.WebControls.DropDownList ambTurnos_dropListEstado;
 
         /// <summary>
         /// ambTurnos_dropListMed control.

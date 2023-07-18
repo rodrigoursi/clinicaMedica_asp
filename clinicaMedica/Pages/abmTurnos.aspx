@@ -7,17 +7,17 @@
 <div class="container contenedor-grid my-4">
     <div class="contenedor-activo">
         <div class="mb-3 ancho">
-            <asp:DropDownList ID="ambTurnos_dropListActivo" DataTextField="estado" CssClass="form-select" runat="server"></asp:DropDownList>
+            <asp:DropDownList ID="ambTurnos_dropListEstado" DataTextField="estado" CssClass="form-select" runat="server"></asp:DropDownList>
         </div>
     </div>
     <div class="contenedor-buscadores">
         <div class="mb-3 ancho">
             <label for="ambTurnos_dropListMed" class="form-label">Medico</label>
-            <asp:DropDownList ID="ambTurnos_dropListMed"  CssClass="form-select" runat="server"></asp:DropDownList>
+            <asp:DropDownList ID="ambTurnos_dropListMed"  DataTextField="nombreYApellido" CssClass="form-select" runat="server"></asp:DropDownList>
         </div>
         <div class="mb-3 ancho">
             <label for="ambTurnos_dropListPac" class="form-label">Paciente</label>
-            <asp:DropDownList ID="ambTurnos_dropListPac" CssClass="form-select" runat="server"></asp:DropDownList>
+            <asp:DropDownList ID="ambTurnos_dropListPac" DataTextField="nombreYApellido" CssClass="form-select" runat="server"></asp:DropDownList>
         </div>
         <div class="mb-3 ancho">
             <label for="ambTurnos_inputFecha" class="form-label">Fecha</label>
@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="contenedor-botonBuscar mb-3">
-        <asp:Button Text="BUSCAR" CssClass="btn btn-secondary" ID="ambTurnos_buttonBsc" runat="server" />
+        <asp:Button Text="BUSCAR" CssClass="btn btn-secondary" ID="ambTurnos_buttonBsc" runat="server" OnClick="BuscarTurnos" />
     </div>
         <asp:GridView ID="GridAbmLocalidades" runat="server" DataKeyNames="id" AutoGenerateColumns="false" CssClass="table">
         <HeaderStyle CssClass="cabecera"/>

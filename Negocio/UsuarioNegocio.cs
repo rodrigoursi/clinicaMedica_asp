@@ -238,22 +238,21 @@ namespace Negocio
             }
         }
 
-        public List<string> listarNombres(string especialidad="3")
+        public List<Usuario> listarNombres(string rol="3")
         {
-            List<string> usuarios = new List<string>();
+            List<Usuario> usuarios = new List<Usuario>();
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("SELECT nombre_apellido FROM usuarios " +
-                                    "WHERE especialidad =" + especialidad);
+                datos.setearConsulta("SELECT nombre_apellido FROM usuarios WHERE usuarios.rol =" + rol);
                 
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
-                    string usuario;
-                    usuario = (string)datos.Lector["nombre_apellido"];
+                    Usuario usuario = new Usuario();
+                    usuario.nombreYApellido = (string)datos.Lector["nombre_apellido"];
 
                     usuarios.Add(usuario);
                 }
