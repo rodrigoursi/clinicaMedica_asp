@@ -192,5 +192,37 @@ namespace Negocio
             }
             return resultado;
         }
+        public bool setCampo(string campo, string valor, string filtro = "")
+        {
+            int resultado = 0;
+            TunoNegocio turno = new TunoNegocio();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("UPDATE " +
+                                        "turnos" +
+                                    " SET " +
+                                        "observaciones='@valor'" + filtro);
+
+                datos.setearParametro("@campo", campo);
+                datos.setearParametro("@valor", valor);
+                resultado = datos.ejecutarUpdate(2);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+            if(resultado > 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

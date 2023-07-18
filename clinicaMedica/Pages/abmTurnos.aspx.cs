@@ -116,5 +116,13 @@ namespace clinicaMedica.Pages
 
             Response.Redirect("abmTurnos.aspx");
         }
+
+        protected void grabarDiagnostico_Click(object sender, EventArgs e)
+        {
+            TunoNegocio turnoNeg = new TunoNegocio();
+            string valor = diagnostico.Text;
+            string id = Request.QueryString["id"];
+            turnoNeg.setCampo("observaciones", valor, $" WHERE id={id}");
+        }
     }
 }

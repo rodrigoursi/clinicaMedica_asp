@@ -2,6 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Css/usuario.css" rel="stylesheet" />
     <link href="../Css/abmTurnos.css" rel="stylesheet" />
+    <script defer src="abmTurnos.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <div class="container contenedor-grid my-4">
@@ -56,8 +57,34 @@
                     </a>
                 </ItemTemplate>
             </asp:TemplateField>
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <a href='<%# "/pages/ABMTurnos.aspx?id=" + Eval("id")%>'>
+                       <i class="fa-solid fa-prescription"></i>
+                    </a>
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
         </asp:GridView>
         <div><a href="/pages/FichaLocalidades.aspx?id=0&mod=0" class="btn btn-success">AGREGAR</a></div>
     </div>
+
+    <!-- Modal -->
+<div class="modal fade" id="obsMedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <asp:TextBox ID="diagnostico" CssClass="form-control" rows="5" runat="server" TextMode="MultiLine" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <asp:Button Text="GRABAR" ID="grabarDiagnostico" CssClass="btn btn-primary" runat="server" OnClick="grabarDiagnostico_Click" />
+      </div>
+    </div>
+  </div>
+</div>
 </asp:Content>

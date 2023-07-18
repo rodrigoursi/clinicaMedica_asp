@@ -2129,6 +2129,7 @@
     <Content Include="Pages\abmLocalidades.aspx" />
     <Content Include="Pages\abmProvincias.aspx" />
     <Content Include="Pages\abmTurnos.aspx" />
+    <Content Include="Pages\abmTurnos.js" />
     <Content Include="Pages\cargarTurno.aspx" />
     <Content Include="Pages\ErrorPage.aspx" />
     <Content Include="Pages\ficha.aspx" />
