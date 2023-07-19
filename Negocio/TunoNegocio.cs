@@ -192,10 +192,9 @@ namespace Negocio
             }
             return resultado;
         }
-        public bool setCampo(string campo, string valor, string filtro = "")
+        public bool setDiagnostico(string diagnostico, int id)
         {
             int resultado = 0;
-            TunoNegocio turno = new TunoNegocio();
             AccesoDatos datos = new AccesoDatos();
 
             try
@@ -203,10 +202,11 @@ namespace Negocio
                 datos.setearConsulta("UPDATE " +
                                         "turnos" +
                                     " SET " +
-                                        "observaciones='@valor'" + filtro);
+                                        "observaciones = CAST(observaciones AS NVARCHAR(MAX)) + CHAR(10) + 'profesional: ' + @valor, estado= " +
+                                        "(SELECT id FROM estados WHERE codigo = 0) WHERE id = @id");
 
-                datos.setearParametro("@campo", campo);
-                datos.setearParametro("@valor", valor);
+                datos.setearParametro("@id", id);
+                datos.setearParametro("@valor", diagnostico);
                 resultado = datos.ejecutarUpdate(2);
             }
             catch (Exception ex)

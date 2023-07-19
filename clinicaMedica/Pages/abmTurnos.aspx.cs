@@ -114,15 +114,19 @@ namespace clinicaMedica.Pages
 
             Session["whereSQL"] = whereSql;
 
-            Response.Redirect("abmTurnos.aspx");
+            Response.Redirect("ABMTurnos.aspx");
         }
 
         protected void grabarDiagnostico_Click(object sender, EventArgs e)
         {
             TunoNegocio turnoNeg = new TunoNegocio();
             string valor = diagnostico.Text;
-            string id = Request.QueryString["id"];
-            turnoNeg.setCampo("observaciones", valor, $" WHERE id={id}");
+            int id = int.Parse(Request.QueryString["id"]);
+            if(turnoNeg.setDiagnostico(valor, id))
+            {
+                Response.Redirect("/pages/ABMTurnos.aspx"); //aca falta poner la url con la logica  q es medico
+            }
+            
         }
     }
 }
