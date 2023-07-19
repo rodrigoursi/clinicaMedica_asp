@@ -172,7 +172,15 @@ namespace clinicaMedica.Pages
         {
             if(!this.validarCampos())
             {
-                return;
+                return;  // aca pone un alert que diga q tiene desplegables sin seleccionar
+            }
+            if(!validarContra())
+            {
+                return; // aca pone un alert que diga q los campos de contraseña y repetir la contraseña tienen q ser iguales.
+            }
+            if(!validarCorreo())
+            {
+                return; // aca pone un alert que diga q el campo correo electronico debe ser un mail valido.
             }
             Usuario usuario = new Usuario();
             this.cargarUsuario(usuario);
@@ -361,6 +369,30 @@ namespace clinicaMedica.Pages
                 AltaUsuario_hFin.Enabled = false;
             }
             panelHorarios.Update();
+        }
+        protected bool validarContra()
+        {
+            string contra = AltaUsuario_contra.Text;
+            string repetir = AltaUsuario_repeat.Text;
+            if(contra == repetir)
+            {
+                return true;
+            }
+            return false;
+        }
+        protected bool validarCorreo()
+        {
+            int con = 0;
+            string correo = AltaUsuario_correo.Text;
+            foreach (char letra in correo)
+            {
+                if (letra == '@')
+                {
+                    con++;
+                }
+            }
+            if(con == 1) return true;
+            return false;
         }
     }
 }
