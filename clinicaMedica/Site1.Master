@@ -31,7 +31,7 @@
                                     rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
 
                                     if (rolAux != null && rolAux.permisosFichas == true)
-                                    {       
+                                    {      
                                     %>
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuario</a>
                                     <ul class="dropdown-menu">
@@ -40,9 +40,10 @@
                                             {%>
                                             <li><a class="dropdown-item" href= '<%= "/Pages/usuario.aspx?rolId=" + rol.id  %>'><%=rol.rol %></a></li>
                                        <%   }
-                                    }
-                                    %>                                     
+                                     %>                                   
                                     </ul>
+                                    <%}
+                                    %> 
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="/pages/ABMTurnos.aspx">Mis Turnos</a>

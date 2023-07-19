@@ -14,21 +14,30 @@ eventosModal(cerrar, modal);
 
 const inputs = document.querySelectorAll(".formulario input");
 const submit = document.getElementById("ContentPlaceHolder1_AltaUsuario_agregar");
+let apagar = true;
 inputs.forEach(input => {
-    let apagar = false;
+    
     input.addEventListener("blur", () => {
+        apagar = false;
         inputs.forEach((elem, i) => {
-            if (i != 0) {
+            if (i != 0 && i < 10) {
                 if (elem.value == "") {
                     apagar = true;
                 }
+                console.log(i);
             }
         });
+        console.log(apagar)
         if (apagar) {
             submit.disabled = true;
         } else submit.removeAttribute("disabled");
     })
 })
+console.log(apagar)
+if (apagar) {
+    submit.disabled = true;
+} else submit.removeAttribute("disabled");
+
 
 
 function eventosModal(boton, modal) {
