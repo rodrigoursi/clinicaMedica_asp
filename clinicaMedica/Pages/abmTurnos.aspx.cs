@@ -51,6 +51,7 @@ namespace clinicaMedica.Pages
                 EstadoNegocio estadoNegocio = new EstadoNegocio();
                 ambTurnos_dropListEstado.DataSource = estadoNegocio.listar();
                 ambTurnos_dropListEstado.DataTextField = "estado";
+                ambTurnos_dropListEstado.DataValueField = "id";
                 ambTurnos_dropListEstado.DataBind();
                 ambTurnos_dropListEstado.Items.Insert(0, new ListItem("Todos", "0"));
 
@@ -120,6 +121,18 @@ namespace clinicaMedica.Pages
                 Response.Redirect("/pages/ABMTurnos.aspx"); //aca falta poner la url con la logica  q es medico
             }
             
+        }
+
+        protected void ambTurnos_listEstado_selChanged(object sender, EventArgs e)
+        {
+            string id_estado = ambTurnos_dropListEstado.SelectedValue;
+            TunoNegocio TurnoNegocio = new TunoNegocio();
+            if(id_estado != "0")
+            {
+                GridAbmLocalidades.DataSource = TurnoNegocio.listar($" AND T.estado={id_estado}");
+            } else GridAbmLocalidades.DataSource = TurnoNegocio.listar((string)Session["whereSQL"]);
+
+            GridAbmLocalidades.DataBind();
         }
     }
 }

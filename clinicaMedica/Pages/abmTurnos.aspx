@@ -10,7 +10,7 @@
 <div class="container contenedor-grid my-4">
     <div class="contenedor-activo">
         <div class="mb-3 ancho">
-            <asp:DropDownList ID="ambTurnos_dropListEstado" DataTextField="estado" CssClass="form-select" runat="server"></asp:DropDownList>
+            <asp:DropDownList ID="ambTurnos_dropListEstado" DataTextField="estado" CssClass="form-select" runat="server" OnSelectedIndexChanged="ambTurnos_listEstado_selChanged" AutoPostBack="true" ></asp:DropDownList>
         </div>
     </div>
     <div class="contenedor-buscadores">
