@@ -245,7 +245,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT nombre_apellido FROM usuarios WHERE usuarios.rol =" + rol);
+                datos.setearConsulta("SELECT id, nombre_apellido FROM usuarios WHERE usuarios.rol =" + rol);
                 
                 datos.ejecutarLectura();
 
@@ -253,6 +253,7 @@ namespace Negocio
                 {
                     Usuario usuario = new Usuario();
                     usuario.nombreYApellido = (string)datos.Lector["nombre_apellido"];
+                    usuario.id = (int)datos.Lector["id"];
 
                     usuarios.Add(usuario);
                 }

@@ -58,12 +58,14 @@ namespace clinicaMedica.Pages
                 UsuarioNegocio usuarioNegocioMedico = new UsuarioNegocio();
                 ambTurnos_dropListMed.DataSource = usuarioNegocioMedico.listarNombres("3");
                 ambTurnos_dropListMed.DataTextField = "nombreYApellido";
+                ambTurnos_dropListMed.DataValueField = "id";
                 ambTurnos_dropListMed.DataBind();
                 ambTurnos_dropListMed.Items.Insert(0, new ListItem("Todos", "0"));
 
                 UsuarioNegocio usuarioNegocioPaciente = new UsuarioNegocio();
                 ambTurnos_dropListPac.DataSource = usuarioNegocioMedico.listarNombres("4");
-                ambTurnos_dropListMed.DataTextField = "nombreYApellido";
+                ambTurnos_dropListPac.DataTextField = "nombreYApellido";
+                ambTurnos_dropListPac.DataValueField = "id";
                 ambTurnos_dropListPac.DataBind();
                 ambTurnos_dropListPac.Items.Insert(0, new ListItem("Todos", "0"));
 
@@ -79,23 +81,35 @@ namespace clinicaMedica.Pages
         protected void BuscarTurnos(object sender, EventArgs e)
         {
 
+            string filtro = "";
 
             if (ambTurnos_dropListEstado.SelectedValue != "0")
             {
-                Session["estadoBuscar"] = ambTurnos_dropListEstado.SelectedValue;
-                whereSql += " AND E.estado = '" + Session["estadoBuscar"] + "'";
+                string id_estado = ambTurnos_dropListEstado.SelectedValue;
+                filtro += $" AND T.estado={id_estado}";
+                /*Session["estadoBuscar"] = ambTurnos_dropListEstado.SelectedValue;
+                whereSql += " AND E.estado = '" + Session["estadoBuscar"] + "'";*/
             }
 
             if (ambTurnos_dropListMed.SelectedValue != "0")
             {
+                string id_medico = ambTurnos_dropListMed.SelectedValue;
+                filtro += $" AND id_medico={id_medico}";
+                
+                /*
                 Session["medicoBuscar"] = ambTurnos_dropListMed.SelectedValue;
                 whereSql += " AND M.nombre_apellido = '" + Session["medicoBuscar"] + "'";
+                */
             }
 
             if (ambTurnos_dropListPac.SelectedValue != "0")
             {
+                string id_paciente = ambTurnos_dropListPac.SelectedValue;
+                filtro += $" AND id_paciente={id_paciente}";
+                /*
                 Session["pacienteBuscar"] = ambTurnos_dropListPac.SelectedValue;
                 whereSql += " AND P.nombre_apellido = '" + Session["pacienteBuscar"] + "'";
+                */
             }
 
             if (ambTurnos_inputFecha.Text != "")
@@ -105,10 +119,12 @@ namespace clinicaMedica.Pages
                 Session["fechaBuscar"] = fechaFormatted;
                 whereSql += " AND CAST(T.fecha_hora AS date) = '" + Session["fechaBuscar"] + "'";
             }
-
+            TunoNegocio TurnoNegocio = new TunoNegocio();
+            GridAbmLocalidades.DataSource = TurnoNegocio.listar(filtro);
+            GridAbmLocalidades.DataBind();
             Session["whereSQL"] = whereSql;
 
-            Response.Redirect("ABMTurnos.aspx");
+            //Response.Redirect("ABMTurnos.aspx");
         }
 
         protected void grabarDiagnostico_Click(object sender, EventArgs e)
@@ -126,12 +142,34 @@ namespace clinicaMedica.Pages
         protected void ambTurnos_listEstado_selChanged(object sender, EventArgs e)
         {
             string id_estado = ambTurnos_dropListEstado.SelectedValue;
+            string id_medico = ambTurnos_dropListMed.SelectedValue;
+            string id_paciente = ambTurnos_dropListPac.SelectedValue;
+            string filtro = "";
             TunoNegocio TurnoNegocio = new TunoNegocio();
+            /*
             if(id_estado != "0")
             {
                 GridAbmLocalidades.DataSource = TurnoNegocio.listar($" AND T.estado={id_estado}");
             } else GridAbmLocalidades.DataSource = TurnoNegocio.listar((string)Session["whereSQL"]);
+            */
 
+
+            if (id_estado != "0")
+            {
+                filtro += $" AND T.estado={id_estado}";
+            }
+            
+            if (id_medico != "0")
+            {
+                filtro += $" AND id_medico={id_medico}";
+            }
+            
+            if (id_paciente != "0")
+            {
+                filtro += $" AND id_paciente={id_paciente}";
+            }
+
+            GridAbmLocalidades.DataSource = TurnoNegocio.listar(filtro);
             GridAbmLocalidades.DataBind();
         }
     }
