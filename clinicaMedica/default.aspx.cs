@@ -32,20 +32,12 @@ namespace clinicaMedica
             }
             else
             {
-                //Response.Redirect("/default.aspx");
-
                 Session.Add("usuario", codUser);
 
                 RolNegocio negocio = new RolNegocio();
                 Rol currentRol = negocio.RolDeUsuario(currentUser);
                 Session.Add("currentRol", currentRol);
             }
-        }
-
-        protected void logout_Click(object sender, EventArgs e)
-        {
-            Session.Remove("usuario");
-            Session.Remove("rol");
         }
     }
 }

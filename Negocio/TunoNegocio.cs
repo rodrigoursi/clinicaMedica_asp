@@ -37,7 +37,8 @@ namespace Negocio
                                     "FROM turnos AS T " +
                                     "INNER JOIN usuarios AS P ON P.id = T.id_paciente " +
                                     "INNER JOIN usuarios AS M ON M.id = T.id_medico " +
-                                    "INNER JOIN estados AS E ON E.id = T.estado " + filtros);
+                                    "INNER JOIN estados AS E ON E.id = T.estado " +
+                                    "WHERE T.bajaUsu IS NULL " + filtros);
 
                 datos.ejecutarLectura();
 

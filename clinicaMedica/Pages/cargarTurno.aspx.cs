@@ -18,6 +18,16 @@ namespace clinicaMedica.Pages
         private TunoNegocio turno = new TunoNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            Rol rolAux = new Rol();
+            rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
+
+            if (rolAux == null || rolAux.permisosModificarTurno == false)
+            {
+                Response.Redirect("../default.aspx");
+            }
+
+
             if (cargaTurno_prof.SelectedValue != "")
             {
                 HorarioNegocio negHorario = new HorarioNegocio();

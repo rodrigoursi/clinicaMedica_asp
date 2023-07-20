@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="abmTurnos.aspx.cs" Inherits="clinicaMedica.Pages.abmTurnos" %>
+<%@ Import Namespace="Dominio" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Css/usuario.css" rel="stylesheet" />
     <link href="../Css/abmTurnos.css" rel="stylesheet" />
@@ -12,6 +14,13 @@
         </div>
     </div>
     <div class="contenedor-buscadores">
+        <%
+            Rol rolAux = new Rol();
+            rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
+
+            if (rolAux != null && rolAux.permisosModificarTurno == true)
+            {
+        %>
         <div class="mb-3 ancho">
             <label for="ambTurnos_dropListMed" class="form-label">Medico</label>
             <asp:DropDownList ID="ambTurnos_dropListMed"  DataTextField="nombreYApellido" CssClass="form-select" runat="server"></asp:DropDownList>
@@ -20,6 +29,9 @@
             <label for="ambTurnos_dropListPac" class="form-label">Paciente</label>
             <asp:DropDownList ID="ambTurnos_dropListPac" DataTextField="nombreYApellido" CssClass="form-select" runat="server"></asp:DropDownList>
         </div>
+        <%
+            }
+            %>
         <div class="mb-3 ancho">
             <label for="ambTurnos_inputFecha" class="form-label">Fecha</label>
             <asp:TextBox ID="ambTurnos_inputFecha" CssClass="form-control" Placeholder="Ej. formato 23/8/1990" runat="server"></asp:TextBox>
@@ -66,7 +78,14 @@
             </asp:TemplateField>
         </Columns>
         </asp:GridView>
-        <div><a href="/pages/FichaLocalidades.aspx?id=0&mod=0" class="btn btn-success">AGREGAR</a></div>
+        <%        
+            if (rolAux != null && rolAux.permisosModificarTurno == true)
+            {
+        %>
+        <div><a href="/pages/cargarTuno.aspx?id=0&mod=0" class="btn btn-success">AGREGAR</a></div>
+        <%
+            }
+            %>
     </div>
 
     <!-- Modal -->

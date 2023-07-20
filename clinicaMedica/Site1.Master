@@ -45,9 +45,15 @@
                                     <%}
                                     %> 
                                 </li>
+                                    <%
+                                        if (rolAux != null)
+                                        {
+                                   %>
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="/pages/ABMTurnos.aspx">Mis Turnos</a>
                                 </li>
+                                   <%   }
+                                       %>
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="/pages/cargarTurno.aspx">Nuevo Turno</a>
                                 </li>

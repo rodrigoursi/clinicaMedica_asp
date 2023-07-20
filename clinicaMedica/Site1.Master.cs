@@ -31,7 +31,9 @@ namespace clinicaMedica
         {
             Session.Remove("usuario");
             Session.Remove("rol");
-            Response.Redirect(Request.RawUrl);
+            Session.Remove("currentRol");
+            string urlDefault = ResolveUrl("~/default.aspx");
+            Response.Redirect(urlDefault);
         }
     }
 }

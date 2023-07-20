@@ -37,23 +37,5 @@
 
             <h2 style="text-align:center;" class="my-5">Bienvenido...!</h2>
 
-            <!-- Modal -->
-          <!--  <div class="modal fade" id="salirModal" tabindex="-1" aria-labelledby="salirModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="salirModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ESTA SEGURO QUE QUIERE CERRAR SESION?
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <asp:Button Text="Cerrar Sesion" runat="server" id="logout" CssClass="btn btn-danger" OnClick="logout_Click" />
-                  </div>
-                </div>
-              </div>
-            </div> -->
            <%} %>
 </asp:Content>

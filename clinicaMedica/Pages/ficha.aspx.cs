@@ -172,14 +172,20 @@ namespace clinicaMedica.Pages
         {
             if(!this.validarCampos())
             {
+                lblAdvertencia.Text = "Por favor, complete los campos desplegabless";
+                lblAdvertencia.Visible = true;
                 return;  // aca pone un alert que diga q tiene desplegables sin seleccionar
             }
             if(!validarContra())
             {
+                lblAdvertencia.Text = "las contraseñas no coinciden";
+                lblAdvertencia.Visible = true;
                 return; // aca pone un alert que diga q los campos de contraseña y repetir la contraseña tienen q ser iguales.
             }
             if(!validarCorreo())
             {
+                lblAdvertencia.Text = "El campo EMAL debe ser un mail valido";
+                lblAdvertencia.Visible = true;
                 return; // aca pone un alert que diga q el campo correo electronico debe ser un mail valido.
             }
             Usuario usuario = new Usuario();
@@ -217,9 +223,9 @@ namespace clinicaMedica.Pages
             }
             finally
             {
-                Response.Write("<script>alert('Usuario creado correctamente!');</script>");
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Usuario creado correctamente!');", true);
                 string rolId = Request.QueryString["rolId"];
-                //Response.Redirect("/Pages/usuario.aspx?rolId=" + rolId);
+                Response.Redirect("/pages/usuario.aspx?rolId=" + rolId);
             }
         }
 

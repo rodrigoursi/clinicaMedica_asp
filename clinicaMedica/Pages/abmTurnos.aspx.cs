@@ -19,15 +19,14 @@ namespace clinicaMedica.Pages
             Rol rolAux = new Rol();
             rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
 
-            if (rolAux == null || rolAux.permisosModificarTurno == false)
+            if (rolAux == null)// || rolAux.permisosModificarTurno == false)
             {
                 Response.Redirect("../default.aspx");
             }
 
             if (!IsPostBack)
             {
-                //Session["whereSQL"] = "";
-                
+               
                 if (Request.QueryString["mod"] != null)
                 {
                     if (Request.QueryString["id"] != null)
@@ -72,10 +71,6 @@ namespace clinicaMedica.Pages
                 GridAbmLocalidades.DataSource = TurnoNegocio.listar((string)Session["whereSQL"]);
                 GridAbmLocalidades.DataBind();
 
-                //Session.Add("estadoBuscar", ambTurnos_dropListEstado.SelectedValue);
-                //Session.Add("medicoBuscar", ambTurnos_dropListMed.SelectedValue);
-                //Session.Add("pacienteBuscar", ambTurnos_dropListPac.SelectedValue);
-                //Session.Add("fechaBuscar", ambTurnos_dropListMed.SelectedValue);
             
             }
         }
@@ -106,8 +101,6 @@ namespace clinicaMedica.Pages
             {
                 string fechaString = ambTurnos_inputFecha.Text;
                 string fechaFormatted = string.Join("-", fechaString.Split('/').Reverse());
-                //Console.WriteLine(fecha2); //2022-12-01 
-                //string fechaFormatted = fecha.ToString("yyyy-MM-dd");
                 Session["fechaBuscar"] = fechaFormatted;
                 whereSql += " AND CAST(T.fecha_hora AS date) = '" + Session["fechaBuscar"] + "'";
             }

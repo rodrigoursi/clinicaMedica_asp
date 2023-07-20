@@ -7,7 +7,7 @@ VALUES
   (2, 'Confirmado'),
   (3, 'No asistio'),
   (4, 'Realizado'),
-  (5, 'Cancelado')
+  (0, 'Cancelado')
 GO
 
 INSERT INTO especialidades (codigo, especialidad)

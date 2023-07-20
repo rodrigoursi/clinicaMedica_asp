@@ -126,22 +126,22 @@ begin
 end
 go
 
-create trigger TR_deleteLogicoyFisico on usuarios
-instead of delete as
-begin
-	declare @bajaFec datetime
-	select @bajaFec = bajaFecha from deleted
-	if @bajaFec is null begin
-		update usuarios set bajausu = 'admin', bajaFecha = getdate() 
-		from usuarios 
-		inner join deleted on deleted.id = usuarios.id  end
-	else begin
-		delete from usuarios
-		from usuarios
-		inner join deleted on deleted.id = usuarios.id
-	end
-end
-go
+--create trigger TR_deleteLogicoyFisico on usuarios
+--instead of delete as
+--begin
+--	declare @bajaFec datetime
+--	select @bajaFec = bajaFecha from deleted
+--	if @bajaFec is null begin
+--		update usuarios set bajausu = 'admin', bajaFecha = getdate() 
+--		from usuarios 
+--		inner join deleted on deleted.id = usuarios.id  end
+--	else begin
+--		delete from usuarios
+--		from usuarios
+--		inner join deleted on deleted.id = usuarios.id
+--	end
+--end
+--go
 
 create trigger TR_turnos_automaticoFechamodi on turnos
 after update as 
@@ -153,20 +153,20 @@ begin
 end
 go
 
-create trigger TR_turnos_deleteLogicoyFisico on turnos
-instead of delete as
-begin
-	declare @bajaFec datetime
-	select @bajaFec = bajaFecha from deleted
-	if @bajaFec is null begin
-		update turnos set bajausu = 'admin', bajaFecha = getdate() 
-		from turnos 
-		inner join deleted on deleted.id = turnos.id  
-	end
-	else begin
-		delete from turnos
-		from turnos
-		inner join deleted on deleted.id = turnos.id
-	end
-end
-go
+--create trigger TR_turnos_deleteLogicoyFisico on turnos
+--instead of delete as
+--begin
+--	declare @bajaFec datetime
+--	select @bajaFec = bajaFecha from deleted
+--	if @bajaFec is null begin
+--		update turnos set bajausu = 'admin', bajaFecha = getdate() 
+--		from turnos 
+--		inner join deleted on deleted.id = turnos.id  
+--	end
+--	else begin
+--		delete from turnos
+--		from turnos
+--		inner join deleted on deleted.id = turnos.id
+--	end
+--end
+--go

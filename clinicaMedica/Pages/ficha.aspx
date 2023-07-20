@@ -6,6 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" />
     <h1 style="text-align:center">ALTA DE USUARIO</h1>
+    <asp:Label ID="lblAdvertencia" runat="server" Visible="false" CssClass="text-danger"></asp:Label>
     <div class="container formFicha my-2">
         <div class="imagen-user">
             <img src="./../Assets/images/usermas.png" alt="Alternate Text" /></div>
