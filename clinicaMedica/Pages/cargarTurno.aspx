@@ -14,6 +14,8 @@
         <h4>Datos del paciente</h4>
         <div class="formulario-turno mt-4">
             <div class="mb-3 subcontenedor">
+                <% if(Request.QueryString["idEditar"] == null)
+            {%>
                 <div>
                     <label for="cargarTurno_documento" class="form-label">Documento</label>
                     <div style="display:flex; width:100%">
@@ -21,6 +23,7 @@
                         <asp:Button Text="BUSCAR" runat="server" class="btn btn-success" ID="buscarDoc" OnClick="buscarDoc_Click" />
                     </div>
                 </div>
+                <%} %>
             </div>
             <div class="mb-3">
                 <label for="cargarTurno_documento" class="form-label">Paciente</label>
@@ -53,8 +56,10 @@
             <div class="mb-3">
                 <label for="cargarTurno_mot" class="form-label">Motivo/s de la Consulta</label>
                 <asp:TextBox runat="server" TextMode="MultiLine" ID="cargarTurno_mot" CssClass="form-control" Rows="5" />
+            <% if(Request.QueryString["id"] == null) {%> 
             </div>
             <asp:Button Text="GRABAR" CssClass="btn btn-primary mb-3 btn-grabar" ID="grabarTurno" runat="server" OnClick="grabarTurno_Click" />
         </div>
+        <%} %>
     </div>
 </asp:Content>

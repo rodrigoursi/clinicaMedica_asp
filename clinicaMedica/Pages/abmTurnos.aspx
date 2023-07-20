@@ -49,7 +49,7 @@
             <asp:BoundField HeaderText="Estado" DataField="estado.estado" />
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href='<%# "/pages/cargarTurno.aspx?id=" + Eval("id") +"&mod=1" %>'>
+                    <a href='<%# "/pages/cargarTurno.aspx?id=" + Eval("id") +"&idEditar=" + Eval("id") %>'>
                        <i class="fa-solid fa-eye" title="ver"></i>
                     </a>
                 </ItemTemplate>

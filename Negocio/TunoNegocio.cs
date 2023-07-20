@@ -155,7 +155,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public int editar(Turno turno)
+        public int editar(Turno turno, int filas = 1)
         {
             int resultado = 0;
             AccesoDatos datos = new AccesoDatos();
@@ -170,10 +170,9 @@ namespace Negocio
                                         "fecha_hora=@fechaHora," +
                                         "observaciones=@observaciones," +
                                         "estado=@estado," +
-                                        "modiUsu=@modiUsuario," +
-                                        "modiFecha=@modiFecha " +
-                                        "WHERE" +
-                                            "id=@id");
+                                        "modiUsu=@modiUsuario" +
+                                        " WHERE" +
+                                            " id=@id");
 
                 datos.setearParametro("@id", turno.id);
                 datos.setearParametro("@paciente", turno.paciente.id);
@@ -182,8 +181,7 @@ namespace Negocio
                 datos.setearParametro("@observaciones", turno.observaciones);
                 datos.setearParametro("@estado", turno.estado.id);
                 datos.setearParametro("@modiUsuario", turno.modificacionUsuario.id);
-                datos.setearParametro("@modiFecha", turno.modificacionFecha);
-                resultado = datos.ejecutarUpdate();
+                resultado = datos.ejecutarUpdate(filas);
             }
             catch (Exception ex)
             {

@@ -42,6 +42,10 @@ namespace clinicaMedica.Pages
             {
                 cargarBoxes();
             }
+            if (Request.QueryString["id"] != null)
+            {
+                apagarcampos();
+            }
         }
 
         protected void buscarDoc_Click(object sender, EventArgs e)
@@ -64,19 +68,12 @@ namespace clinicaMedica.Pages
             cargaTurno_Esp.Items.Insert(0, new ListItem("Selecciona una especialidad", ""));
             cargaTurno_Esp.DataBind();
 
-            cargaTurno_prof.Items.Insert(0, new ListItem("Selecciona un profesional", ""));
-            cargaTurno_prof.DataBind();
-
-            cargaTurno_fecha.Items.Insert(0, new ListItem("Selecciona una fecha", ""));
-            cargaTurno_fecha.DataBind();
-            cargaTurno_hora.Items.Insert(0, new ListItem("Selecciona un horario", ""));
-            cargaTurno_hora.DataBind();
-
             if (Request.QueryString["idEditar"] != null)
             {
                 TunoNegocio turnoNeg = new TunoNegocio();
                 Turno turno = turnoNeg.verTurno(int.Parse(Request.QueryString["idEditar"]));
                 cargarTurno_paciente.Text = turno.paciente.nombreYApellido;
+                cargarTurno_paciente.Attributes["value"] = turno.paciente.id.ToString();
                 cargaTurno_Esp.SelectedValue = turno.medico.especialidad.id.ToString();
 
                 UsuarioNegocio negProf = new UsuarioNegocio();
@@ -86,12 +83,39 @@ namespace clinicaMedica.Pages
                 cargaTurno_prof.DataValueField = "id";
                 cargaTurno_prof.DataTextField = "nombreYApellido";
                 cargaTurno_prof.DataBind();
+                //cargaTurno_prof.Items.Insert(0, new ListItem("Selecciona un profesional", ""));
                 cargaTurno_prof.SelectedValue = turno.medico.id.ToString();
-                cargaTurno_prof.SelectedValue = "5";
-                cargaTurno_fecha.Text = turno.fechaYHora.ToString("dd/MM/yyyy");
-                cargaTurno_hora.Text = turno.fechaYHora.ToShortTimeString();
+
+                if (Request.QueryString["id"] != null)
+                {
+                    cargaTurno_fecha.Items.Insert(0, new ListItem(turno.fechaYHora.ToShortDateString(), ""));
+                    cargaTurno_hora.Items.Insert(0, new ListItem(turno.fechaYHora.ToShortTimeString(), ""));
+                }
+                //cargaTurno_fecha.Text = turno.fechaYHora.ToString("dd/MM/yyyy");
+                //cargaTurno_hora.Text = turno.fechaYHora.ToShortTimeString();
                 cargarTurno_mot.Text = turno.observaciones.ToString();
+                
+                HorarioNegocio negHorario = new HorarioNegocio();
+                filtro = $"WHERE id_medico = {cargaTurno_prof.SelectedValue} ORDER BY id_medico";
+
+                listaHorarios = negHorario.listar(filtro);
+                if (Request.QueryString["id"] == null) llenarFechas();
             }
+
+                cargaTurno_prof.DataBind();
+            cargaTurno_prof.Items.Insert(0, new ListItem("Selecciona un profesional", ""));
+            //cargaTurno_prof.DataBind();
+
+            //cargaTurno_fecha.Items.Insert(0, new ListItem("Selecciona una fecha", ""));
+            //cargaTurno_fecha.DataBind();
+            if (Request.QueryString["id"] == null)
+            {
+                cargaTurno_hora.Items.Insert(0, new ListItem("Selecciona un horario", ""));
+            }
+
+            //cargaTurno_hora.DataBind();
+
+
         }
 
         protected void cargaTurno_Esp_Changed(object sender, EventArgs e)
@@ -217,7 +241,15 @@ namespace clinicaMedica.Pages
         protected void grabarTurno_Click(object sender, EventArgs e)
         {
             Turno objTurno = new Turno();
-            if(cargar(objTurno)) turno.agregar(objTurno);
+            if(Request.QueryString["idEditar"] == null)
+            {
+                if (cargar(objTurno)) turno.agregar(objTurno);
+            }
+            if(Request.QueryString["idEditar"] != null)
+            {
+                objTurno.id = int.Parse(Request.QueryString["idEditar"]);
+                if (cargar(objTurno)) turno.editar(objTurno, 2);
+            }
         }
         protected bool cargar(Turno obj)
         {
@@ -246,7 +278,7 @@ namespace clinicaMedica.Pages
             int idMedico = int.Parse(cargaTurno_prof.Text);
             string fecha = cargaTurno_fecha.Text;
             List<Turno> objTurno = new List<Turno>();
-            objTurno = turno.listar($" WHERE T.bajaFecha IS NULL AND T.fecha_hora > GETDATE() AND T.id_medico = {idMedico} ");
+            objTurno = turno.listar($" AND T.id_medico = {idMedico} ");
             for( int i = lsHoras.Count() - 1; i > -1; i-- )
             {
                 DateTime fecha_hora = DateTime.Parse(fecha + " " + lsHoras[i]);
@@ -257,5 +289,34 @@ namespace clinicaMedica.Pages
                 }
             }
         }
-    }
+        protected void llenarFechas()
+        {
+            List<ListItem> horarios = new List<ListItem>();
+            List<DateTime> fechas = new List<DateTime>();
+            listaHorarios.ForEach(lista =>
+            {
+                DiaSemana oDia = new DiaSemana();
+                oDia = diaSem.Find(x => x.id == lista.idDia.id);
+                int dia = (int)oDia.codDia;
+                fechas.AddRange(devolverProximaFecha((DayOfWeek)dia, 3));
+                fechas.Sort();
+            });
+            fechas.ForEach(x =>
+            {
+                //cargaTurno_fecha.Items.Add(new ListItem(x.ToString("dd/MM/yyyy"), dia.ToString()));
+                horarios.Add(new ListItem(x.ToString("dd/MM/yyyy"), ((int)x.DayOfWeek).ToString()));
+            });
+            cargaTurno_fecha.DataSource = horarios;
+            cargaTurno_fecha.DataBind();
+            cargaTurno_fecha.Items.Insert(0, new ListItem("Selecciona una fecha", ""));
+        }
+        protected void apagarcampos()
+        {
+            cargaTurno_Esp.Enabled = false;
+            cargaTurno_prof.Enabled = false;
+            cargaTurno_fecha.Enabled = false;
+            cargaTurno_hora.Enabled = false;
+            cargarTurno_mot.Enabled = false;
+        }
+    }   
 }
