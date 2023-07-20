@@ -24,7 +24,7 @@
             </div>
             <div class="mb-3">
                 <label for="cargarTurno_documento" class="form-label">Paciente</label>
-                <asp:TextBox runat="server" CssClass="form-control" ID="cargarTurno_paciente" />
+                <asp:TextBox runat="server" CssClass="form-control" ID="cargarTurno_paciente" Enabled="false" />
             </div>
             <asp:UpdatePanel runat="server" ID="panelTurnos">
                 <ContentTemplate>

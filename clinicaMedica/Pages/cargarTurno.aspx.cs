@@ -40,6 +40,7 @@ namespace clinicaMedica.Pages
             string filtro = $"numero_doc = {cargarTurno_documento.Text}";  
             List<Usuario> lista = new List<Usuario>();
             lista = negUser.buscarPor(filtro);
+            if (lista.Count < 1) return; // aca poner mensaje de que no existe paciente con ese documento
             cargarTurno_paciente.Text = lista[0].nombreYApellido;
             cargarTurno_paciente.Attributes["value"] = lista[0].id.ToString();
         }
@@ -60,6 +61,27 @@ namespace clinicaMedica.Pages
             cargaTurno_fecha.DataBind();
             cargaTurno_hora.Items.Insert(0, new ListItem("Selecciona un horario", ""));
             cargaTurno_hora.DataBind();
+
+            if (Request.QueryString["idEditar"] != null)
+            {
+                TunoNegocio turnoNeg = new TunoNegocio();
+                Turno turno = turnoNeg.verTurno(int.Parse(Request.QueryString["idEditar"]));
+                cargarTurno_paciente.Text = turno.paciente.nombreYApellido;
+                cargaTurno_Esp.SelectedValue = turno.medico.especialidad.id.ToString();
+
+                UsuarioNegocio negProf = new UsuarioNegocio();
+                string filtro = $"especialidad = {cargaTurno_Esp.SelectedValue} AND bajaUsu IS NULL";
+                List<Usuario> listaus = negProf.buscarPor(filtro);
+                cargaTurno_prof.DataSource = listaus;
+                cargaTurno_prof.DataValueField = "id";
+                cargaTurno_prof.DataTextField = "nombreYApellido";
+                cargaTurno_prof.DataBind();
+                cargaTurno_prof.SelectedValue = turno.medico.id.ToString();
+                cargaTurno_prof.SelectedValue = "5";
+                cargaTurno_fecha.Text = turno.fechaYHora.ToString("dd/MM/yyyy");
+                cargaTurno_hora.Text = turno.fechaYHora.ToShortTimeString();
+                cargarTurno_mot.Text = turno.observaciones.ToString();
+            }
         }
 
         protected void cargaTurno_Esp_Changed(object sender, EventArgs e)
@@ -185,25 +207,29 @@ namespace clinicaMedica.Pages
         protected void grabarTurno_Click(object sender, EventArgs e)
         {
             Turno objTurno = new Turno();
-            cargar(objTurno);
-            turno.agregar(objTurno);
+            if(cargar(objTurno)) turno.agregar(objTurno);
         }
-        protected void cargar(Turno obj)
+        protected bool cargar(Turno obj)
         {
             EstadoNegocio negEstado = new EstadoNegocio();
             List<Estado> objEstado = negEstado.listar();
             string fecha = cargaTurno_fecha.Text;
             string hora = cargaTurno_hora.Text;
+            if (cargaTurno_fecha.SelectedValue == "") return false;  // aca poner mensaje q no selecciono fecha
+            if (cargaTurno_hora.SelectedValue == "") return false;  // aca poner mensaje q no selecciono horario.
             DateTime fechaYhora = DateTime.Parse(fecha + " " + hora);
             Usuario objUserP = new Usuario();
             Usuario objUserM = new Usuario();
             objUserP.id = int.Parse(cargarTurno_paciente.Attributes["value"]);
             obj.paciente = objUserP;
+            if (cargaTurno_prof.SelectedValue == "") return false; // aca poner mensaje q no selecciono profesional.
             objUserM.id = int.Parse(cargaTurno_prof.SelectedValue);
             obj.medico = objUserM;
             obj.fechaYHora = fechaYhora;
+            if (cargarTurno_mot.Text == "") return false; // aca poner mensaje de que el campo observaciones esta vacio
             obj.observaciones = cargarTurno_mot.Text;
             obj.estado = objEstado.Find(x => x.defecto);
+            return true;
         }
         protected void validoHorarios(List<string> lsHoras)
         {

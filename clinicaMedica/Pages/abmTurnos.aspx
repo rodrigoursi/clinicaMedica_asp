@@ -44,7 +44,7 @@
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <a href='<%# "/pages/cargarTurno.aspx?id=" + Eval("id") +"&mod=2" %>'>
+                    <a href='<%# "/pages/cargarTurno.aspx?idEditar=" + Eval("id") +"&mod=2" %>'>
                        <i class="fa-solid fa-file-pen" title="editar"></i>
                     </a>
                 </ItemTemplate>

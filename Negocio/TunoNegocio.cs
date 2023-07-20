@@ -1,5 +1,6 @@
 ﻿using Dominio;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,8 +37,7 @@ namespace Negocio
                                     "FROM turnos AS T " +
                                     "INNER JOIN usuarios AS P ON P.id = T.id_paciente " +
                                     "INNER JOIN usuarios AS M ON M.id = T.id_medico " +
-                                    "INNER JOIN estados AS E ON E.id = T.estado " +
-                                    "WHERE T.id = T.id " + filtros);
+                                    "INNER JOIN estados AS E ON E.id = T.estado " + filtros);
 
                 datos.ejecutarLectura();
 
@@ -84,7 +84,76 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public Turno verTurno(int id)
+        {
+            Turno turno = new Turno();
+            AccesoDatos datos = new AccesoDatos();
 
+            try
+            {
+                datos.setearConsulta("SELECT " +
+                                        "T.id, " +
+                                        "T.id_paciente, " +
+                                        "P.nombre_apellido AS nombrePaciente, " +
+                                        "T.id_medico, " +
+                                        "M.nombre_apellido AS nombreMedico, " +
+                                        "T.fecha_hora, " +
+                                        "T.observaciones, " +
+                                        "T.estado, " +
+                                        "E.estado AS nombreEstado, " +
+                                        "T.altaUsu, " +
+                                        "T.modiUsu, " +
+                                        "T.bajaUsu, " +
+                                        "T.altaFecha, " +
+                                        "T.modiFecha, " +
+                                        "T.bajaFecha, " +
+                                        "M.especialidad AS especialidad " +
+                                    "FROM turnos AS T " +
+                                    "INNER JOIN usuarios AS P ON P.id = T.id_paciente " +
+                                    "INNER JOIN usuarios AS M ON M.id = T.id_medico " +
+                                    "INNER JOIN estados AS E ON E.id = T.estado WHERE T.id=@id");
+                datos.setearParametro("@id", id);
+                datos.ejecutarLectura();
+                datos.Lector.Read();
+
+                turno.id = (int)datos.Lector["id"];
+                turno.fechaYHora = (DateTime)datos.Lector["fecha_hora"];
+                turno.observaciones = (string)datos.Lector["observaciones"];
+
+
+                turno.paciente = new Usuario();
+                turno.paciente.id = (int)datos.Lector["id_paciente"];
+                turno.paciente.nombreYApellido = (string)datos.Lector["nombrePaciente"];
+
+                turno.medico = new Usuario();
+                turno.medico.id = (int)datos.Lector["id_medico"];
+                turno.medico.nombreYApellido = (string)datos.Lector["nombreMedico"];
+                turno.medico.especialidad = new Especialidad();
+                turno.medico.especialidad.id = (short)datos.Lector["especialidad"];
+
+                turno.estado = new Estado();
+                turno.estado.id = (byte)datos.Lector["estado"];
+                turno.estado.estado = (string)datos.Lector["nombreEstado"];
+
+                turno.altaUsuario.codigoUsuario = (string)datos.Lector["altaUsu"];
+                turno.modificacionUsuario.codigoUsuario = datos.Lector["modiUsu"].ToString();
+                turno.bajaUsuario.codigoUsuario = datos.Lector["bajaUsu"].ToString();
+                turno.altaFecha = (DateTime)datos.Lector["altaFecha"];
+                turno.modificacionFecha = datos.Lector["modiFecha"] != DBNull.Value ? (DateTime)datos.Lector["modiFecha"] : DateTime.MinValue;
+                turno.bajaFecha = datos.Lector["bajaFecha"] != DBNull.Value ? (DateTime)datos.Lector["bajaFecha"] : DateTime.MinValue;
+
+                return turno;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al capturar los datos de la tabla de TURNOS");
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public int editar(Turno turno)
         {
             int resultado = 0;
