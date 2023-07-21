@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -22,7 +22,7 @@ namespace clinicaMedica.Pages
             Rol rolAux = new Rol();
             rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
 
-            if (rolAux == null)
+            if (rolAux == null || rolAux.permisosSoloTurnosPropios == true)
             {
                 Response.Redirect("../default.aspx");
             }

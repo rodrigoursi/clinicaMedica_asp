@@ -41,7 +41,11 @@
             <label for="ambTurnos_inputFecha" class="form-label">Fecha</label>
             <asp:TextBox ID="ambTurnos_inputFecha" CssClass="form-control" Placeholder="Ej. formato 23/8/1990" runat="server"></asp:TextBox>
             <asp:Button Text="HOY" ID="TurnosHoy" CssClass="btn btn-success" runat="server" OnClick="mostrarTurnosHoy_Click" />
+            <asp:Button Text="EN ESPERA" ID="EnEspera" CssClass="btn btn-primary" runat="server" OnClick="mostrarTurnosEnEspera_Click" />
+            <asp:Button Text=" DEL " ID="Button1" CssClass="btn btn-danger" runat="server" OnClick="borrarFiltros_Click" />
         </div>
+
+
     </div>
     <div class="contenedor-botonBuscar mb-3">
         <asp:Button Text="BUSCAR" CssClass="btn btn-secondary" ID="ambTurnos_buttonBsc" runat="server" OnClick="BuscarTurnos" />
@@ -106,7 +110,8 @@
         </Columns>
         </asp:GridView>
         <div>
-            <a href='<%# "/pages/cargarTurno.aspx?id=" + Eval("id") + "&idEditar=" +  Eval("id")%>' class="btn btn-success">AGREGAR</a></div>
+            <a href="/Pages/cargarTurno.aspx" class="btn btn-success">AGREGAR</a>
+        </div>
 
         <%
             }

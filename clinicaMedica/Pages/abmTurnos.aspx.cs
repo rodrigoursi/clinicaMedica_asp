@@ -97,11 +97,27 @@ namespace clinicaMedica.Pages
             }
         }
 
+        protected void borrarFiltros_Click(object sender, EventArgs e)
+        {
+            ambTurnos_inputFecha.Text = "";
+            ambTurnos_dropListEstado.SelectedValue = "0";
+
+            BuscarTurnos(null, null);
+        }
+        protected void mostrarTurnosEnEspera_Click(object sender, EventArgs e)
+        {
+            ambTurnos_dropListEstado.SelectedValue = "2";
+            BuscarTurnos(null, null);
+
+            //mostrarTurnosHoy_Click(null, null);
+        }
+
         protected void mostrarTurnosHoy_Click(object sender, EventArgs e)
         {
             ambTurnos_inputFecha.Text = DateTime.Today.ToString("dd/MM/yyyy");
             BuscarTurnos(null, null);
         }
+
 
         protected void BuscarTurnos(object sender, EventArgs e)
         {
