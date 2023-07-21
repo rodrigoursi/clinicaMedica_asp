@@ -76,9 +76,21 @@ namespace clinicaMedica.Pages
             byte idRol;
             if (byte.TryParse(Request.QueryString["rolId"], out idRol))
             {
-                UsuarioNegocio negocio2 = new UsuarioNegocio();
-                GridAbmUser.DataSource = negocio2.listar(idRol);
-                GridAbmUser.DataBind();
+                Rol rolAux = new Rol();
+                rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
+
+                if (rolAux.permisosSoloTurnosPropios == true)
+                {
+                    UsuarioNegocio negocio2 = new UsuarioNegocio();
+                    GridAbmUser.DataSource = negocio2.listar(idRol);
+                    GridAbmUser.DataBind();
+                }
+                else
+                {
+                    UsuarioNegocio negocio2 = new UsuarioNegocio();
+                    GridAbmUser2.DataSource = negocio2.listar(idRol);
+                    GridAbmUser2.DataBind();
+                }
             }
         }
     }

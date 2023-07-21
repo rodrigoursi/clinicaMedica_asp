@@ -22,7 +22,7 @@ namespace clinicaMedica.Pages
             Rol rolAux = new Rol();
             rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
 
-            if (rolAux == null || rolAux.permisosModificarTurno == false)
+            if (rolAux == null)
             {
                 Response.Redirect("../default.aspx");
             }

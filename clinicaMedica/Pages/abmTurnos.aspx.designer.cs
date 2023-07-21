@@ -24,6 +24,15 @@ namespace clinicaMedica.Pages
         protected global::System.Web.UI.WebControls.DropDownList ambTurnos_dropListEstado;
 
         /// <summary>
+        /// lblambTurnos_dropListMed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblambTurnos_dropListMed;
+
+        /// <summary>
         /// ambTurnos_dropListMed control.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,15 @@ namespace clinicaMedica.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ambTurnos_inputFecha;
+
+        /// <summary>
+        /// TurnosHoy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button TurnosHoy;
 
         /// <summary>
         /// ambTurnos_buttonBsc control.

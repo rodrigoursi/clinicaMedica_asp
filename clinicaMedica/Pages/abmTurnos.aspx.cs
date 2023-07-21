@@ -72,6 +72,20 @@ namespace clinicaMedica.Pages
 
                 if (rolAux != null && rolAux.permisosModificarTurno == true)
                 {
+                    lblambTurnos_dropListMed.Visible = false;
+                    ambTurnos_dropListMed.Visible = false;
+
+                    if (Session["usuario"] != null)
+                    {
+                        string nombreYApellido = ((Usuario)Session["usuario"]).nombreYApellido;
+
+                        ListItem itemSeleccionado = ambTurnos_dropListMed.Items.FindByText(nombreYApellido);
+
+                        if (itemSeleccionado != null)
+                        {
+                            itemSeleccionado.Selected = true; // aca estoy haciendo que el campo medico sea el del usuario medico
+                        }
+                    }
                     TunoNegocio TurnoNegocio = new TunoNegocio();
                     GridAbmTurnos.DataSource = TurnoNegocio.listar((string)Session["whereSQL"]);
                     GridAbmTurnos.DataBind();
@@ -85,6 +99,12 @@ namespace clinicaMedica.Pages
 
             
             }
+        }
+
+        protected void mostrarTurnosHoy_Click(object sender, EventArgs e)
+        {
+            ambTurnos_inputFecha.Text = DateTime.Today.ToString("dd/MM/yyyy");
+            BuscarTurnos(null, null);
         }
 
         protected void BuscarTurnos(object sender, EventArgs e)

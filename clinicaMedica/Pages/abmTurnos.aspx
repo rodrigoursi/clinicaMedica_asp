@@ -27,7 +27,7 @@
             {
         %>
         <div class="mb-3 ancho">
-            <label for="ambTurnos_dropListMed" class="form-label">Medico</label>
+            <asp:Label ID="lblambTurnos_dropListMed" for="ambTurnos_dropListMed" class="form-label" runat="server">Medico</asp:Label>
             <asp:DropDownList ID="ambTurnos_dropListMed"  DataTextField="nombreYApellido" CssClass="form-select" runat="server"></asp:DropDownList>
         </div>
         <div class="mb-3 ancho">
@@ -37,9 +37,10 @@
         <%
             }
             %>
-        <div class="mb-3 ancho">
+        <div class="mb-3 ancho ">
             <label for="ambTurnos_inputFecha" class="form-label">Fecha</label>
             <asp:TextBox ID="ambTurnos_inputFecha" CssClass="form-control" Placeholder="Ej. formato 23/8/1990" runat="server"></asp:TextBox>
+            <asp:Button Text="HOY" ID="TurnosHoy" CssClass="btn btn-success" runat="server" OnClick="mostrarTurnosHoy_Click" />
         </div>
     </div>
     <div class="contenedor-botonBuscar mb-3">
