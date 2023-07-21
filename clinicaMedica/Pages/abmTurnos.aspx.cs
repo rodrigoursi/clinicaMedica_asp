@@ -258,7 +258,7 @@ namespace clinicaMedica.Pages
             int id = int.Parse(e.CommandArgument.ToString());
             TunoNegocio turno = new TunoNegocio();
             turno.cambiarEstado(id, -1);
-            Page_Load(sender, e);
+            buscador();
         }
         protected void buscador()
         {
