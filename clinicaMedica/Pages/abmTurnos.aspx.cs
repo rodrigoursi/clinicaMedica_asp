@@ -77,7 +77,7 @@ namespace clinicaMedica.Pages
 
                     if (Session["usuario"] != null)
                     {
-                        string nombreYApellido = ((Usuario)Session["usuario"]).nombreYApellido;
+                        string nombreYApellido = ((string)Session["usuario"]);
 
                         ListItem itemSeleccionado = ambTurnos_dropListMed.Items.FindByText(nombreYApellido);
 
