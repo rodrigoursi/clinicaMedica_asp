@@ -2,4 +2,6 @@
 let urlParams = new URLSearchParams(window.location.search);
 let id = urlParams.get('id');
 if (id) myModal.show();
+console.log("hola")
+console.log(myModal)
 
