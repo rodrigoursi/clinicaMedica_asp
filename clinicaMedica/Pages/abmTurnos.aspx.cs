@@ -150,14 +150,17 @@ namespace clinicaMedica.Pages
             {
                 string fechaString = ambTurnos_inputFecha.Text;
                 string fechaFormatted = string.Join("-", fechaString.Split('/').Reverse());
-                Session["fechaBuscar"] = fechaFormatted;
-                whereSql += " AND CAST(T.fecha_hora AS date) = '" + Session["fechaBuscar"] + "'";
+                filtro += $" AND CONVERT(date,fecha_hora,103) ='{fechaFormatted}'";
+
+                /*Session["fechaBuscar"] = fechaFormatted;
+                whereSql += " AND CAST(T.fecha_hora AS date) = '" + Session["fechaBuscar"] + "'";*/
             }
 
             if (rolAux != null && rolAux.permisosModificarTurno == true)
             {
                 TunoNegocio TurnoNegocio = new TunoNegocio();
-                GridAbmTurnos.DataSource = TurnoNegocio.listar((string)Session["whereSQL"]);
+                //GridAbmTurnos.DataSource = TurnoNegocio.listar((string)Session["whereSQL"]);
+                GridAbmTurnos.DataSource = TurnoNegocio.listar(filtro);
                 GridAbmTurnos.DataBind();
             }
             else
@@ -190,6 +193,7 @@ namespace clinicaMedica.Pages
             string id_estado = ambTurnos_dropListEstado.SelectedValue;
             string id_medico = ambTurnos_dropListMed.SelectedValue;
             string id_paciente = ambTurnos_dropListPac.SelectedValue;
+            string fechaString = ambTurnos_inputFecha.Text;
             string filtro = "";
             TunoNegocio TurnoNegocio = new TunoNegocio();
             /*
@@ -213,6 +217,12 @@ namespace clinicaMedica.Pages
             if (id_paciente != "0")
             {
                 filtro += $" AND id_paciente={id_paciente}";
+            }
+
+            if (fechaString != "")
+            {
+                string fechaFormatted = string.Join("-", fechaString.Split('/').Reverse());
+                filtro += $" AND CONVERT(date,fecha_hora,103) ='{fechaFormatted}'";
             }
 
             if (rolAux != null && rolAux.permisosModificarTurno == true)
