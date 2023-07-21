@@ -69,36 +69,29 @@ namespace clinicaMedica.Pages
                 ambTurnos_dropListPac.DataBind();
                 ambTurnos_dropListPac.Items.Insert(0, new ListItem("Todos", "0"));
 
+                BuscarTurnos(null, null);
 
-                if (rolAux != null && rolAux.permisosModificarTurno == true)
-                {
-                    ////lblambTurnos_dropListMed.blo = false;
-                    //ambTurnos_dropListMed.Enabled = false;
+                //string filtro = (string)Session["filtro"]!=null? (string)Session["filtro"]: "";
 
-                    //if (Session["usuario"] != null)
-                    //{
-                    //    string nombreYApellido = ((string)Session["usuario"]);
+                //if (rolAux != null && rolAux.permisosModificarTurno == true)
+                //{
+                //    //ambTurnos_dropListMed.SelectedValue = false;
 
-                    //    ListItem itemSeleccionado = ambTurnos_dropListMed.Items.FindByText(nombreYApellido);
 
-                    //    if (itemSeleccionado != null)
-                    //    {
-                    //        itemSeleccionado.Selected = true; // aca estoy haciendo que el campo medico sea el del usuario medico
-                    //    }
-                    //}
-                    
-                    TunoNegocio TurnoNegocio = new TunoNegocio();
-                    GridAbmTurnos.DataSource = TurnoNegocio.listar((string)Session["whereSQL"]);
-                    GridAbmTurnos.DataBind();
-                }
-                else 
-                {
-                    TunoNegocio TurnoNegocio = new TunoNegocio();
-                    GridAbmTurnos2.DataSource = TurnoNegocio.listar((string)Session["whereSQL"]);
-                    GridAbmTurnos2.DataBind();
+                //    TunoNegocio TurnoNegocio = new TunoNegocio();
+                //    GridAbmTurnos.DataSource = TurnoNegocio.listar(filtro);
+                //    GridAbmTurnos.DataBind();
+                //}
+                //else 
+                //{
 
-                }
-            
+
+                //    TunoNegocio TurnoNegocio = new TunoNegocio();
+                //    GridAbmTurnos2.DataSource = TurnoNegocio.listar(filtro);
+                //    GridAbmTurnos2.DataBind();
+
+                //}
+
             }
         }
 
@@ -144,7 +137,7 @@ namespace clinicaMedica.Pages
                 */
             }
             
-            Session["whereSQL"] = whereSql;
+            Session["filtro"] = filtro;
 
             if (ambTurnos_inputFecha.Text != "")
             {
@@ -165,8 +158,21 @@ namespace clinicaMedica.Pages
             }
             else
             {
+                if (Session["usuario"] != null)
+                {
+                    string nombreYApellido = ((string)Session["usuario"]);
+
+                    ListItem itemSeleccionado = ambTurnos_dropListMed.Items.FindByText(nombreYApellido);
+
+                    if (itemSeleccionado != null)
+                    {
+                        itemSeleccionado.Selected = true; // aca estoy haciendo que el campo medico sea el del usuario medico
+                        filtro += $" AND M.nombre_apellido = '" + itemSeleccionado + "'";
+                    }
+                }
+
                 TunoNegocio TurnoNegocio = new TunoNegocio();
-                GridAbmTurnos2.DataSource = TurnoNegocio.listar((string)Session["whereSQL"]);
+                GridAbmTurnos2.DataSource = TurnoNegocio.listar(filtro);
                 GridAbmTurnos2.DataBind();
             }
 
