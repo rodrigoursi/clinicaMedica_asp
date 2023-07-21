@@ -250,6 +250,7 @@ namespace clinicaMedica.Pages
             int id = int.Parse(e.CommandArgument.ToString());
             TunoNegocio turno = new TunoNegocio();
             turno.cambiarEstado(id);
+            buscador();
         }
 
         protected void cancelado_Command(object sender, CommandEventArgs e)
@@ -257,6 +258,51 @@ namespace clinicaMedica.Pages
             int id = int.Parse(e.CommandArgument.ToString());
             TunoNegocio turno = new TunoNegocio();
             turno.cambiarEstado(id, -1);
+            Page_Load(sender, e);
+        }
+        protected void buscador()
+        {
+            Rol rolAux = new Rol();
+            rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
+
+            string id_estado = ambTurnos_dropListEstado.SelectedValue;
+            string id_medico = ambTurnos_dropListMed.SelectedValue;
+            string id_paciente = ambTurnos_dropListPac.SelectedValue;
+            string fechaString = ambTurnos_inputFecha.Text;
+            string filtro = "";
+            TunoNegocio TurnoNegocio = new TunoNegocio();
+
+            if (id_estado != "0")
+            {
+                filtro += $" AND T.estado={id_estado}";
+            }
+
+            if (id_medico != "0")
+            {
+                filtro += $" AND id_medico={id_medico}";
+            }
+
+            if (id_paciente != "0")
+            {
+                filtro += $" AND id_paciente={id_paciente}";
+            }
+
+            if (fechaString != "")
+            {
+                string fechaFormatted = string.Join("-", fechaString.Split('/').Reverse());
+                filtro += $" AND CONVERT(date,fecha_hora,103) ='{fechaFormatted}'";
+            }
+
+            if (rolAux != null && rolAux.permisosModificarTurno == true)
+            {
+                GridAbmTurnos.DataSource = TurnoNegocio.listar(filtro);
+                GridAbmTurnos.DataBind();
+            }
+            else
+            {
+                GridAbmTurnos2.DataSource = TurnoNegocio.listar(filtro);
+                GridAbmTurnos2.DataBind();
+            }
         }
     }
 }
