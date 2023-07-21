@@ -97,9 +97,9 @@
             {%>
 
             
-                    <a href='<%# "/pages/ABMTurnos.aspx?id=" + Eval("id")%>'>
+                    <asp:LinkButton ID="cancelado" CommandArgument='<%# Eval("id") %>' OnCommand="cancelado_Command" runat="server" >
                        <i class="fa-solid fa-ban" title="cancelar"></i>
-                    </a>
+                    </asp:LinkButton>
                     <% } %>
                 </ItemTemplate>
             </asp:TemplateField>

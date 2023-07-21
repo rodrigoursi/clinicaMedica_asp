@@ -251,5 +251,12 @@ namespace clinicaMedica.Pages
             TunoNegocio turno = new TunoNegocio();
             turno.cambiarEstado(id);
         }
+
+        protected void cancelado_Command(object sender, CommandEventArgs e)
+        {
+            int id = int.Parse(e.CommandArgument.ToString());
+            TunoNegocio turno = new TunoNegocio();
+            turno.cambiarEstado(id, -1);
+        }
     }
 }

@@ -294,19 +294,31 @@ namespace Negocio
             }
             return false;
         }
-        public bool cambiarEstado(int id)
+        public bool cambiarEstado(int id, int nivel = 1)
         {
             int resultado = 0;
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("UPDATE " +
+                if(nivel < 0)
+                {
+                    datos.setearConsulta("UPDATE " +
+                                        "turnos" +
+                                    " SET " +
+                                        "estado = (SELECT top 1 id FROM estados WHERE codigo < 0 AND defecto != 1 ORDER BY id) WHERE id = @id");
+
+                    datos.setearParametro("@id", id);
+                } else
+                {
+                    datos.setearConsulta("UPDATE " +
                                         "turnos" +
                                     " SET " +
                                         "estado = (SELECT top 1 id FROM estados WHERE codigo > 0 AND defecto != 1 ORDER BY id) WHERE id = @id");
 
-                datos.setearParametro("@id", id);
+                    datos.setearParametro("@id", id);
+                }
+                
                 resultado = datos.ejecutarUpdate(2);
             }
             catch (Exception ex)
