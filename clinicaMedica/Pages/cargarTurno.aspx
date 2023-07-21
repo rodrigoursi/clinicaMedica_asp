@@ -12,6 +12,7 @@
         <p>Completa el siguiente formulario para reservar el turno</p>
         <hr />
         <h4>Datos del paciente</h4>
+        <asp:Label ID="lblAdvertencia" runat="server" Visible="false" CssClass="text-danger"></asp:Label>
         <div class="formulario-turno mt-4">
             <div class="mb-3 subcontenedor">
                 <% if(Request.QueryString["idEditar"] == null)
@@ -59,7 +60,9 @@
             <% if(Request.QueryString["id"] == null) {%> 
             </div>
             <asp:Button Text="GRABAR" CssClass="btn btn-primary mb-3 btn-grabar" ID="grabarTurno" runat="server" OnClick="grabarTurno_Click" />
+            <%} %>
+            <asp:Button Text="Volver" CssClass="btn btn-secondary mb-3 btn-grabar" ID="volverTurno" runat="server" OnClick="volverTurno_Click" />
         </div>
-        <%} %>
+        
     </div>
 </asp:Content>

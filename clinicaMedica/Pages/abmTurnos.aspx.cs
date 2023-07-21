@@ -69,10 +69,19 @@ namespace clinicaMedica.Pages
                 ambTurnos_dropListPac.DataBind();
                 ambTurnos_dropListPac.Items.Insert(0, new ListItem("Todos", "0"));
 
-            
-                TunoNegocio TurnoNegocio = new TunoNegocio();
-                GridAbmLocalidades.DataSource = TurnoNegocio.listar((string)Session["whereSQL"]);
-                GridAbmLocalidades.DataBind();
+
+                if (rolAux != null && rolAux.permisosModificarTurno == true)
+                {
+                    TunoNegocio TurnoNegocio = new TunoNegocio();
+                    GridAbmTurnos.DataSource = TurnoNegocio.listar((string)Session["whereSQL"]);
+                    GridAbmTurnos.DataBind();
+                }
+                else 
+                {
+                    TunoNegocio TurnoNegocio = new TunoNegocio();
+                    GridAbmTurnos2.DataSource = TurnoNegocio.listar((string)Session["whereSQL"]);
+                    GridAbmTurnos2.DataBind();
+                }
 
             
             }
@@ -80,6 +89,8 @@ namespace clinicaMedica.Pages
 
         protected void BuscarTurnos(object sender, EventArgs e)
         {
+            Rol rolAux = new Rol();
+            rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
 
             string filtro = "";
 
@@ -111,6 +122,8 @@ namespace clinicaMedica.Pages
                 whereSql += " AND P.nombre_apellido = '" + Session["pacienteBuscar"] + "'";
                 */
             }
+            
+            Session["whereSQL"] = whereSql;
 
             if (ambTurnos_inputFecha.Text != "")
             {
@@ -119,12 +132,21 @@ namespace clinicaMedica.Pages
                 Session["fechaBuscar"] = fechaFormatted;
                 whereSql += " AND CAST(T.fecha_hora AS date) = '" + Session["fechaBuscar"] + "'";
             }
-            TunoNegocio TurnoNegocio = new TunoNegocio();
-            GridAbmLocalidades.DataSource = TurnoNegocio.listar(filtro);
-            GridAbmLocalidades.DataBind();
-            Session["whereSQL"] = whereSql;
 
-            //Response.Redirect("ABMTurnos.aspx");
+            if (rolAux != null && rolAux.permisosModificarTurno == true)
+            {
+                TunoNegocio TurnoNegocio = new TunoNegocio();
+                GridAbmTurnos.DataSource = TurnoNegocio.listar((string)Session["whereSQL"]);
+                GridAbmTurnos.DataBind();
+            }
+            else
+            {
+                TunoNegocio TurnoNegocio = new TunoNegocio();
+                GridAbmTurnos2.DataSource = TurnoNegocio.listar((string)Session["whereSQL"]);
+                GridAbmTurnos2.DataBind();
+            }
+
+
         }
 
         protected void grabarDiagnostico_Click(object sender, EventArgs e)
@@ -141,6 +163,9 @@ namespace clinicaMedica.Pages
 
         protected void ambTurnos_listEstado_selChanged(object sender, EventArgs e)
         {
+            Rol rolAux = new Rol();
+            rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
+
             string id_estado = ambTurnos_dropListEstado.SelectedValue;
             string id_medico = ambTurnos_dropListMed.SelectedValue;
             string id_paciente = ambTurnos_dropListPac.SelectedValue;
@@ -169,8 +194,16 @@ namespace clinicaMedica.Pages
                 filtro += $" AND id_paciente={id_paciente}";
             }
 
-            GridAbmLocalidades.DataSource = TurnoNegocio.listar(filtro);
-            GridAbmLocalidades.DataBind();
+            if (rolAux != null && rolAux.permisosModificarTurno == true)
+            {
+                GridAbmTurnos.DataSource = TurnoNegocio.listar(filtro);
+                GridAbmTurnos.DataBind();
+            }
+            else
+            {
+                GridAbmTurnos2.DataSource = TurnoNegocio.listar(filtro);
+                GridAbmTurnos2.DataBind();
+            };
         }
     }
 }

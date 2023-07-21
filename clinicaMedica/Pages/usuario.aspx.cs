@@ -47,7 +47,7 @@ namespace clinicaMedica.Pages
                 Rol rolAux = new Rol();
                 rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
 
-                if (rolAux == null || rolAux.permisosFichas == false)
+                if (rolAux == null)
                 {
                     Response.Redirect("../default.aspx");
                 }
@@ -83,3 +83,10 @@ namespace clinicaMedica.Pages
         }
     }
 }
+
+//PARAMETROS POR URL
+
+// id           =   id de registro
+// currentRol   =   Rol de la persona logueada
+// rolId        =   usuarios del ROL x
+// mod          =   modo ver, editar o eliminar

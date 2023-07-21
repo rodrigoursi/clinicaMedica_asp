@@ -251,24 +251,49 @@ namespace clinicaMedica.Pages
                 if (cargar(objTurno)) turno.editar(objTurno, 2);
             }
         }
+
+        protected void volverTurno_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("abmTurnos.aspx");
+        }
         protected bool cargar(Turno obj)
         {
             EstadoNegocio negEstado = new EstadoNegocio();
             List<Estado> objEstado = negEstado.listar();
             string fecha = cargaTurno_fecha.Text;
             string hora = cargaTurno_hora.Text;
-            if (cargaTurno_fecha.SelectedValue == "") return false;  // aca poner mensaje q no selecciono fecha
-            if (cargaTurno_hora.SelectedValue == "") return false;  // aca poner mensaje q no selecciono horario.
+            if (cargaTurno_fecha.SelectedValue == "")
+            {
+                lblAdvertencia.Text = "Debe seleccionar una fecha para el turno";
+                lblAdvertencia.Visible = true;
+                return false;  // aca poner mensaje q no selecciono fecha
+            }
+            if (cargaTurno_hora.SelectedValue == "")
+            {
+                lblAdvertencia.Text = "Debe seleccionar un horario para el turno";
+                lblAdvertencia.Visible = true;
+                return false;  // aca poner mensaje q no selecciono horario.
+            }
             DateTime fechaYhora = DateTime.Parse(fecha + " " + hora);
             Usuario objUserP = new Usuario();
             Usuario objUserM = new Usuario();
             objUserP.id = int.Parse(cargarTurno_paciente.Attributes["value"]);
             obj.paciente = objUserP;
-            if (cargaTurno_prof.SelectedValue == "") return false; // aca poner mensaje q no selecciono profesional.
+            if (cargaTurno_prof.SelectedValue == "")
+            {
+                lblAdvertencia.Text = "Debe seleccionar un profecional para el turno";
+                lblAdvertencia.Visible = true;
+                return false; // aca poner mensaje q no selecciono profesional.
+            }
             objUserM.id = int.Parse(cargaTurno_prof.SelectedValue);
             obj.medico = objUserM;
             obj.fechaYHora = fechaYhora;
-            if (cargarTurno_mot.Text == "") return false; // aca poner mensaje de que el campo observaciones esta vacio
+            if (cargarTurno_mot.Text == "")
+            {
+                lblAdvertencia.Text = "Debe indicar motivo del turno";
+                lblAdvertencia.Visible = true;
+                return false; // aca poner mensaje de que el campo observaciones esta vacio
+            }
             obj.observaciones = cargarTurno_mot.Text;
             obj.estado = objEstado.Find(x => x.defecto);
             return true;

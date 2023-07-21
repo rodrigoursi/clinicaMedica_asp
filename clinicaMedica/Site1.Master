@@ -30,19 +30,51 @@
                                     Rol rolAux = new Rol();
                                     rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
 
-                                    if (rolAux != null && rolAux.permisosFichas == true)
-                                    {      
+                                    if (rolAux != null && (rolAux.permisosConfiguracion == true || rolAux.permisosFichas == true || rolAux.permisosSoloTurnosPropios == true))
+                                    {
                                     %>
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuario</a>
                                     <ul class="dropdown-menu">
                                     <%
-                                            foreach (var rol in roles)
-                                            {%>
+                                        if (rolAux.permisosConfiguracion == true)
+                                        {
+                                            foreach (var rol in roles)    
+                                            {
+                                    %>
                                             <li><a class="dropdown-item" href= '<%= "/Pages/usuario.aspx?rolId=" + rol.id  %>'><%=rol.rol %></a></li>
-                                       <%   }
-                                     %>                                   
+                                    <%   
+                                            }
+                                        }
+                                        if (rolAux.permisosConfiguracion == false && rolAux.permisosFichas== true)
+                                        {
+                                            foreach (var rol in roles)    
+                                            {
+                                                if(rol.permisosFichas == false)
+                                                {
+                                    %>
+                                            <li><a class="dropdown-item" href= '<%= "/Pages/usuario.aspx?rolId=" + rol.id  %>'><%=rol.rol %></a></li>
+                                    <%       
+                                                }
+                                            }
+                                        }
+
+                                        if (rolAux.permisosConfiguracion == false && rolAux.permisosSoloTurnosPropios == true)
+                                        {
+                                            foreach (var rol in roles)    
+                                            {
+                                                if(rol.permisosConfiguracion == false && rol.permisosSoloTurnosPropios == false && rol.permisosFichas == false)
+                                                {
+                                    %>
+                                            <li><a class="dropdown-item" href= '<%= "/Pages/usuario.aspx?rolId=" + rol.id  %>'><%=rol.rol %></a></li>
+                                    <%       
+                                                }
+                                            }
+                                        }
+                                    %>
+                                        
                                     </ul>
-                                    <%}
+                                    <%
+                                    }
                                     %> 
                                 </li>
                                     <%
@@ -52,13 +84,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="/pages/ABMTurnos.aspx">Mis Turnos</a>
                                 </li>
-                                   <%   }
-                                       %>
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="/pages/cargarTurno.aspx">Nuevo Turno</a>
                                 </li>
-                                <%
-
+                                   <%   
+                                       }
+                                  
                                     if (rolAux != null && rolAux.permisosConfiguracion == true)
                                     {
                                 %>

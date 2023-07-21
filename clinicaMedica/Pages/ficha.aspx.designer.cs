@@ -168,6 +168,15 @@ namespace clinicaMedica.Pages
         protected global::System.Web.UI.WebControls.Button AltaUsuario_agregar;
 
         /// <summary>
+        /// volverUsuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button volverUsuario;
+
+        /// <summary>
         /// AltaUsuario_altaLoc control.
         /// </summary>
         /// <remarks>

@@ -11,7 +11,14 @@ namespace clinicaMedica.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!string.IsNullOrEmpty(Request.QueryString["errorMessage"]))
+            {
+                ErrorMessageLiteral.Text = Server.HtmlEncode(Request.QueryString["errorMessage"]);
+            }
+            else
+            {
+                ErrorMessageLiteral.Text = "Ha ocurrido un error.";
+            }
         }
     }
 }

@@ -79,6 +79,7 @@
                     </ContentTemplate>
             </asp:UpdatePanel>
             <asp:Button Text="AGREGAR" CssClass="btn btn-primary mb-3" ID="AltaUsuario_agregar" runat="server" OnClick="AltaUsuario_agregar_Click" />
+            <asp:Button Text="Volver" CssClass="btn btn-secondary mb-3 btn-grabar" ID="volverUsuario" runat="server" OnClick="volverUsuario_Click" />
         </div>
     </div>
         

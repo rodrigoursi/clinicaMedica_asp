@@ -9,6 +9,7 @@ using Dominio;
 using System.Web.Services.Description;
 using System.Reflection.Emit;
 using System.Security.Cryptography;
+using System.Data.SqlTypes;
 
 
 namespace clinicaMedica.Pages
@@ -30,7 +31,7 @@ namespace clinicaMedica.Pages
             Rol rolAux = new Rol();
             rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
 
-            if (rolAux == null || rolAux.permisosFichas == false)
+            if (rolAux == null)
             {
                 Response.Redirect("../default.aspx");
             }
@@ -136,29 +137,37 @@ namespace clinicaMedica.Pages
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
-                throw;
+                //Session.Add("error", ex);
+                //throw;
+                Response.Redirect("/Pages/ErrorPage.aspx?errorMessage=" + Server.UrlEncode(ex.Message));
+
             }
         }
         protected void cargarUsuario(Usuario oUsuario)
         {
-            oUsuario.codigoUsuario = AltaUsuario_codigo.Text;
-            oUsuario.password = AltaUsuario_contra.Text;
-            oUsuario.nombreYApellido = AltaUsuario_nombre.Text;
-            oUsuario.emailUsuario = AltaUsuario_correo.Text;
-            oUsuario.tipoDeDocumento = AltaUsuario_tipoDoc.Text;
-            oUsuario.numeroDeDocumento = AltaUsuario_doc.Text;
-            oUsuario.direccion = AltaUsuario_dire.Text;
-            oUsuario.fechaDeNacimiento = DateTime.Parse(AltaUsuario_fecNac.Text);
+            try
+            {
+                oUsuario.codigoUsuario = AltaUsuario_codigo.Text;
+                oUsuario.password = AltaUsuario_contra.Text;
+                oUsuario.nombreYApellido = AltaUsuario_nombre.Text;
+                oUsuario.emailUsuario = AltaUsuario_correo.Text;
+                oUsuario.tipoDeDocumento = AltaUsuario_tipoDoc.Text;
+                oUsuario.numeroDeDocumento = AltaUsuario_doc.Text;
+                oUsuario.direccion = AltaUsuario_dire.Text;
+                oUsuario.fechaDeNacimiento = DateTime.Parse(AltaUsuario_fecNac.Text);
+                oUsuario.localidad = new Localidad();
+                oUsuario.localidad.id = short.Parse(AltaUsuario_loc.SelectedValue);
+                oUsuario.rol = new Rol();
+                oUsuario.rol.id = byte.Parse(ficha_rol.SelectedValue);
+                oUsuario.especialidad = new Especialidad();
+                oUsuario.especialidad.id = byte.Parse(ficha_esp.SelectedValue);
 
-            oUsuario.localidad = new Localidad();
-            oUsuario.localidad.id = short.Parse(AltaUsuario_loc.SelectedValue);
-            oUsuario.rol = new Rol();
-            oUsuario.rol.id = byte.Parse(ficha_rol.SelectedValue);
-            oUsuario.especialidad = new Especialidad();
-            oUsuario.especialidad.id = byte.Parse(ficha_esp.SelectedValue);
-
-            oUsuario.altaUsuario = Session["usuario"].ToString();
+                oUsuario.altaUsuario = Session["usuario"].ToString();
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("/Pages/ErrorPage.aspx?errorMessage=" + Server.UrlEncode(ex.Message));
+            }
 
         }
         protected void cargarLocalidad(Localidad oLoc)
@@ -170,6 +179,7 @@ namespace clinicaMedica.Pages
 
         protected void AltaUsuario_agregar_Click(object sender, EventArgs e)
         {
+            
             if(!this.validarCampos())
             {
                 lblAdvertencia.Text = "Por favor, complete los campos desplegabless";
@@ -188,6 +198,28 @@ namespace clinicaMedica.Pages
                 lblAdvertencia.Visible = true;
                 return; // aca pone un alert que diga q el campo correo electronico debe ser un mail valido.
             }
+
+            if(!validarFecha())
+            {
+                lblAdvertencia.Text = "El campo FECHA DE NACIMIENTO debe ser una fecha validad con el formato DD/MM/AAAA";
+                lblAdvertencia.Visible = true;
+                return; // aca pone un alert que diga q el campo correo electronico debe ser un mail valido.
+            }
+
+            if (!validarDocumento())
+            {
+                lblAdvertencia.Text = "El campo NUMERO DE DOCUMENTO debe estar entre 0 y 999.9999.999";
+                lblAdvertencia.Visible = true;
+                return;
+            }
+
+            if(!validarTipoDocumento())
+            {
+                lblAdvertencia.Text = "El campo TIPO DE DOCUMENTO es erroneo, indicar DNI, CUIL, CUIT o PASAPORTE";
+                lblAdvertencia.Visible = true;
+                return;
+            }
+
             Usuario usuario = new Usuario();
             this.cargarUsuario(usuario);
             UsuarioNegocio negocio = new UsuarioNegocio();
@@ -218,8 +250,9 @@ namespace clinicaMedica.Pages
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
-                throw;
+                //Session.Add("error", ex);
+                //throw;
+                Response.Redirect("/Pages/ErrorPage.aspx?errorMessage=" + Server.UrlEncode(ex.Message));
             }
             finally
             {
@@ -241,8 +274,9 @@ namespace clinicaMedica.Pages
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
-                throw;
+                //Session.Add("error", ex);
+                //throw;
+                Response.Redirect("/Pages/ErrorPage.aspx?errorMessage=" + Server.UrlEncode(ex.Message));
             }
             finally
             {
@@ -253,6 +287,11 @@ namespace clinicaMedica.Pages
                 AltaUsuario_loc.Items.Insert(0, new ListItem("Seleccionar localidad", ""));
                 AltaUsuario_loc.Items.Add(new ListItem("Nueva localidad", "nuevo"));
             }
+        }
+
+        protected void volverUsuario_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/default.aspx");
         }
 
         protected bool validarCampos()
@@ -399,6 +438,55 @@ namespace clinicaMedica.Pages
             }
             if(con == 1) return true;
             return false;
+        }
+
+        protected bool validarFecha()
+        {
+            string inputFecha = AltaUsuario_fecNac.Text;
+            DateTime fecha;
+
+            if (DateTime.TryParse(inputFecha, out fecha))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        protected bool validarDocumento()
+        {
+            int numDoc;
+            if (int.TryParse(AltaUsuario_doc.Text, out numDoc))
+            {
+                if (numDoc > 0 && numDoc < 999999999)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else 
+            {
+                return false; 
+            }
+        }
+
+        protected bool validarTipoDocumento()
+        {
+            string tipoDoc = AltaUsuario_tipoDoc.Text.ToUpper();
+
+            if (tipoDoc == "DNI" || tipoDoc == "CUIL" || tipoDoc == "CUIT" || tipoDoc == "PASAPORTE")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

@@ -45,7 +45,11 @@
     <div class="contenedor-botonBuscar mb-3">
         <asp:Button Text="BUSCAR" CssClass="btn btn-secondary" ID="ambTurnos_buttonBsc" runat="server" OnClick="BuscarTurnos" />
     </div>
-        <asp:GridView ID="GridAbmLocalidades" runat="server" DataKeyNames="id" AutoGenerateColumns="false" CssClass="table">
+        <%
+            if (rolAux != null && rolAux.permisosModificarTurno == true)
+            {
+        %>
+        <asp:GridView ID="GridAbmTurnos" runat="server" DataKeyNames="id" AutoGenerateColumns="false" CssClass="table">
         <HeaderStyle CssClass="cabecera"/>
         <Columns>
             <asp:BoundField HeaderText="Paciente" DataField="paciente.nombreYApellido" />
@@ -83,11 +87,36 @@
             </asp:TemplateField>
         </Columns>
         </asp:GridView>
-        <%        
-            if (rolAux != null && rolAux.permisosModificarTurno == true)
+        <div><a href="/pages/cargarTuno.aspx?id=0&mod=0" class="btn btn-success">AGREGAR</a></div>
+        <%
+            }
+            else
             {
         %>
-        <div><a href="/pages/cargarTuno.aspx?id=0&mod=0" class="btn btn-success">AGREGAR</a></div>
+        
+        <asp:GridView ID="GridAbmTurnos2" runat="server" DataKeyNames="id" AutoGenerateColumns="false" CssClass="table">
+        <HeaderStyle CssClass="cabecera"/>
+        <Columns>
+            <asp:BoundField HeaderText="Paciente" DataField="paciente.nombreYApellido" />
+            <asp:BoundField HeaderText="Medico" DataField="medico.nombreYApellido" />
+            <asp:BoundField HeaderText="Fecha y Hora" DataField="fechaYHora" />
+            <asp:BoundField HeaderText="Estado" DataField="estado.estado" />
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <a href='<%# "/pages/cargarTurno.aspx?id=" + Eval("id") +"&idEditar=" + Eval("id") %>'>
+                       <i class="fa-solid fa-eye" title="ver"></i>
+                    </a>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <a href='<%# "/pages/ABMTurnos.aspx?id=" + Eval("id")%>'>
+                       <i class="fa-solid fa-prescription"></i>
+                    </a>
+                </ItemTemplate>
+            </asp:TemplateField>
+        </Columns>
+        </asp:GridView>
         <%
             }
             %>

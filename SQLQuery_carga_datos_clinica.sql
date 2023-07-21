@@ -1,13 +1,13 @@
 USE TURNOS_MEDICOS
 GO
 
-INSERT INTO estados(codigo, estado)
+INSERT INTO estados(codigo, estado, defecto)
 VALUES
-  (1, 'Borrador'),
-  (2, 'Confirmado'),
-  (3, 'No asistio'),
-  (4, 'Realizado'),
-  (0, 'Cancelado')
+  (1, 'Borrador', 1),
+  (2, 'Confirmado', 0),
+  (3, 'No asistio', 0),
+  (4, 'Realizado', 0),
+  (0, 'Cancelado', 0)
 GO
 
 INSERT INTO especialidades (codigo, especialidad)
@@ -28,8 +28,8 @@ GO
 INSERT INTO roles(codigo, rol, horariosSi, permisosConfiguracion, permisosFichas, permisosModificarTurno, permisosSoloTurnosPropios)
 VALUES
   (1, 'Administrador', 0, 1, 1, 1 ,0),
-  (2, 'Recepcionista', 0, 0, 1, 1 ,1),
-  (3, 'Medico', 1, 0, 0, 1 ,1),
+  (2, 'Recepcionista', 0, 0, 1, 1 ,0),
+  (3, 'Medico', 1, 0, 0, 0 ,1),
   (4, 'Paciente', 0, 0, 0, 0, 0)
 GO
 
@@ -103,7 +103,7 @@ VALUES
 	(8, 3, '13:00', '15:00'),
 	(8, 5, '9:00', '13:00'),
 	(9, 1, '8:00', '11:00'),
-	(9, 2, '15:00', '18:00'),
+	(9, 2, '15:00', '18:00'),	
 	(9, 3, '13:00', '15:00'),
 	(9, 4, '9:00', '13:00')
 
