@@ -107,6 +107,7 @@ namespace clinicaMedica.Pages
         protected void mostrarTurnosEnEspera_Click(object sender, EventArgs e)
         {
             ambTurnos_dropListEstado.SelectedValue = "2";
+            ambTurnos_inputFecha.Text = "";
             BuscarTurnos(null, null);
 
             //mostrarTurnosHoy_Click(null, null);
@@ -115,6 +116,7 @@ namespace clinicaMedica.Pages
         protected void mostrarTurnosHoy_Click(object sender, EventArgs e)
         {
             ambTurnos_inputFecha.Text = DateTime.Today.ToString("dd/MM/yyyy");
+            ambTurnos_dropListEstado.SelectedValue = "0";
             BuscarTurnos(null, null);
         }
 
