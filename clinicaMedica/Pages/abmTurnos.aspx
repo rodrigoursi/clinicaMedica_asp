@@ -81,9 +81,26 @@
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
+                    <%if (!rolActual.horariosSi)
+            {%>
+
+            
+                    <asp:LinkButton runat="server" ID="espera" CommandArgument='<%# Eval("id") %>' OnCommand="espera_Command" >
+                       <i class="fa-solid fa-user-check"></i>
+                    </asp:LinkButton>
+                    <% } %>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <%if (!rolActual.horariosSi)
+            {%>
+
+            
                     <a href='<%# "/pages/ABMTurnos.aspx?id=" + Eval("id")%>'>
-                       <i class="fa-solid fa-prescription"></i>
+                       <i class="fa-solid fa-ban" title="cancelar"></i>
                     </a>
+                    <% } %>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
@@ -107,15 +124,17 @@
             <asp:TemplateField>
                 <ItemTemplate>
                     <a href='<%# "/pages/cargarTurno.aspx?id=" + Eval("id") +"&idEditar=" + Eval("id") %>'>
-                       <i class="fa-solid fa-eye" title="ver"></i>
+                       <i class="fa-solid fa-eye" title="ver2"></i>
                     </a>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
+                  
                     <a href='<%# "/pages/ABMTurnos.aspx?id=" + Eval("id")%>'>
                        <i class="fa-solid fa-prescription"></i>
                     </a>
+                    
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

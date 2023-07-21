@@ -13,11 +13,13 @@ namespace clinicaMedica.Pages
     public partial class abmTurnos : System.Web.UI.Page
     {
         string whereSql ="";
+        public Rol rolActual { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             
             Rol rolAux = new Rol();
             rolAux = (Rol)Session["currentRol"] != null ? (Rol)Session["currentRol"] : null;
+            rolActual = rolAux;
 
             if (rolAux == null)// || rolAux.permisosModificarTurno == false)
             {
@@ -241,6 +243,13 @@ namespace clinicaMedica.Pages
                 GridAbmTurnos2.DataSource = TurnoNegocio.listar(filtro);
                 GridAbmTurnos2.DataBind();
             }
+        }
+
+        protected void espera_Command(object sender, CommandEventArgs e)
+        {
+            int id = int.Parse(e.CommandArgument.ToString());
+            TunoNegocio turno = new TunoNegocio();
+            turno.cambiarEstado(id);
         }
     }
 }

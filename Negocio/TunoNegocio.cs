@@ -294,5 +294,35 @@ namespace Negocio
             }
             return false;
         }
+        public bool cambiarEstado(int id)
+        {
+            int resultado = 0;
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("UPDATE " +
+                                        "turnos" +
+                                    " SET " +
+                                        "estado = (SELECT top 1 id FROM estados WHERE codigo > 0 AND defecto != 1 ORDER BY id) WHERE id = @id");
+
+                datos.setearParametro("@id", id);
+                resultado = datos.ejecutarUpdate(2);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+            if (resultado > 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
