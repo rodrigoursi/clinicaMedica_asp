@@ -42,6 +42,7 @@ namespace clinicaMedica.Pages
                                 {
                                     Estados_codigo.Text = estado.codigo;
                                     Estados_estado.Text = estado.estado;
+                                    Estados_defecto.Checked = estado.defecto;
                                     break;
                                 }
                             }
@@ -53,6 +54,7 @@ namespace clinicaMedica.Pages
                             {
                                 Estados_codigo.Enabled = false;
                                 Estados_estado.Enabled = false;
+                                Estados_defecto.Enabled = false;
                                 Estado_agregar.Text = "Modificar";
                                 Estado_cancelar.Text = "Volver";
 
@@ -61,6 +63,7 @@ namespace clinicaMedica.Pages
                             {
                                 Estados_codigo.Enabled = true;
                                 Estados_estado.Enabled = true;
+                                Estados_defecto.Enabled = true;
                                 Estado_agregar.Text = "Guardar";
                                 Estado_cancelar.Text = "Cancelar";
                             }
@@ -89,6 +92,7 @@ namespace clinicaMedica.Pages
                 EstadoNegocio negocio = new EstadoNegocio();
                 nuevoEstado.codigo = Estados_codigo.Text;
                 nuevoEstado.estado = Estados_estado.Text;
+                nuevoEstado.defecto = Estados_defecto.Checked;
 
                 negocio.agregar(nuevoEstado);
             }
@@ -99,6 +103,7 @@ namespace clinicaMedica.Pages
                 nuevoEstado.id = byte.Parse(Request.QueryString["id"]);
                 nuevoEstado.codigo = Estados_codigo.Text;
                 nuevoEstado.estado = Estados_estado.Text;
+                nuevoEstado.defecto = Estados_defecto.Checked;
 
                 negocio.editar(nuevoEstado);
             }

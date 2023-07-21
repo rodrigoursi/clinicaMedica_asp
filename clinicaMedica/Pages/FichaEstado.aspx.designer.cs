@@ -33,6 +33,15 @@ namespace clinicaMedica.Pages
         protected global::System.Web.UI.WebControls.TextBox Estados_estado;
 
         /// <summary>
+        /// Estados_defecto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox Estados_defecto;
+
+        /// <summary>
         /// Estado_agregar control.
         /// </summary>
         /// <remarks>

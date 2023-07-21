@@ -7,7 +7,7 @@
         string rolId = Request.QueryString["rolId"].ToString();
     %>
     <div class="container contenedor-grid my-4">
-        <asp:GridView ID="GridAbmUser" runat="server" DataKeyNames="id" AutoGenerateColumns="false" CssClass="table">
+        <asp:GridView ID="GridAbmUser" runat="server" DataKeyNames="id" AutoGenerateColumns="false" CssClass="table" AllowSorting="true">
         <HeaderStyle CssClass="cabecera"/>
         <Columns>
             <asp:BoundField HeaderText="codigo" DataField="codigoUsuario" />

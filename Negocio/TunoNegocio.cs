@@ -38,7 +38,8 @@ namespace Negocio
                                     "INNER JOIN usuarios AS P ON P.id = T.id_paciente " +
                                     "INNER JOIN usuarios AS M ON M.id = T.id_medico " +
                                     "INNER JOIN estados AS E ON E.id = T.estado " +
-                                    "WHERE T.bajaUsu IS NULL AND T.bajaFecha IS NULL " + filtros);
+                                    "WHERE T.bajaUsu IS NULL AND T.bajaFecha IS NULL " + filtros +
+                                    " ORDER BY T.id DESC ");
 
                 datos.ejecutarLectura();
 

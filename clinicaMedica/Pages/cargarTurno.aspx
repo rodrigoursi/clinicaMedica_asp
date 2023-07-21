@@ -21,7 +21,8 @@
                     <label for="cargarTurno_documento" class="form-label">Documento</label>
                     <div style="display:flex; width:100%">
                         <asp:TextBox runat="server" type="number" CssClass="form-control me-4" ID="cargarTurno_documento" />
-                        <asp:Button Text="BUSCAR" runat="server" class="btn btn-success" ID="buscarDoc" OnClick="buscarDoc_Click" />
+                        <asp:Button Text="BUSCAR" runat="server" class="btn btn-success me-2" ID="buscarDoc" OnClick="buscarDoc_Click" />
+                        <asp:Button Text="AGREGAR" runat="server" class="btn btn-primary" ID="agregarPaciente" OnClick="agregarPaciente_CLick" />
                     </div>
                 </div>
                 <%} %>

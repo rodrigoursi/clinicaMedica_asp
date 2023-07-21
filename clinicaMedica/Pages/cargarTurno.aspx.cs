@@ -58,6 +58,11 @@ namespace clinicaMedica.Pages
             cargarTurno_paciente.Text = lista[0].nombreYApellido;
             cargarTurno_paciente.Attributes["value"] = lista[0].id.ToString();
         }
+
+        protected void agregarPaciente_CLick(object sender, EventArgs e)
+        {
+            Response.Redirect("/Pages/ficha.aspx?rolId=4");
+        }
         protected void cargarBoxes()
         {
             EspecialidadNegocio negEsp = new EspecialidadNegocio();
@@ -250,6 +255,10 @@ namespace clinicaMedica.Pages
                 objTurno.id = int.Parse(Request.QueryString["idEditar"]);
                 if (cargar(objTurno)) turno.editar(objTurno, 2);
             }
+
+            lblAdvertencia.Text = "TURNO CREADO CORRECTAMENTE!";
+            lblAdvertencia.ForeColor = System.Drawing.Color.Green;
+            lblAdvertencia.Visible = true;
         }
 
         protected void volverTurno_Click(object sender, EventArgs e)
@@ -274,6 +283,13 @@ namespace clinicaMedica.Pages
                 lblAdvertencia.Visible = true;
                 return false;  // aca poner mensaje q no selecciono horario.
             }
+            if (cargarTurno_paciente.Text == "")
+            {
+                lblAdvertencia.Text = "Debe indicar un paciente, buscnadolo a traves de su Numero de Documento";
+                lblAdvertencia.Visible = true;
+                return false;  // aca poner mensaje q no selecciono horario.
+            }
+
             DateTime fechaYhora = DateTime.Parse(fecha + " " + hora);
             Usuario objUserP = new Usuario();
             Usuario objUserM = new Usuario();

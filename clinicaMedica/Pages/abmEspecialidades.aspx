@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <div class="container contenedor-grid my-4">
-        <asp:GridView ID="GridAbmEspecialidades" runat="server" DataKeyNames="id" AutoGenerateColumns="false" CssClass="table">
+        <asp:GridView ID="GridAbmEspecialidades" runat="server" DataKeyNames="id" AutoGenerateColumns="false" CssClass="table" AllowSorting="true">
         <HeaderStyle CssClass="cabecera"/>
         <Columns>
             <asp:BoundField HeaderText="codigo" DataField="codigo" />

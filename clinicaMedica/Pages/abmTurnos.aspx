@@ -49,7 +49,7 @@
             if (rolAux != null && rolAux.permisosModificarTurno == true)
             {
         %>
-        <asp:GridView ID="GridAbmTurnos" runat="server" DataKeyNames="id" AutoGenerateColumns="false" CssClass="table">
+        <asp:GridView ID="GridAbmTurnos" runat="server" DataKeyNames="id" AutoGenerateColumns="false" CssClass="table" AllowSorting="true">
         <HeaderStyle CssClass="cabecera"/>
         <Columns>
             <asp:BoundField HeaderText="Paciente" DataField="paciente.nombreYApellido" />
@@ -87,14 +87,16 @@
             </asp:TemplateField>
         </Columns>
         </asp:GridView>
-        <div><a href="/pages/cargarTuno.aspx?id=0&mod=0" class="btn btn-success">AGREGAR</a></div>
+        <div>
+            <a href='<%# "/pages/cargarTurno.aspx?id=" + Eval("id") + "&idEditar=" +  Eval("id")%>' class="btn btn-success">AGREGAR</a></div>
+
         <%
             }
             else
             {
         %>
         
-        <asp:GridView ID="GridAbmTurnos2" runat="server" DataKeyNames="id" AutoGenerateColumns="false" CssClass="table">
+        <asp:GridView ID="GridAbmTurnos2" runat="server" DataKeyNames="id" AutoGenerateColumns="false" CssClass="table" AllowSorting="true">
         <HeaderStyle CssClass="cabecera"/>
         <Columns>
             <asp:BoundField HeaderText="Paciente" DataField="paciente.nombreYApellido" />

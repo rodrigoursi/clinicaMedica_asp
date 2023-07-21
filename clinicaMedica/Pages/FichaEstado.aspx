@@ -17,6 +17,13 @@
                 <asp:TextBox runat="server" CssClass="form-control" id="Estados_estado"/>
             </div>
             <div class="mb-2">
+                <label for="Estados_defecto" class="form-label">Estado inicial?</label>
+                <asp:CheckBox runat="server" CssClass="form-check-input" id="Estados_defecto"/>
+            </div>
+            <div>
+
+            </div>
+            <div class="mb-2">
                 <asp:Button Text="AGREGAR" CssClass="btn btn-primary mb-3" ID="Estado_agregar" runat="server" OnClick="Estado_agregar_Click" />
             </div>
             <div class="mb-2">

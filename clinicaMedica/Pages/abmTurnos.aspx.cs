@@ -203,7 +203,7 @@ namespace clinicaMedica.Pages
             {
                 GridAbmTurnos2.DataSource = TurnoNegocio.listar(filtro);
                 GridAbmTurnos2.DataBind();
-            };
+            }
         }
     }
 }

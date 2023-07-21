@@ -256,9 +256,13 @@ namespace clinicaMedica.Pages
             }
             finally
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Usuario creado correctamente!');", true);
-                string rolId = Request.QueryString["rolId"];
-                Response.Redirect("/pages/usuario.aspx?rolId=" + rolId);
+                lblAdvertencia.Text = "REGISTRO CREADO EXITOSAMENTE";
+                lblAdvertencia.ForeColor = System.Drawing.Color.Green;
+                lblAdvertencia.Visible = true;
+
+                //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Usuario creado correctamente!');", true);
+                //string rolId = Request.QueryString["rolId"];
+                //Response.Redirect("/pages/usuario.aspx?rolId=" + rolId);
             }
         }
 
