@@ -72,20 +72,21 @@ namespace clinicaMedica.Pages
 
                 if (rolAux != null && rolAux.permisosModificarTurno == true)
                 {
-                    lblambTurnos_dropListMed.Visible = false;
-                    ambTurnos_dropListMed.Visible = false;
+                    ////lblambTurnos_dropListMed.blo = false;
+                    //ambTurnos_dropListMed.Enabled = false;
 
-                    if (Session["usuario"] != null)
-                    {
-                        string nombreYApellido = ((string)Session["usuario"]);
+                    //if (Session["usuario"] != null)
+                    //{
+                    //    string nombreYApellido = ((string)Session["usuario"]);
 
-                        ListItem itemSeleccionado = ambTurnos_dropListMed.Items.FindByText(nombreYApellido);
+                    //    ListItem itemSeleccionado = ambTurnos_dropListMed.Items.FindByText(nombreYApellido);
 
-                        if (itemSeleccionado != null)
-                        {
-                            itemSeleccionado.Selected = true; // aca estoy haciendo que el campo medico sea el del usuario medico
-                        }
-                    }
+                    //    if (itemSeleccionado != null)
+                    //    {
+                    //        itemSeleccionado.Selected = true; // aca estoy haciendo que el campo medico sea el del usuario medico
+                    //    }
+                    //}
+                    
                     TunoNegocio TurnoNegocio = new TunoNegocio();
                     GridAbmTurnos.DataSource = TurnoNegocio.listar((string)Session["whereSQL"]);
                     GridAbmTurnos.DataBind();
@@ -95,8 +96,8 @@ namespace clinicaMedica.Pages
                     TunoNegocio TurnoNegocio = new TunoNegocio();
                     GridAbmTurnos2.DataSource = TurnoNegocio.listar((string)Session["whereSQL"]);
                     GridAbmTurnos2.DataBind();
-                }
 
+                }
             
             }
         }
